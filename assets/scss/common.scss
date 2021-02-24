@@ -1,0 +1,119 @@
+$text: "Hello";
+h1:hover {
+    color: green;
+}
+h2:hover {
+    color: green;
+}
+
+.btn:focus {
+    color:red;
+    background-color:teal;
+}
+
+.box::after {
+  content: $text;
+}
+.butn {
+    outline: none;
+    border: none;
+    cursor: pointer;
+    display: block;
+    position: relative;
+    background: #fcad26;
+    font-size: 16px;
+    font-weight: 300;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 25px 80px;
+    margin: 0 auto;
+    box-shadow: 0 6px #efa424;
+    border-radius: 20px;
+}
+  
+.butn:hover {
+    box-shadow: 0 4px #efa424;
+    top: 2px;
+    transform: scale(1.5);
+}
+  
+.butn:active {
+    box-shadow: 0 0 #efa424;
+    top: 6px; 
+}
+
+.butn:focus {
+    transform: rotate(45deg);
+}
+
+.box {
+    background: #9b59b6;
+    height: 50px;
+    width: 50px;
+    line-height:50px;
+    text-align: center;
+    color: white;
+    font-size: 17px;
+    border-radius: 20px;
+    /* float: left; */
+  }
+  
+  .animated {
+    /* transition-property: background, border-radius; */
+    /* transition-property: transform; */
+    /* transition-duration: 5s, 1s; */
+    /* transition-delay: 2s; */
+    transition-duration: 3s;
+    /* transition-timing-function: cubic-bezier(0.050, 0.005, 0.000, 0.870);  */
+    transition-timing-function: ease-out; 
+  }
+  
+  .box:hover {
+    background: #e74c3c;
+    transform-origin: top left;
+    transform:scale(2) rotate(-45deg);
+    border-radius: 50px;
+  }
+
+  .loader {
+    
+    float: left;
+    margin:auto;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    border: 16px solid #bdc3c7;
+    width: 120px;
+    height: 120px;
+    border-top-color: #1abc9c;
+    border-bottom-color: #3498db;
+    border-radius: 50%;
+    animation: coloredspin 4s linear infinite;
+  }
+  
+  @keyframes coloredspin {
+    0%{
+      transform: rotate(0deg) scale(1);
+      border-top-color: #1abc9c;
+      border-bottom-color: #1abc9c;
+    }
+    25% {
+      border-top-color: #2ecc71;
+      border-bottom-color: #2ecc71;
+    }
+    50% {
+      transform: rotate(360deg) scale(1.05);
+      border-top-color: #3498db;
+      border-bottom-color: #3498db;
+    }
+    75% {
+      border-top-color: #9b59b6;
+      border-bottom-color: #9b59b6;
+    }
+    100%{
+      transform: rotate(720deg) scale(1);
+      border-top-color: #1abc9c;
+      border-bottom-color: #1abc9c;
+    }
+  }
+  

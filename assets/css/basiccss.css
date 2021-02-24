@@ -1,0 +1,166 @@
+
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
+@import url('https://fonts.googleapis.com/css?family=Raleway:200');
+body {
+  display: flex;
+  margin: 0;
+  flex-direction: column;
+  min-height: 100vh;
+  background:  #ecf0f1;
+  font-family: Helvetica;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+main > *, header, footer {
+  margin: 4px;
+  padding: 5px;
+  border-radius: 7px;
+}
+
+main {
+  display: flex;
+  flex-basis: 800px;
+}
+
+article {
+  flex: 4 0 60%;
+  background: #ecf0f1;
+}
+
+nav {
+  flex: 1 1 20%;
+  order: -1;
+}
+
+nav a {
+  font-size: 20px;
+  margin: 20px;
+  text-decoration: none;
+  color: teal;
+  font-family: raleway;
+  border-bottom: 1px solid #52c9aa;
+  transition: color 0.5s ease-out;
+}
+
+nav a:hover {
+  color: yellow;
+  border-bottom-color: #3498db;
+}
+
+nav i{
+  margin-right: 10px;
+}
+
+aside {
+  flex: 1 1 20%;
+  background: #3498db;
+}
+
+header, footer {
+  background: #1abc9c;
+  flex-basis: 100px;
+}
+
+
+
+
+/*h1 have a 1px solid black border*/
+  h1{
+    border: 1px solid black;
+  }
+  
+  /* h2 elements has purple color*/
+  h2{
+    font-family: sans-serif;
+    color: purple;
+  }
+   
+  /*Input boxes have a 2px solid dark red border*/
+  input{
+    border: 2px solid rgb(144, 0, 0);
+  }
+  
+  /*paragraphs ha yellow backgroud color*/
+  p{
+    background:#fffca5;
+  }
+  
+  /*Set Text box set a width,a height and border*/
+  
+  #textblock{
+    border: 4px solid gray;
+    width: 600px;
+    height: 100px;
+  }
+  
+  
+  /*The id="itemone" have an overline text-decoration and the color is purple.*/
+  #itemone{
+    text-decoration: overline;
+    color: purple;
+  }
+  
+  /*The "exit" class have a background of blue and a 4px dashed yellow border.*/
+  .exit{
+    background-color: blue;
+    border: 4px dashed yellow;
+  }
+   
+.sidebar {
+  float: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  height: 100vh;
+  width: 15vw;
+  border-right: 1px solid #D7DBDD;
+  font-family: raleway;
+  background: #34495e
+}
+
+.item {
+    padding: 10px 20px;
+    color: white;
+    font-size: 20px;
+}
+
+.section {
+  padding: 10px;
+}
+
+
+
+
+@media screen and (max-width: 920px) {
+  nav {
+    justify-content: center;
+  }
+  nav a {
+    font-size: 26px;
+  }
+}
+
+@media all and (max-width: 640px) {
+  main {
+    flex-direction: column;
+    flex-grow: 1;
+    background: #34495e;
+  }
+  
+  nav {
+    order: 0;
+  }
+
+  nav a {
+    color: white;
+  }
+  header, footer {
+    flex-basis: 50px;
+  }
+}

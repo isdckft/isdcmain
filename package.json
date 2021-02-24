@@ -1,0 +1,38 @@
+{
+  "name": "isdcmain",
+  "version": "1.0.0",
+  "description": "ISDCKFT main page",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/isdckft/isdcmain.git"
+  },
+  "author": "Isdc Kft",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/isdckft/isdcmain/issues"
+  },
+  "homepage": "https://github.com/isdckft/isdcmain#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "compile-sass": "0.0.5",
+    "crypto-js": "^3.1.9-1",
+    "express": "^4.16.4",
+    "hbs": "^4.0.1",
+    "jsonwebtoken": "^8.4.0",
+    "lodash": "^4.17.11",
+    "mongodb": "^3.1.13",
+    "mongoose": "^5.4.6",
+    "validator": "^10.11.0"
+  },
+  "devDependencies": {
+    "webpack": "^4.29.0",
+    "webpack-cli": "^3.2.1"
+  }
+}
