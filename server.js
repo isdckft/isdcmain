@@ -14,7 +14,7 @@ const bodyParser = require('body-parser');
 //var {User} = require('./rest/models/user');
 //var {authenticate} = require('./rest/middleware/authenticate');
 
-const port = process.env.PORT; 
+const port = process.env.PORT || 4200; 
 var app = express();
 
 hbs.registerPartials(__dirname + '/views/viewparts');
@@ -265,7 +265,12 @@ app.get('/tutorial/ts', (req, res) => {
   // });
 // });
 
-app.listen(port, '127.0.0.1' ,() => {
-  console.log(`Server is up on port ${port}`);
+// app.listen(port, '127.0.0.1' ,() => {
+//   console.log(`Server is up on port ${port}`);
+// });
+
+var server = app.listen(port, function () {
+  var host = server.address().address;
+  console.log("app listening at http://%s:%s", host, port);
 });
 module.exports = {app};
