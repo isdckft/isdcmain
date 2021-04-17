@@ -1,4 +1,4 @@
-require('./rest/config/config');
+//require('./rest/config/config');mongodb
 
 const express = require('express');
 const hbs = require('hbs');
@@ -7,9 +7,9 @@ const compileSass = require('compile-sass');
 const path = require('path');
 const _ = require('lodash');
 const bodyParser = require('body-parser');
-const {ObjectID} = require('mongodb');
+//const {ObjectID} = require('mongodb');
 
-var {mongoose} = require('./rest/db/mongoose');
+//var {mongoose} = require('./rest/db/mongoose');
 var {Article} = require('./rest/models/article');
 var {User} = require('./rest/models/user');
 var {authenticate} = require('./rest/middleware/authenticate');
