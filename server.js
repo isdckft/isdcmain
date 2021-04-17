@@ -14,7 +14,7 @@ const bodyParser = require('body-parser');
 //var {User} = require('./rest/models/user');
 //var {authenticate} = require('./rest/middleware/authenticate');
 
-const port = process.env.PORT || 443; 
+const port = process.env.PORT; 
 var app = express();
 
 hbs.registerPartials(__dirname + '/views/viewparts');
