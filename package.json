@@ -3,10 +3,6 @@
   "version": "1.0.0",
   "description": "ISDCKFT main page",
   "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/isdckft/isdcmain.git"
