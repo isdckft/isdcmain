@@ -1,4 +1,4 @@
-//require('./rest/config/config');mongodb
+require('./rest/config/config');
 
 const express = require('express');
 const hbs = require('hbs');
@@ -7,12 +7,12 @@ const compileSass = require('compile-sass');
 const path = require('path');
 const _ = require('lodash');
 const bodyParser = require('body-parser');
-//const {ObjectID} = require('mongodb');
+const {ObjectID} = require('mongodb');
 
-//var {mongoose} = require('./rest/db/mongoose');
-//var {Article} = require('./rest/models/article');
-//var {User} = require('./rest/models/user');
-//var {authenticate} = require('./rest/middleware/authenticate');
+var {mongoose} = require('./rest/db/mongoose');
+var {Article} = require('./rest/models/article');
+var {User} = require('./rest/models/user');
+var {authenticate} = require('./rest/middleware/authenticate');
 
 const port = process.env.PORT || 4200; 
 var app = express();
@@ -121,149 +121,149 @@ app.get('/tutorial/ts', (req, res) => {
 
 //  REST API
 
-// POST /users - Registration , create a new user
-// app.post('/rest/users', (req, res) => {
-//   var body = _.pick(req.body, ['email', 'password']);
-//   var user = new User(body);
+//POST /users - Registration , create a new user
+app.post('/rest/users', (req, res) => {
+  var body = _.pick(req.body, ['email', 'password']);
+  var user = new User(body);
 
-//   user.save().then(() => {
-//     return user.generateAuthToken();
-//   }).then((token) => {
-//     res.header('x-auth', token).send(user);
-//   }).catch((e) => {
-//     res.status(400).send(e);
-//   })
-// });
+  user.save().then(() => {
+    return user.generateAuthToken();
+  }).then((token) => {
+    res.header('x-auth', token).send(user);
+  }).catch((e) => {
+    res.status(400).send(e);
+  })
+});
 
 
 // POST USER login
-// app.post('/rest/users/login', (req, res) => {
-  // var body = _.pick(req.body, ['email', 'password']);
+app.post('/rest/users/login', (req, res) => {
+  var body = _.pick(req.body, ['email', 'password']);
 
-  // User.findByCredentials(body.email, body.password).then((user) => {
-    // return user.generateAuthToken().then((token) => {
-      // res.header('x-auth', token).send(user);
-    // });
-  // }).catch((e) => {
-    // res.status(400).send();
-  // });
-// });
+  User.findByCredentials(body.email, body.password).then((user) => {
+    return user.generateAuthToken().then((token) => {
+      res.header('x-auth', token).send(user);
+    });
+  }).catch((e) => {
+    res.status(400).send();
+  });
+});
 
 // GET - Who am I
-// app.get('/rest/users/me', authenticate, (req, res) => {
-  // res.send(req.user);
-// });
+app.get('/rest/users/me', authenticate, (req, res) => {
+  res.send(req.user);
+});
 
-// // Delete token. Logout
-// app.delete('/rest/users/me/token', authenticate, (req, res) => {
-  // req.user.removeToken(req.token).then(() => {
-    // res.status(200).send();
-  // }, () => {
-    // res.status(400).send();
-  // });
-// });
+// Delete token. Logout
+app.delete('/rest/users/me/token', authenticate, (req, res) => {
+  req.user.removeToken(req.token).then(() => {
+    res.status(200).send();
+  }, () => {
+    res.status(400).send();
+  });
+});
 
 
 // // New Article 
-// app.post('/rest/articles', authenticate, (req, res) => {
+app.post('/rest/articles', authenticate, (req, res) => {
 
-  // var article = new Article({
-    // author: req.body.author,
-    // title: req.body.title,
-    // desc: req.body.desc,
-    // url: req.body.url,
-    // completedAt: new Date(),
-    // _creator: req.user._id
-  // });
+  var article = new Article({
+    author: req.body.author,
+    title: req.body.title,
+    desc: req.body.desc,
+    url: req.body.url,
+    completedAt: new Date(),
+    _creator: req.user._id
+  });
 
-  // article.save().then((doc) => {
-    // res.send(doc);
-  // }, (e) => {
-    // res.status(400).send(e);
-  // });
-// });
+  article.save().then((doc) => {
+    res.send(doc);
+  }, (e) => {
+    res.status(400).send(e);
+  });
+});
 
 // List of the articles of a user
-// app.get('/rest/articles', authenticate, (req, res) => {
-  // Article.find({
-    // _creator: req.user._id
-  // }).then((articles) => {
-    // res.send({articles});
-  // }, (e) => {
-    // res.status(400).send(e);
-  // });
-// });
+app.get('/rest/articles', authenticate, (req, res) => {
+  Article.find({
+    _creator: req.user._id
+  }).then((articles) => {
+    res.send({articles});
+  }, (e) => {
+    res.status(400).send(e);
+  });
+});
 
 // Get One Article by ID
-// app.get('/rest/articles/:id', authenticate, (req, res) => {
-  // var id = req.params.id;
+app.get('/rest/articles/:id', authenticate, (req, res) => {
+  var id = req.params.id;
 
-  // if (!ObjectID.isValid(id)) {
-    // return res.status(404).send();
-  // }
+  if (!ObjectID.isValid(id)) {
+    return res.status(404).send();
+  }
 
-  // Article.findOne({
-    // _id: id,
-    // _creator: req.user._id
-  // }).then((article) => {
-    // if (!article) {
-      // return res.status(404).send();
-    // }
+  Article.findOne({
+    _id: id,
+    _creator: req.user._id
+  }).then((article) => {
+    if (!article) {
+      return res.status(404).send();
+    }
 
-    // res.send({article});
-  // }).catch((e) => {
-    // res.status(400).send();
-  // });
-// });
+    res.send({article});
+  }).catch((e) => {
+    res.status(400).send();
+  });
+});
 
 
 
 // Update one article
-// app.patch('/rest/articles/:id', authenticate, (req, res) => {
-  // var id = req.params.id;
-  // var body = _.pick(req.body, ['author', 'title', 'desc', 'url']);
+app.patch('/rest/articles/:id', authenticate, (req, res) => {
+  var id = req.params.id;
+  var body = _.pick(req.body, ['author', 'title', 'desc', 'url']);
 
-  // if (!ObjectID.isValid(id)) {
-    // return res.status(404).send();
-  // }
+  if (!ObjectID.isValid(id)) {
+    return res.status(404).send();
+  }
 
-  // body.completedAt = new Date().getTime();
+  body.completedAt = new Date().getTime();
 
 
-  // Article.findOneAndUpdate({_id: id, _creator: req.user._id}, {$set: body}, {new: true}).then((article) => {
-    // if (!article) {
-      // return res.status(404).send();
-    // }
+  Article.findOneAndUpdate({_id: id, _creator: req.user._id}, {$set: body}, {new: true}).then((article) => {
+    if (!article) {
+      return res.status(404).send();
+    }
 
-    // res.send({article});
-  // }).catch((e) => {
-    // res.status(400).send();
-  // })
-// });
+    res.send({article});
+  }).catch((e) => {
+    res.status(400).send();
+  })
+});
 
 
 
 // delete One Article by id
-// app.delete('/rest/articles/:id', authenticate, (req, res) => {
-  // var id = req.params.id;
+app.delete('/rest/articles/:id', authenticate, (req, res) => {
+  var id = req.params.id;
 
-  // if (!ObjectID.isValid(id)) {
-    // return res.status(404).send();
-  // }
+  if (!ObjectID.isValid(id)) {
+    return res.status(404).send();
+  }
 
-  // Article.findOneAndDelete({
-    // _id: id,
-    // _creator: req.user._id
-  // }).then((article) => {
-    // if (!article) {
-      // return res.status(404).send();
-    // }
+  Article.findOneAndDelete({
+    _id: id,
+    _creator: req.user._id
+  }).then((article) => {
+    if (!article) {
+      return res.status(404).send();
+    }
 
-    // res.send({article});
-  // }).catch((e) => {
-    // res.status(400).send();
-  // });
-// });
+    res.send({article});
+  }).catch((e) => {
+    res.status(400).send();
+  });
+});
 
 // app.listen(port, '127.0.0.1' ,() => {
 //   console.log(`Server is up on port ${port}`);
