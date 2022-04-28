@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-10805370-17"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-10805370-17');
+</script>
+
+<title>Welcome to the isdckft project site!</title>
+<link rel="stylesheet" href="/assets/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="/assets/css/jumbotron.css"/>
+<link rel="stylesheet" href="/assets/css/common.css"/>
+
+
+
+</head>
+<body>
+{{> menu}}
+<main role="main"> 
+
+  <!-- Main jumbotron for a primary marketing message or call to action -->
+  <div class="jumbotron">
+    <div class="container">
+      <h1 class="display-3">{{pageTitle}}</h1>
+      <p>
+        Here you can learn about different software programming languages, frameworks and much other cool stuff. 
+        We help you to build up your web sites with different tutorials, links, articles as we did our site! 
+        You can find about the installation on Windows client and about to deploy to Heroku and push to Github here :
+        <a href="/tutorial/environment">Install on Windows</a>. 
+        About the installation on our own Linux server see this page: <a href="/tutorial/linux">Ubuntu Linux</a>. <br>
+        Build up your website with us!
+
+      </p>
+      <div>
+        <div class="animated box" id="#gotit"></div>
+        <button class="butn"> Got It!</button> 
+        <div class="loader"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+      <div class="col-md-4">
+        <h2>JavaScript</h2>
+        <p>
+        This is a simple site with the basics of web developing. <br>  
+        <ul>
+            <li>
+                Front end:
+                <a href="/tutorial/html">HTML</a>, <a href="/tutorial/js">JavaScript</a>, <a href="/tutorial/css">CSS</a>, <a href="/tutorial/css">Bootstrap</a>     
+            </li>
+            <li>
+                Back end: <a href="/tutorial/nodejs" >Node.Js</a>
+            </li>
+            <li>
+                Database: <a href="/tutorial/linux">Mongodb</a>
+            </li>
+            <li>
+                Server side: <a href="/tutorial/linux">Ubuntu Linux, Nginx, Jenkins</a>
+            </li>
+        </ul>
+        </p>
+        <p><a class="btn btn-secondary" href="/home" role="button">View details &raquo;</a></p>
+      </div>
+      <div class="col-md-4">
+        <h2>Angular</h2>
+        <p>
+        <ul>
+            <li>
+              Front end:
+              <a href="/tutorial/html">HTML</a>, 
+              <a href="/tutorial/ts">TypeScript</a>, 
+              <a href="/tutorial/css">CSS</a>, 
+              <a href="/tutorial/css">Bootstrap 4</a>,   
+              <a href="/tutorial/angular">Angular</a>,   
+              <a href="/tutorial/angular">JWT authentication client side</a>
+
+            </li>
+            <li>
+                Back end: <a href="/tutorial/python">Python</a>,  <a href="/tutorial/python">Django REST Framework</a>,  
+                <a href="/tutorial/python">JWT authentication server side</a>
+            </li>
+            <li>
+                Database: <a href="/tutorial/linux">PostgreSQL</a>,  
+            </li>
+            <li>
+                Server side: <a href="/tutorial/linux">Linux, Node.Js, npm, Express, Nginx, PM2, Gunicorn, Jenkins</a>
+            </li>
+          
+          </ul>
+        </p>
+        <p><a class="btn btn-secondary" href="https://www.isdckft.com:4250" role="button">View details &raquo;</a></p>
+      </div>
+      <div class="col-md-4">
+        <h2>Django</h2>
+        <p>
+          <ul>
+                  <li>
+                      Front end: 
+                      <a href="/tutorial/html">HTML</a>, 
+                      <a href="/tutorial/js">JavaScript</a>, 
+                      <a href="/tutorial/css">CSS</a>, 
+                      <a href="/tutorial/css">Bootstrap 4</a>,  
+                      <a href="/tutorial/python">Python</a>,  
+                      <a href="/tutorial/python">Django</a>  
+                  </li>
+                  <li>
+                      Back end: <a href="/tutorial/python">Python</a>,  <a href="/tutorial/python">Django Framework</a>,  
+                  </li>
+                  <li>
+                      Database: <a href="/tutorial/linux">PostgreSQL</a>,  
+                  </li>
+                  <li>
+                      Server side: <a href="/tutorial/linux">Linux, Nginx, Gunicorn, Jenkins</a>
+                  </li>
+                  
+          </ul>
+         
+        </p>
+        <p><a class="btn btn-secondary" href="https://www.isdckft.com:8000" role="button">View details &raquo;</a></p>
+      </div>
+    </div>
+
+    <hr>
+
+  </div> <!-- /container -->
+
+</main>
+
+{{> footer}}
+
+</body>
+</html>

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-10805370-17"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-10805370-17');
+</script>
+<!-- Global adsence code -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-6352873787606567",
+          enable_page_level_ads: true
+     });
+</script>
+<meta charset="utf-8" />
+<link rel="icon" href="favicon.png" />
+<title>Tutorial - Node.Js - npm</title>
+<link rel="stylesheet" href="/assets/css/bootstrap.min.css"/>
+<link href="/assets/css/prism.css" rel="stylesheet" />  
+
+</head> 
+<body> 
+{{> menu}}
+<main role="main">
+<div class="jumbotron">
+<div class="container">
+    <h1>{{pageTitle}}</h1>
+<a href="#basics">Node.js, npm basics</a> <br>
+<a href="#example">Example for plane HTML, CSS, JS</a> <br>
+<a href="#rest">Node.js REST API</a> <br>
+<a href="#webpack">Webpack</a> <br>
+
+
+
+
+<div id = "basics">
+    <h1>Node.js, npm basics</h1>
+   <b>Node.js®</b> is a JavaScript runtime built on Chrome's V8 JavaScript engine. Documentation is here : 
+    <a href="https://nodejs.org/en/docs/" target="_blank" rel="noopener noreferrer">https://nodejs.org/en/docs/</a> <br>
+    <b>npm</b> is the package manager for JavaScript and the world’s largest software registry. Documentation is here:
+    <a href="https://docs.npmjs.com/" target="_blank" rel="noopener noreferrer">https://docs.npmjs.com/</a> <br>
+    First you have to download and install <b>Node.js and npm </b> from here: <a href="https://nodejs.org/en/" target="_blank">https://nodejs.org/en/</a>.
+    You can read more about Node.js here: <a href="https://www.npmjs.com/get-npm" target="_blank">https://www.npmjs.com/get-npm</a>.
+    <br>
+    After installing Node.js, please start a Windows command line (cmd) and you can upgrade with the next command: <br>
+    <b>npm i -g npm-upgrade</b>  <br>
+    You can check the version number with this: <br>
+    <b>npm –version</b><br>
+    <b>node –version</b><br>
+    So we can build packages with <b>npm</b>, that runs under Node.js. In <b>Node.js</b> there are many modules what you can 
+    load into your <b>JavaScript</b> app with the <b>require</b> function. There are also a lot third-party modules, that 
+    you can install with the <b>npm</b> command. 
+    After the installations, the given modul will go to the <b>node_modules</b> folder in your project folder.
+    With <b>npm</b> you can create a <b>package.json</b> file, that contains the main entry point of the app and the dependencies.
+    <br> Let's see an example: <br>
+    <ul>
+        <li>create an empty folder and navigate into it</li>
+        <li>create a file <b>myapp.js</b> and put a few JavaScript lines in it, for example : <b>console.log('Hello world');</b></li>
+        <li><b>npm init</b> : it will ask a few questions an create the <b>package.json</b> file</li>
+        <li><b>npm i --save lodash</b> : it will create the <b>node_modules</b> folder and in it the <b>lodash</b> modul. <br>
+            The <b>--save</b> option will modify the <b>package.json</b> file and puts <b>lodash</b> ito the <b>dependencies</b> section with the exact version.      
+        </li>
+        <li>Now you can delete the <b>node_modules</b> folder and run <b>npm install</b>. <br>
+            It will create the <b>node_modules</b> folder and place in it the necessary modules based on the <b>package.json</b> file</li>
+      
+    </ul>    
+    Now let's see, how to use other modules in a Javascript file (<b>app.js</b> ): <br>
+    <pre><code class="lang-javascript">
+
+        // load fron node.js the file system modul
+        const fs = require('fs');
+        // load from node.js the OS module
+        const os = require('os');
+        // load from the node_modules folder the lodash module
+        const _ = require('lodash');
+        // load our text.js file
+        const text = require('./text.js');
+        
+        const moreText= text.addText();
+        
+        // prints true, it uses a lodash function
+        console.log(_.isString('Is this a text?'));
+        
+        // gets the logged in user name from the os
+        var user = os.userInfo();
+        
+        fs.appendFile('hello.txt', `Hello ${user.username}!  ${moreText}`, (err) => {
+            if (err) throw err;
+        });
+    </code></pre>
+    And <b>text.js</b> :
+    <pre><code class="lang-javascript">
+
+        console.log('Starting text.js');
+
+        module.exports.addText = () => {
+          return 'Added text';
+        };
+    </code></pre> 
+    To run the program above: <b>node app.js</b>. <br>
+    With <b>nodemon</b> you can run an app so, that changing the app, nodemon will reload and restart the app. 
+    It is very useful during developing. Install it: <br>
+    <b>npm install -g nodemon </b> : <b>-g</b> means, that it will be installed globally into <b>Node.js</b> not into your package folder.
+    Another useful modul is <b>yargs</b>. With it you can handle the apps parameters easy. <br>
+    <b>npm i yargs --save</b>
+</div>
+<div id = "example">
+        <h1>Example for plane HTML, CSS, JS</h1>
+        We have a website, that is build up only from HTML, JavaScript and CSS. Now we will convert it to under <b>Node.js</b>. <br>
+        First navigate to the project folder where your <b>index.html</b> file is located. <br>
+        <ul>
+            <li><b>npm init</b>: it will ask for some parameters. Set the main file to <b>server.js</b>. This will create <b>package.json</b></li>
+            <li><b>npm install express --save</b> : install <a href="http://expressjs.com/" target="_blank" rel="noopener noreferrer">express</a> <br>
+                Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and 
+                mobile applications, whit it we will build a server.
+            </li>
+            <li> package.json file: <br>
+            <pre><code class="lang-javascript">
+            {
+                "name": "isdcmain",
+                "version": "1.0.0",
+                "description": "ISDCKFT main page",
+                "main": "server.js",
+                "scripts": {
+                    "test": "echo \"Error: no test specified\" && exit 1"
+                },
+                "repository": {
+                    "type": "git",
+                    "url": "git+https://github.com/isdckft/isdcmain.git"
+                },
+                "author": "Isdc Kft",
+                "license": "ISC",
+                "bugs": {
+                    "url": "https://github.com/isdckft/isdcmain/issues"
+                },
+                "homepage": "https://github.com/isdckft/isdcmain#readme",
+                "dependencies": {
+                    "express": "^4.16.4",
+                }
+            }
+            </code></pre>
+            
+            
+            </li>
+            <li>create a <b>server.js</b> file in the package folder : <br>
+            <pre><code class="lang-javascript">
+                const express = require('express');         // load the framework
+                const port = process.env.PORT || 3000;      // set the port
+                var app = express();                        // create the app object
+                app.use(express.static(__dirname + '/'));   // set the folders of the statatis files
+
+                app.listen(port, () => {                    // set the port
+                console.log(`Server is up on port ${port}`);
+                });
+            </code></pre>
+            Now you can start your browser and your website will run as an app on http://localhost:3000 .
+            
+            </li>
+            <li>write <b>"node_modules/"</b> into the <b>.gitignore</b> file</li>
+            
+        </ul>
+        Next let's improve some things.
+
+        <ul>
+            <li><b>npm install hbs --save </b>: This is Express.js view engine for handlebars.js <br>
+                Handlebars provides the power necessary to let you build semantic templates effectively. It is a template engine. 
+            </li>
+            <li>in the project folder create a <b>views</b> and a <b>views/viewparts</b> folder. <br>
+            The <b>views</b> folder is the default folder for <b>hbs</b></li>
+            <li>Except of the static files, move all your <b>htlm</b> files into the <b>views</b> folder and rename them to <b>.hbs</b> files.</li>
+            <li>Move the <b>menu.hbs</b> file to the <b>views/viewparts</b> folder</li>
+        </ul>
+        With <b>hbs</b> you can include partial html files into other html files alike with the <b>w3-include-html</b> tag. 
+        So we won't need it anymore. The <b>menu.hbs</b> file is the same as before, only we have to do one small change. <br>
+        In the urls in the navigation we do not need the <b>.html</b> ending. 
+        For example , instead of <b>"tutorial/angular.html</b> only <b>"tutorial/angular</b> , because <b>hbs</b> will render the file. 
+        You will see it in the <b>server.js</b> file later.
+        In the other files we can include <b>menu.hbs</b> so: <br>
+        <pre><code class="language-html">
+        &#123;&#123;&gt; menu&#125;&#125;
+        </code></pre>
+        Notice: You did not need to write the file extension.
+        <br>
+        We can also include a value into the hbs file from the Javascript file, for example from the server.js file.
+        
+        <pre><code class="language-html">
+        &#123;&#123; pageTitle &#125;&#125;
+        </code></pre>
+        <br>
+        Now let's see the <b>server.js</b> file:
+        <pre><code class="language-javascript">
+        const express = require('express');
+        const hbs = require('hbs');
+        const fs = require('fs');
+
+        const port = process.env.PORT || 4200; 
+        var app = express();
+
+        hbs.registerPartials(__dirname + '/views/viewparts'); // define the path for the partials
+        app.set('view engine', 'hbs');                         // set the view engine , the defalt folder is:views 
+
+        // make the logging
+        app.use((req, res, next) => {
+        var now = new Date().toString();
+        var log = `${now}: ${req.method} ${req.url} ${port}`;
+
+        console.log(log);
+        fs.appendFile('server.log', log + '\n', (err) => {
+            if (err) throw err;
+        });
+        next(); // After the logging, the server will execute the next statement
+        });
+
+        app.use(express.static(__dirname + '/')); // define the static folder
+
+        // to the main url will be rendered the index.hbs files, 
+        // the 2. parameter is an object with the parameters, which will be injected in the html file
+        app.get('/', (req, res) => {
+        res.render('index.hbs', {
+            pageTitle: 'Welcome to the isdckft project site!',
+        });
+        });
+
+        // other url
+        app.get('/tutorial/html', (req, res) => {
+        res.render('tutorial/html.hbs', {
+            pageTitle: 'HTML Basics',
+        });
+        });
+
+        // other url
+        app.get('/tutorial/css', (req, res) => {
+        res.render('tutorial/css.hbs', {
+            pageTitle: 'CSS - Bootstrap',
+        });
+        });
+
+        /////
+
+        // define all urls
+        ////
+
+        app.listen(port, () => {
+        console.log(`Server is up on port ${port}`);
+        });
+        </code></pre>
+        More about express here: <a href="http://expressjs.com/en/4x/api.html#req" target="_blank" rel="noopener noreferrer">http://expressjs.com/en/4x/api.html#req</a>
+
+        Next on the server:
+        <ul>
+            <li>In Jenkins set : <b>npm istall</b></li>
+            <li>run <b>pm2 start server.js</b></li>
+            <li>set the default nginx file:
+            <pre><code class="lang-nginx">
+
+                upstream backend {
+                server 127.0.0.1:4200;
+                keepalive 64;
+                }
+
+                server {
+                    listen 80 default_server;
+                    listen [::]:80 default_server;
+                    root /var/lib/jenkins/workspace/isdcmain/;
+
+                    server_name isdckft.com;
+                    
+                    location / {
+                        try_files $uri @backend;
+                    }
+
+                    location @backend {
+                        
+                        proxy_pass http://backend;
+                        proxy_set_header X-Real-IP $remote_addr;
+                        proxy_set_header Host $host;
+                        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                        # Following is necessary for Websocket support
+                        proxy_http_version 1.1;
+                        proxy_set_header Upgrade $http_upgrade;
+                        proxy_set_header Connection "upgrade";
+                    }
+                }
+
+
+            </code></pre>
+            </li>                
+        </ul>
+</div>
+
+    <div id = "rest">
+        <h1>A Node.js REST API</h1>
+        We are building a REST API with Node.js based on Mongdb database. <br>
+        In the project folder install these modules: <br>
+        <ul>
+            <li><b>npm i --save lodash</b></li>
+            <li><b>npm i validator --save</b></li>
+            <li><b>npm i bcryptjs --save</b></li>
+            <li><b>npm i body-parser --save</b></li>
+            <li><b>npm i crypto-js --save</b></li>
+            <li><b>npm i jsonwebtoken --save</b></li>
+            <li><b>npm i mongodb --save</b></li>
+            <li><b>npm i mongoose --save</b></li>
+        </ul>
+s
+    </div>
+
+    <div id = "webpack">
+        <h1>Webpack</h1>
+        <b>npm install --save-dev webpack</b>
+    </div>
+</div>
+</div>
+</main>
+{{> footer}}
+    <script src="/assets/js/prism.js"></script>
+    
+</body>
+</html>

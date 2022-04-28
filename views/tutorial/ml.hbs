@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-10805370-17"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-10805370-17');
+</script>
+<!-- Global adsence code -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-6352873787606567",
+          enable_page_level_ads: true
+     });
+</script>
+<meta charset="utf-8" />
+<link rel="icon" href="favicon.png" />
+<title>Tutorial-Machine learning</title>
+<link rel="stylesheet" href="/assets/css/bootstrap.min.css"/>
+<link href="/assets/css/prism.css" rel="stylesheet" />   
+    
+</head> 
+<body>
+{{> menu}}
+<main role="main">
+<div class="jumbotron">
+<div class="container">
+    <h1>{{pageTitle}}</h1>
+    I have created a folder <b>ml-module</b>, then manually created <b>ml.module.ts</b> and 
+    <b>ml-routing-module.ts</b>. Then I have imported the module in the <b>app.module.ts</b> file. 
+    In this module we will try several technics to show the machine learning results in our Angular application. <br>
+    <a href="/mystory/ml#tensorflow">Tensorflow.Js</a> <br>
+    <a href="/mystory/ml#tspretrained">Tensorflow.Js with pre-trained model</a> <br>
+    <a href="/mystory/ml#iris">Classification, Iris</a> <br>
+    
+    <div id="tensorflow">
+    <h1>TensorFlow JS</h1>
+    About TensorFlow.js more here: <a href="https://js.tensorflow.org/" target="_blank" rel="noopener noreferrer">https://js.tensorflow.org/</a>
+    To work with Tensorflow we have to install it: <br>
+    <b>npm install @tensorflow/tfjs</b> <br>
+    I have created the component in the ml module:  <br>
+    <b>ng g c ml-module/TensorFlowBasic --module=ml-module/Ml</b> <br>
+    These are very simple examples, that shows how to use the <b>Tensorflow Javascript libraries</b> in Angular.
+    With this method you can train and test your machine learning model in the browser side.
+    First example: <br>
+    <div id="ts1"></div>
+    <pre><code class="language-typescript">
+        import { Component, OnInit } from '@angular/core';
+        import * as tf from '@tensorflow/tfjs';
+        
+        @Component({
+          selector: 'app-tensor-flow-basic',
+          templateUrl: './tensor-flow-basic.component.html',
+          styleUrls: ['./tensor-flow-basic.component.css']
+        })
+        export class TensorFlowBasicComponent implements OnInit {
+          // Define a model for linear regression.
+          
+          model = tf.sequential();
+          rank;
+          tensorA;
+          tensorB;
+          tensor2D;
+          tensorZeros;
+          tensorAdd;
+          pred;
+        
+        
+          a = tf.scalar(2);
+          b = tf.scalar(4);
+          c = tf.scalar(8);
+          
+          constructor() { }
+          
+          ngOnInit() {
+          }
+        
+         runLinRegDemo(){
+            this.model.add(tf.layers.dense({units: 1, inputShape: [1]}));
+        
+            // Prepare the model for training: Specify the loss and the optimizer.
+            this.model.compile({loss: 'meanSquaredError', optimizer: 'sgd'});
+        
+            // Generate some synthetic data for training.
+            const xs = tf.tensor2d([1, 2, 3, 4], [4, 1]);
+            const ys = tf.tensor2d([1, 3, 5, 7], [4, 1]);
+        
+            // Train the model using the data.
+            this.model.fit(xs, ys, {epochs: 10}).then(() => {
+              // Use the model to do inference on a data point the model hasn't seen before:
+              this.rank = this.model.predict(tf.tensor2d([5], [1, 1]));
+            });
+         }
+        
+         displayTensors(){
+        
+            // 2x3 Tensor
+            const shape = [2, 3]; // 2 rows, 3 columns
+            this.tensorA = tf.tensor([1.0, 2.0, 3.0, 10.0, 20.0, 30.0], shape);
+            
+        
+            // The shape can also be inferred:
+            this.tensorB = tf.tensor([[1.0, 2.0, 3.0], [10.0, 20.0, 30.0]]);
+            this.tensor2D= tf.tensor2d([[1.0, 2.0, 3.0], [10.0, 20.0, 30.0]]);
+            this.tensorZeros = tf.zeros([3, 5]);
+        
+            const e = tf.tensor2d([[1.0, 2.0], [3.0, 4.0]]);
+            const f = tf.tensor2d([[5.0, 6.0], [7.0, 8.0]]);
+        
+            const e_plus_f = e.add(f);
+            this.tensorAdd = e_plus_f;
+        
+        
+            // Predict output for input of 2
+            const result = this.predict(2);
+            this.pred= result;
+        
+          }
+        
+        // Define function
+          predict(input) {
+            // y = a * x ^ 2 + b * x + c
+            // More on tf.tidy in the next section
+            return tf.tidy(() => {
+              const x = tf.scalar(input);
+        
+              const ax2 = this.a.mul(x.square());
+              const bx = this.b.mul(x);
+              const y = ax2.add(bx).add(this.c);
+        
+              return y;
+          });
+        
+          }
+        
+        }
+    </code></pre>
+    
+    </div>
+    <div id="tspretrained">
+        <h1>Tensorflow.Js with pre-trained model</h1>
+        Tensorflow JS can work with pre-trained model. The original example is here:
+        <a href="https://github.com/tensorflow/tfjs-examples/tree/master/translation" target="_blank" rel="noopener noreferrer">https://github.com/tensorflow/tfjs-examples/tree/master/translation</a>
+        <br>
+        I have used that example and modified it to work in my Angular environment. Do not forget, TensorFlow Js is purely Javascript.
+        In this example I have used two pre-trained models. One from with the original remote access, that translate from 
+        English to France and one from local from English to Hungarian. The last is pre-trained in Python and I have put it in the <b>assets</b> folder:
+        <br> <b>metadata.json</b> and <b>model.json</b>. Both pre-trained model is very simple and give very bad results. 
+        They are only just demonstration purpose. Here are the source codes: <br>
+        <pre><code class="language-typescript">
+            import { Component,  OnInit } from '@angular/core';
+            import * as loader from './loader';
+            import {Translator}  from './translator';
+            
+            @Component({
+              selector: 'app-tensor-flow-demo',
+              templateUrl: './tensor-flow-demo.component.html',
+              styleUrls: ['./tensor-flow-demo.component.css']
+            })
+            export class TensorFlowDemoComponent implements OnInit {
+            
+              hunSentence;
+              englishSentence;
+              public HOSTED_URLS = {
+                model:
+                  'https://storage.googleapis.com/tfjs-models/tfjs/translation_en_fr_v1/model.json',
+                metadata:
+                  'https://storage.googleapis.com/tfjs-models/tfjs/translation_en_fr_v1/metadata.json'
+              };
+              
+              public LOCAL_URLS = {
+                model:    '/assets/tensorflow/model.json',
+                metadata: '/assets/tensorflow/metadata.json'
+              };
+            
+            
+              ngOnInit() {
+                this.setupTranslator();
+              }
+            
+            
+              
+              /**
+               * Loads the pretrained model and metadata, and registers the translation
+               * function with the UI.
+               */
+              // async function setupTranslator() {
+                async setupTranslator() {
+                if (await loader.urlExists(this.HOSTED_URLS.model)) {
+                  this.status('Model available: ' + this.HOSTED_URLS.model);
+                  const button = document.getElementById('load-pretrained-remote');
+                  button.addEventListener('click', async () => {
+                    const translator = await new Translator();
+                    translator.init(this.HOSTED_URLS);
+                    this.setTranslationFunction(x => translator.translate(x));
+                    //this.setEnglish('Go.', x => translator.translate(x));
+                  });
+                  button.style.display = 'inline-block';
+                }
+            
+                // if (await loader.urlExists(this.LOCAL_URLS.model)) {
+                  // this.status('Model available: ' + this.LOCAL_URLS.model);
+                  const button = document.getElementById('load-pretrained-local');
+                  button.addEventListener('click', async () => {
+                    const translator = await new Translator();
+                    translator.init(this.LOCAL_URLS);
+                    this.setTranslationFunction(x => translator.translate(x));
+                    //this.setEnglish('Go.', x => translator.translate(x));
+                  });
+                  button.style.display = 'inline-block';
+                // }
+            
+                this.status('Standing by.');
+              }
+            
+              status(statusText) {
+                console.log(statusText);
+                document.getElementById('status').textContent = statusText;
+              }
+              
+              setEnglish(text, translate) {
+                ( document.getElementById('englishSentence') as HTMLInputElement).value = text;
+                document.getElementById('hunSentence').textContent = translate(text);
+              }
+              
+              setTranslationFunction(translate) {
+                const englishElement = document.getElementById('englishSentence');
+                englishElement.addEventListener('input', (e) => {
+                  const inputSentence = (englishElement as HTMLInputElement).value;
+                  document.getElementById('hunSentence').textContent =
+                      translate(inputSentence);
+                });
+              }
+              
+              disableLoadModelButtons() {
+                document.getElementById('load-pretrained-remote').style.display = 'none';
+                document.getElementById('load-pretrained-local').style.display = 'none';
+              }
+            
+            }
+        </code></pre>
+
+        The <b>Translator.ts</b>
+        <pre><code class="language-typescript">
+            import * as tf from '@tensorflow/tfjs';
+            import * as loader from './loader';
+            export  class Translator {
+                /**
+                 * Initializes the Translation demo.
+                 */
+                urls;
+                maxDecoderSeqLength;
+                maxEncoderSeqLength;
+                inputTokenIndex;
+                targetTokenIndex;
+                reverseTargetCharIndex ;
+                numEncoderTokens;
+                encoderModel ;
+                numDecoderTokens ;
+                decoderModel ;
+            
+            
+            
+                async init(urls) {
+                  console.log('My URL : '+urls);
+                  this.urls = urls;
+                  const model = await loader.loadHostedPretrainedModel(urls.model);
+                  await this.loadMetadata();
+                  this.prepareEncoderModel(model);
+                  this.prepareDecoderModel(model);
+                  return this;
+                }
+              
+                async loadMetadata() {
+                  const translationMetadata =
+                      await loader.loadHostedMetadata(this.urls.metadata);
+                  this.maxDecoderSeqLength = translationMetadata['max_decoder_seq_length'];
+                  this.maxEncoderSeqLength = translationMetadata['max_encoder_seq_length'];
+                  console.log('maxDecoderSeqLength = ' + this.maxDecoderSeqLength);
+                  console.log('maxEncoderSeqLength = ' + this.maxEncoderSeqLength);
+                  this.inputTokenIndex = translationMetadata['input_token_index'];
+                  this.targetTokenIndex = translationMetadata['target_token_index'];
+                  this.reverseTargetCharIndex =
+                      Object.keys(this.targetTokenIndex)
+                          .reduce(
+                              (obj, key) => (obj[this.targetTokenIndex[key]] = key, obj), {});
+                }
+              
+                prepareEncoderModel(model) {
+                  this.numEncoderTokens = model.input[0].shape[2];
+                  console.log('numEncoderTokens = ' + this.numEncoderTokens);
+              
+                  const encoderInputs = model.input[0];
+                  const stateH = model.layers[2].output[1];
+                  const stateC = model.layers[2].output[2];
+                  const encoderStates = [stateH, stateC];
+              
+                  this.encoderModel =
+                      tf.model({inputs: encoderInputs, outputs: encoderStates});
+                }
+              
+                prepareDecoderModel(model) {
+                  this.numDecoderTokens = model.input[1].shape[2];
+                  console.log('numDecoderTokens = ' + this.numDecoderTokens);
+              
+                  const stateH = model.layers[2].output[1];
+                  const latentDim = stateH.shape[stateH.shape.length - 1];
+                  console.log('latentDim = ' + latentDim);
+                  const decoderStateInputH =
+                      tf.input({shape: [latentDim], name: 'decoder_state_input_h'});
+                  const decoderStateInputC =
+                      tf.input({shape: [latentDim], name: 'decoder_state_input_c'});
+                  const decoderStateInputs = [decoderStateInputH, decoderStateInputC];
+              
+                  const decoderLSTM = model.layers[3];
+                  const decoderInputs = decoderLSTM.input[0];
+                  const applyOutputs =
+                      decoderLSTM.apply(decoderInputs, {initialState: decoderStateInputs});
+                  let decoderOutputs = applyOutputs[0];
+                  const decoderStateH = applyOutputs[1];
+                  const decoderStateC = applyOutputs[2];
+                  const decoderStates = [decoderStateH, decoderStateC];
+              
+                  const decoderDense = model.layers[4];
+                  decoderOutputs = decoderDense.apply(decoderOutputs);
+                  this.decoderModel = tf.model({
+                    inputs: [decoderInputs].concat(decoderStateInputs),
+                    outputs: [decoderOutputs].concat(decoderStates)
+                  });
+                }
+              
+                /**
+                 * Encode a string (e.g., a sentence) as a Tensor3D that can be fed directly
+                 * into the TensorFlow.js model.
+                 */
+                encodeString(str) {
+                  const strLen = str.length;
+                  const encoded =
+                      tf.buffer([1, this.maxEncoderSeqLength, this.numEncoderTokens]);
+                  for (let i = 0; i < strLen; ++i) {
+                    if (i >= this.maxEncoderSeqLength) {
+                      console.error(
+                          'Input sentence exceeds maximum encoder sequence length: ' +
+                          this.maxEncoderSeqLength);
+                    }
+              
+                    const tokenIndex = this.inputTokenIndex[str[i]];
+                    if (tokenIndex == null) {
+                      console.error(
+                          'Character not found in input token index: "' + tokenIndex + '"');
+                    }
+                    encoded.set(1, 0, i, tokenIndex);
+                  }
+                  return encoded.toTensor();
+                }
+              
+                decodeSequence(inputSeq) {
+                  // Encode the inputs state vectors.
+                  let statesValue = this.encoderModel.predict(inputSeq);
+              
+                  // Generate empty target sequence of length 1.
+                  let targetSeq = tf.buffer([1, 1, this.numDecoderTokens]);
+                  // Populate the first character of the target sequence with the start
+                  // character.
+                  targetSeq.set(1, 0, 0, this.targetTokenIndex['\t']);
+              
+                  // Sample loop for a batch of sequences.
+                  // (to simplify, here we assume that a batch of size 1).
+                  let stopCondition = false;
+                  let decodedSentence = '';
+                  while (!stopCondition) {
+                    const predictOutputs =
+                        this.decoderModel.predict([targetSeq.toTensor()].concat(statesValue));
+                    const outputTokens = predictOutputs[0];
+                    const h = predictOutputs[1];
+                    const c = predictOutputs[2];
+              
+                    // Sample a token.
+                    // We know that outputTokens.shape is [1, 1, n], so no need for slicing.
+                    const logits = outputTokens.reshape([outputTokens.shape[2]]);
+                    const sampledTokenIndex = logits.argMax().dataSync()[0];
+                    const sampledChar = this.reverseTargetCharIndex[sampledTokenIndex];
+                    decodedSentence += sampledChar;
+              
+                    // Exit condition: either hit max length or find stop character.
+                    if (sampledChar === '\n' ||
+                        decodedSentence.length > this.maxDecoderSeqLength) {
+                      stopCondition = true;
+                    }
+              
+                    // Update the target sequence (of length 1).
+                    targetSeq = tf.buffer([1, 1, this.numDecoderTokens]);
+                    targetSeq.set(1, 0, 0, sampledTokenIndex);
+              
+                    // Update states.
+                    statesValue = [h, c];
+                  }
+              
+                  return decodedSentence;
+                }
+              
+                /** Translate the given English sentence into Hun */
+                translate(inputSentence) {
+                  this.status('Translating...');
+                  const inputSeq = this.encodeString(inputSentence);
+                  const decodedSentence = this.decodeSequence(inputSeq);
+                  this.status('');
+                  return decodedSentence;
+                }
+            
+                status(statusText) {
+                  console.log(statusText);
+                  document.getElementById('status').textContent = statusText;
+                }
+              }
+              
+        </code></pre>
+
+        The <b>loader.js</b>
+        <pre><code class="language-typescript">
+            import * as tf from '@tensorflow/tfjs';
+            import * as ui from './ui';
+            
+            /**
+             * Test whether a given URL is retrievable.
+             */
+            export async function urlExists(url) {
+              ui.status('Testing url ' + url);
+              try {
+                const response = await fetch(url, {method: 'HEAD'});
+                return response.ok;
+              } catch (err) {
+                return false;
+              }
+            }
+            
+            /**
+             * Load pretrained model stored at a remote URL.
+             *
+             * @return An instance of 'tf.Model' with model topology and weights loaded.
+             */
+            export async function loadHostedPretrainedModel(url) {
+              ui.status('Loading pretrained model from ' + url);
+              try {
+                const model = await tf.loadModel(url);
+                ui.status('Done loading pretrained model.');
+                // We can't load a model twice due to
+                // https://github.com/tensorflow/tfjs/issues/34
+                // Therefore we remove the load buttons to avoid user confusion.
+                ui.disableLoadModelButtons();
+                return model;
+              } catch (err) {
+                console.error(err);
+                ui.status('Loading pretrained model failed.');
+              }
+            }
+            
+            /**
+             * Load metadata file stored at a remote URL.
+             *
+             * @return An object containing metadata as key-value pairs.
+             */
+            export async function loadHostedMetadata(url) {
+              ui.status('Loading metadata from ' + url);
+              try {
+                const metadataJson = await fetch(url);
+                const metadata = await metadataJson.json();
+                ui.status('Done loading metadata.');
+                return metadata;
+              } catch (err) {
+                console.error(err);
+                ui.status('Loading metadata failed.');
+              }
+            }
+        </code></pre>
+
+        The <b>ui.js</b>
+        <pre><code class="language-typescript">
+            export function status(statusText) {
+                console.log(statusText);
+                document.getElementById('status').textContent = statusText;
+              }
+              
+              export function setEnglish(text, translate) {
+                document.getElementById('englishSentence').value = text;
+                document.getElementById('frenchSentence').textContent = translate(text);
+              }
+              
+              export function setTranslationFunction(translate) {
+                const englishElement = document.getElementById('englishSentence');
+                englishElement.addEventListener('input', (e) => {
+                  const inputSentence = englishElement.value;
+                  document.getElementById('frenchSentence').textContent =
+                      translate(inputSentence);
+                });
+              }
+              
+              export function disableLoadModelButtons() {
+                document.getElementById('load-pretrained-remote').style.display = 'none';
+                document.getElementById('load-pretrained-local').style.display = 'none';
+              }
+        </code></pre>
+
+        And the <b>html</b>
+        <pre><code class="language-html">
+            &lth1&gtTensorFlow.js Layers: Sequence-to-Sequence (English-Hungarian Translation) Demo&lt/h1&gt
+            &ltdiv class="create-model"&gt
+              &ltbutton id="load-pretrained-remote" style="display:none"&gtLoad hosted pretrained model&lt/button&gt
+              &ltbutton id="load-pretrained-local" style="display:none"&gtLoad local pretrained model&lt/button&gt
+            &lt/div&gt
+            &ltdiv&gt
+              &ltspan id="status"&gtStanding by.&lt/span&gt
+            &lt/div&gt
+            &lthr&gt
+            &ltdiv class="input-div"&gt
+              &ltspan class="input-output-label"&gtInput English sentence:&lt/span&gt
+              &ltinput id="englishSentence" size=16 maxlength="16"&gt
+            &lt/div&gt
+            &ltdiv class="input-div"&gt
+              &ltspan class="input-output-label"&gtOutput Hungarian sentence:&lt/span&gt
+              &ltspan class="output" id="hunSentence"&gt&lt/span&gt
+            &lt/div&gt
+        </code></pre>
+
+    </div>
+    <div id="iris">
+    <h1>Classification, Iris</h1>
+    In this example I have trained and tested the model in Python and only the result is showed here in Angular.
+    Now we will get back a plain html, not json. So, the output is generated in Python too.
+    On the Python side: <br>
+    For machine learning algorithm we have to install some modules. <br>
+        <ul>
+          <li><b>pip install --upgrade tensorflow</b></li>
+          <li><b>pip install keras</b></li>
+          <li><b>pip install tensorflowjs</b></li>
+          <li><b>pip install pandas</b></li>
+          <li><b>pip install matplotlib</b></li>
+          <li><b>pip install sklearn</b></li>
+          
+        </ul> <br>
+    I have installed them in the same virtual environment, as <b>Django</b>. <br>
+    I have created an app in the <b>isdcbackkend</b> application.
+    In the code I simply printed the output in a <b>irisresult.html</b> file and that is the return value of function.
+    The file is located in the <b>templates</b> folder.
+    <pre><code class="language-python">
+        from django.http import HttpResponse, JsonResponse
+        from django.shortcuts import render
+        from django.conf import settings
+        from django.views.decorators.csrf import csrf_exempt
+        from rest_framework.views import APIView
+        from rest_framework.renderers import JSONRenderer
+        from rest_framework.parsers import JSONParser
+        from rest_framework.decorators import api_view, permission_classes
+        from rest_framework import permissions
+        import pandas as pd
+        from sklearn.neighbors import KNeighborsClassifier
+        from sklearn.model_selection import train_test_split
+        from sklearn.metrics import classification_report
+        from sklearn.metrics import confusion_matrix 
+        from sklearn.linear_model import LogisticRegression
+        
+        # Get the parameters
+        @csrf_exempt
+        @api_view(['GET'])
+        @permission_classes([permissions.AllowAny,]) # everybody can access it
+        def ml(request, param):
+            if param== "iris":
+                filename = iris()
+                return render(request,filename)
+            else:
+                return HttpResponse( "Parameter is invalid", status=404) # NOt found
+        
+        def iris():
+            # dataset beolvasása
+            df=pd.read_csv('staticfiles/iris.csv')
+            outputname ='/ml/irisresult.html'
+            filename = settings.TEMPLATE_DIR+outputname
+            file=open(filename, "w")
+            print("<pre>", file=open(filename, "a"))
+            print("Iris ML example", file=open(filename, "a"))
+        
+        
+            # Create arrays for the features and the response variable
+            y = df['species'].values
+            X = df.drop('species', axis=1).values
+        
+            # Split into training and test set
+            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state=42, stratify=y)
+        
+            # Set the classification
+            knn = KNeighborsClassifier(n_neighbors=6)
+        
+            # Fit the classifier to the data
+            knn.fit(X_train,y_train)
+        
+            # Predict the test data
+            y_pred = knn.predict(X_test)
+        
+            # Print the test data
+            print("Prediction: {}".format(y_pred),file=open(filename, "a"))
+        
+            # Print the accuracy
+            print('Iris accuracy',file=open(filename, "a"))
+            print(knn.score(X_test, y_test),file=open(filename, "a"))
+        
+            # Generate the confusion matrix and classification report
+            print("Classification matrix (TP, TN, FP, FN)",file=open(filename, "a"))
+            print(confusion_matrix( y_test,y_pred),file=open(filename, "a"))
+            print("Classification report",file=open(filename, "a"))
+            print("Precision=TP/(TP+FP), Recall=TP/(TP+FN), F1sore/2*precision*recall/(precisuon+recall)",file=open(filename, "a"))
+            print(classification_report(y_test,y_pred),file=open(filename, "a"))
+            print("</pre>", file=open(filename, "a"))
+            file.close()
+        
+            return filename
+    </code></pre>
+    
+    On the <b>Angular</b> side I have created a module for this: <br>
+    <b>ng g c ml-module/Iris --module=ml-module/Ml</b> <br>
+    
+
+    </div>
+               
+</div>
+</div>
+</main>
+{{> footer}}
+    <script src="/assets/js/prism.js"></script>
+    
+</body>
+</html>

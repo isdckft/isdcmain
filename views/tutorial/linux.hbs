@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-10805370-17"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-10805370-17');
+</script>
+<!-- Global adsence code -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-6352873787606567",
+          enable_page_level_ads: true
+     });
+</script>
+<meta charset="utf-8" />
+<link rel="icon" href="favicon.png" />
+<title>Tutorial- Ubuntu Linux server</title>
+<link rel="stylesheet" href="/assets/css/bootstrap.min.css"/>
+<link href="/assets/css/prism.css" rel="stylesheet" />
+   
+</head>
+<body>
+{{> menu}} 
+<main role="main">
+<div class="jumbotron">
+<div class="container">
+    <h1>{{pageTitle}}</h1>
+
+    <a href="#basics">Basics</a> <br>
+    <a href="#email">Email server</a> <br>
+    <a href="#django">Django</a> <br>
+    <a href="#nodejs">Node Js</a> <br>
+    <a href="#jenkins">Jenkins using</a> <br>
+    <a href="#webservers">Webservers</a> <br>
+    <a href="#databases">Databases</a> <br>
+    <a href="#git">Git</a> <br>
+    <a href="#docker">Docker</a> <br>
+
+
+    <div id ="basics">
+    <h1>Basics</h1> 
+    
+    <ul>
+        <li><b>apt-get update</b> : update linux packages</li>
+        <li><b>apt-get upgrade</b> :upgrade linux packages </li>
+        <li><b>apt-get remove</b> :remove linux packages </li>
+        <li><b>apt install mc</b> : install commander</li>
+        <li>dpkg-query -L nodejs: Locate file</li>
+    
+        <li><b>sudo apt-get install vsftpd</b>: install ftp</li>
+        <li><b>adduser isdc</b>: create a new linux user</li>
+        <li><b>usermod -a -G www-data isdc</b>: add the user to a group</li>
+        <li><b>passwd postgres</b> : set a password for the <b>postgres</b> linux user</li>
+        <li><b>echo "isdc" /etc/vsftpd.userlist</b>: add a user to the ftp userlist</li>
+        <li> Edit <b>/etc/vsftpd.conf</b>  file: <br>
+            <ul>
+                <li>write_enable=YES</li>
+                <li>userlist_enable=YES</li>
+                <li>userlist_file=/etc/vsftpd.userlist</li>
+                <li>userlist_deny=NO : When it is set to "NO", only users on the list are allowed access. </li>
+                <li>ssl_enable=YES</li>
+                <li>rsa_cert_file=/etc/ssl/private/vsftpd.pem</li>
+                <li>rsa_private_key_file=/etc/ssl/private/vsftpd.pem</li>
+            </ul>
+        </li>
+    
+        <li><b>sudo service vsftpd start / stop /restart</b> : start/stop/restart ftp</li>
+        <li>/etc/init.d/vsftpd restart</li>
+        <li><b>netstat -nlp | grep :8080</b></li>
+        <li><b>ps aux | grep node</b></li>
+    
+      <li>Change ssh settings in <b>/etc/ssh/sshd_config </b> file:
+    
+        Port 222 <br>
+        PermitRootLogin no <br>
+        X11Forwarding no <br>
+        AllowUsers username <br>
+          
+      </li>
+      <li>Make sure our DNS is working. We can use a A, AAAA or CNAME record as long as it points to your IP address.
+        We can check using ping subdomain.mydomain.com or nslookup subdomain.mydomain.com.
+        Note that DNS changes may take up to 24 hours. 
+       </li>
+       <li> If you have communication via domain names on your server between several services then you should set the domains in the <b>hosts</b>
+            file. <br>
+            For example: <br>
+            The content of the <b>hostname</b> file: <b>isdckft</b> <br>
+            The content of the <b>hosts</b> file: 
+            <pre> <code class="lang-ini">
+                127.0.0.1 localhost.localdomain localhost
+                159.69.203.252 isdckft.com www.isdckft.com django.isdckft.com angular.isdckft.com isdckft
+                
+                
+                # The following lines are desirable for IPv6 capable hosts
+                ::1 ip6-localhost ip6-loopback
+                fe00::0 ip6-localnet
+                ff00::0 ip6-mcastprefix
+                ff02::1 ip6-allnodes
+                ff02::2 ip6-allrouters
+                ff02::3 ip6-allhosts
+            </code></pre>
+            Note: In the <b>hosts</b> file <b>isdckft</b> refers to the <b>hostname</b> file. <br>
+    
+        </li>
+        <li> <b>hostname -f</b> : returns FQDN </li>
+        <li><b>ln -s /usr/share/phppgadmin /var/www</b>: symlink example</li>
+        <li><b>apt-get purge 'postgresql.*'</b> : remove all postgresql</li>
+       <li><b>apt install unzip</b></li>
+       <li><b>printenv</b>: prints the environment variables</li>
+       <li><b>export GEOSERVER_HOME=/var/www/geoserver</b>: set an environment variable</li>
+
+    </ul> <br>
+    Move <b>var</b> folder to a new device: <br>
+    <ul>
+        <li>Add a new hard disk to the server</li>
+        <li>Mount the new filesystem in /mnt, for example: /mnt/newvar</li>
+        <li>init 1: Switch to single-user mode</li>
+        <li>cp -apx /var/* /mnt/newvar</li>
+        <li>mv /var /var.old: rename it for backup</li>
+        <li>mkdir /var</li>
+        <li>Edit the /etc/fstab file: Replace /mnt/newvar with /var</li>
+        <li>reboot</li>
+        
+    </ul>
+
+
+
+    </div>
+    <div id ="email">
+        <h1>Postfix mail server</h1> 
+
+        <b>apt-get install -y postfix</b>, choose <b>internet site</b>. <br>
+        You can reload it with: <b>/etc/init.d/postfix reload</b>. <br>
+        <b>dpkg-reconfigure postfix</b> <br>
+        <ul>
+            <li>postconf -e 'home_mailbox= Maildir/'</li>
+            <li>postconf -e 'virtual_alias_maps= hash:/etc/postfix/virtual'</li>
+            <li>nano /etc/postfix/virtual <br>
+                    contact@example.com sammy
+                    admin@example.com sammy
+            
+            </li>
+            <li>
+                postmap /etc/postfix/virtual
+            </li>
+            <li>systemctl restart postfix</li>
+            <li>ufw allow Postfix : adjust firewall</li>
+            <li>echo 'export MAIL=~/mail' | sudo tee -a /etc/bash.bashrc | sudo tee -a /etc/profile.d/mail.sh</li>
+            <li>apt-get install courier-pop</li>
+            <li>apt-get install courier-imap</li>
+            <li>apt-get install courier-pop-ssl</li>
+            <li>apt-get install courier-imap-ssl</li>
+            <li>service courier-authdaemon start</li>
+            <li>/etc/init.d/courier-pop-ssl restart</li>
+            <li>/etc/init.d/courier-pop-imap restart</li>
+            <li>systemctl enable courier-authdaemon : enable on start</li>
+            <li>Create a bundle cert file: <br>
+            <pre><code class="lang-ini">
+                cat www.isdckft.com.crt.pem www.isdckft.com.key.pem &gt; www.isdckft.bundle.pem
+            </code></pre>
+            Set the <b>TLS_CERTFIL=/path/www.isdckft.bundle.pem</b> in the pop3d-ssl file. 
+            </li>
+
+        </ul>
+
+
+    </div>
+
+
+    <div id ="django">
+        <h1>Django</h1>
+    To Install Python and Django: <br>
+    
+    <ul>
+      <li><b>sudo apt-get install software-properties-common</b></li>
+      <li><b>sudo add-apt-repository ppa:deadsnakes/ppa</b></li>
+      <li><b>sudo apt-get update</b></li>
+      <li>sudo apt-get install python3.6</li>
+      <li><b>pip3 install virtualenv</b></li>
+      <li><b>mkdir isdcbackend</b></li>
+      <li><b>cd isdcbackend</b></li>
+      <li><b>virtualenv isdcp</b></li>
+      <li><b>. isdcp/bin/activate</b></li>
+      <li><b>pip install django</b> : python framework</li>
+      <li><b>pip install djangorestframework</b> : Django framework for REST API</li>
+      <li><b>pip install djangorestframework-jwt</b> : for JWT tokens </li>
+      <li><b>pip install markdown</b></li>
+      <li><b>pip install django-filter</b></li>
+      <li><b>pip install gunicorn</b>  : for deploy to Heroku</li>
+      <li><b>pip install django-cors-headers</b> : for security reason</li>
+      <li><b>pip install django-bootstrap4</b></li>
+      <li><b>pip install pillow </b>: for upload images</li> 
+      <li><b>pip install dj-database-url</b></li>
+      <li><b>pip install pandas</b></li>
+      <li><b>pip install setuptools</b></li>
+      <li><b>pip install sklearn</b></li>
+      <li><b>pip install whitenoise</b></li>
+     
+    </ul>
+    
+        You can use Django with Gunicorn server. See next chapter. Make sure, that in the django project settings.py you set this server name is in the ALLOWED_HOSTS setting
+        If the server does not run, then on server: <br>
+        <ul>
+        <li><b>cd /var/lib/jenkins/workspace/isdcbackend</b></li>
+        <li><b>ps aux | grep gunicorn</b></li>
+        <li><b>kill #processid</b></li>
+        <li><b>. isdcp/bin/activate</b></li>
+        <li><b>gunicorn --daemon --workers 3 --bind unix:/var/lib/jenkins/workspace/isdcbackend/isdcbackend.sock isdcbackend.wsgi</b></li>
+        <li><b>service nginx restart</b></li>
+        <li>OR: <b>gunicorn --daemon --workers 3 -b :8000  isdcbackend.wsgi</b></li>
+        </ul>
+    </div>
+    
+    
+    <div id ="nodejs">
+        <h1>Node Js</h1>
+    More: <a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-16-04" target="_blank" rel="noopener noreferrer">https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-16-04</a>
+    <b>npm</b> is the package manager of <b>node.js</b>. <br>
+    <br>
+    Install <b>Node.js</b>(as root) : <br> 
+    <b>curl -sL https://deb.nodesource.com/setup_11.x | sudo -E bash -</b> <br>
+    <b>apt-get install -y nodejs</b> <br>
+    <b>npm i -g npm-upgrade</b>  <br>
+    You can check the version number with this: <br>
+    <b>npm –version</b><br>
+    My version is currently: 5.6.0.<br>
+    <b>node –version</b><br>
+    My version is currently: 8.11.3.<br>
+    <b>sudo npm install -g pm2</b> <br>
+    
+    Next log in with your user and navigate in to your <b>Angular</b> project folder (isdcproject): <br>
+    I have assumed, that the source code is copied already here. <br>
+     
+    <b>pm2 start server.js</b> or <br>
+    <b>pm2 restart /var/lib/jenkins/workspace/isdcproject/server.js</b> <br>
+    <b>pm2 show 0</b>: 0 is the process id. <br> <br>
+    Now the application is running on the port 8080 <br>
+    
+    After the changing of the source (if you are not working with Jenkins) : <br>
+    <b>ng build --aot --prod</b> <br>
+    <b>ng run isdcproject:serve</b> <br>
+    <h2>If they are in your package.json, then </h2>
+    
+    <b>ng build</b> <br>
+    <b> pm2 restart server.js</b> <br>
+    
+    Some node commands: <br>
+    <ul>
+    <li><b>node</b> : then in the <b>node</b> prompt:</li>
+    <li><b>global</b> </li>
+    <li><b>process</b> </li>
+    <li><b>process.exit(0)</b> </li>
+    
+    </ul>
+    
+    </div>
+    
+    <div id="jenkins">
+        <h1>Jenkins</h1>
+        First install <b>Java</b>: <br>
+        <b>add-apt-repository ppa:webupd8team/java</b> <br>
+        <b>apt-get install default-jre</b>
+        Jenkins install: <br>  
+    
+        <ul>
+            <li><b>wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key |  apt-key add -</b></li>
+            <li><b>sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'</b></li>
+            <li><b>apt-get update</b></li>
+            <li><b>apt-get install jenkins</b></li>
+        </ul>
+        In the <b>/etc/default/jenkins</b> you can ste the http port to other than the default 8080. <br>
+        Start Jenkins: <br>
+        <b>/etc/init.d/jenkins start</b> <br>
+        Jenkins logs available: <b>/var/log/jenkins/jenkins.log.</b>. Now in your browser you can access Jenkins at the given port.
+        <h2>Jenkins build settings for Angular</h2>
+        <b>Settings -> Version controll-> Git -> Repository URL</b> <br>
+        <b>https://github.com/isdckft/isdcproject.git</b> <br>
+        <b>Settings -> Build Environment -> Build -> Execute shell -> Command </b> <br>
+       
+        <b>npm install </b>
+    
+        <h2>Jenkins build settings for Django</h2>
+        <b>Settings -> Version controll-> Git -> Repository URL</b> <br>
+        <b>https://github.com/isdckft/isdcbackend.git</b> <br>
+        <b>Settings -> Build Environment -> Build -> Execute shell -> Command </b> <br>
+        <pre><code class="lang-ini">
+            <b>
+        . isdcp/bin/activate
+        pip install -r requirements.txt
+        python3 manage.py collectstatic --noinput
+            </b>
+         
+        </code></pre>
+    
+
+        <h2>Jenkins in https</h2>
+        In order to put Jenkins behind https we use our <b>nginx</b> server as a proxy. 
+        In the nginx site configuration file write this: <br>
+        <pre><code class="lang-ini">
+            # Jenkins
+            server {
+                    # SSL Configuration
+                    #
+                    listen  8081 ssl;
+                    server_name jenkins;
+                    ssl_certificate     /yourpath/certs/www.isdckft.com.crt.pem;
+                    ssl_certificate_key /yourpath/certs/www.isdckft.com.key.pem;
+
+                    # listen [::]:443 ssl default_server;
+                    access_log            /var/log/nginx/jenkins.access.log;
+                    error_log            /var/log/nginx/jenkins.error.log;
+
+                    location / {
+                            # First attempt to serve request as file, then
+                            # as directory, then fall back to displaying a 404.
+                            # try_files $uri $uri/ =404;
+                            include /etc/nginx/proxy_params;
+                            proxy_pass          http://localhost:8080;
+                            proxy_read_timeout  90s;
+                            # Fix potential "It appears that your reverse proxy set up is broken" error.
+                            proxy_redirect      http://localhost:8080 https://www.isdckft.com:8081;
+                    }
+            }
+
+        </code></pre>
+        Next in the <b>/etc/default/jenkins</b> file:
+        <pre><code class="lang-ini">
+            JENKINS_ARGS="--webroot=/var/cache/$NAME/war --httpPort=$HTTP_PORT --httpListenAddress=127.0.0.1"
+        </code></pre>
+    </div>
+    
+    
+    <div id ="webservers">
+        <h1>Web servers</h1>
+        The main function of a web server is to store, process and deliver web pages to clients. 
+        We can use different web servers such as Apache, nginx, Tomcat, IIS, etc.
+        <h2>ssl</h2>
+        If you buy ssl certificate, then you get four files, for example: <br>
+        <ul>
+            <li>www.isdckft.com.ca.pem : Certificate of the parent</li>
+            <li>www.isdckft.com.crt.pem : Certificate - Your certificate</li>
+            <li>www.isdckft.com.csr.pem : Certificate Request</li>
+            <li>www.isdckft.com.key.pem : Private key -Kell</li>
+        </ul>
+        To use copy them to the server. <br>
+        <h2>nginx</h2>
+        Nginx wiki here: <a href="https://www.nginx.com/resources/wiki/" target="_blank" rel="noopener noreferrer">https://www.nginx.com/resources/wiki/</a>
+        <br>
+        Intall <b>nginx</b> : <b>sudo apt-get install nginx</b> <br>
+        Test it: <b>nginx -t</b> <br>
+        After this, you shuld received this output: <br>
+        <b> <i>
+        nginx: the configuration file /etc/nginx/nginx.conf syntax is ok <br>
+        nginx: configuration file /etc/nginx/nginx.conf test is successful
+        </i>
+        </b> <br>
+    
+        To create the main web page under <b>nginx</b> edit the <b>default</b> file in the 
+        <b>/etc/nginx/sites-available</b>  <br>
+        <pre><code class="language-nginx">
+        # set the path
+        root /var/www/default;
+        
+        # set the index file
+            index index.html
+        </code></pre>
+
+        Start service : <b>service nginx start</b> <br>
+        Stop service : <b>service nginx stop</b> <br>
+        Restart service : <b>service nginx restart</b> <br>
+        Once <b>nginx</b>  is started, it can be controlled by invoking the executable with the -s parameter. <br>
+        <b> nginx -s parameter</b> <br> where the parameters:
+        <ul>
+            <li> <b>stop — fast shutdown</b> </li>
+            <li><b>quit — graceful shutdown</b></li>
+            <li><b>reload — reloading the configuration file</b></li>
+            <li><b>reopen — reopening the log files</b></li>
+        </ul>
+    
+        <h2>Gunicorn Gateway</h2>
+        Gunicorn 'Green Unicorn' is a Python WSGI HTTP Server for UNIX. We use <b>Gunicorn</b> as a gateway to the <b>nginx</b> web service. <br>
+        Install gunicorn under your python virtual environment: <b>pip install gunicorn</b> <br>
+        Next in the project folder (in our example it is in the jenkins workspace): <br>
+        <ul>
+            <li><b>. isdcp/bin/activate</b></li>
+            <li><b>python3 manage.py collectstatic</b></li>
+            <li><b>gunicorn --daemon --workers 3 --bind unix:/var/lib/jenkins/workspace/isdcbackend/isdcbackend.sock isdcbackend.wsgi</b></li>
+        </ul> <br>
+        Then create a file /etc/nginx/sites-available/isdcbackend and type in it the following:
+        <ul>
+            <li>
+            <pre><code class="language-nginx">
+                server {
+                    listen 80;
+                    # make sure, that in the django project settings.py you set this server name is in the ALLOWED_HOSTS setting
+                    server_name django.isdckft.com;
+                    location = /favicon.ico { access_log off; log_not_found off; }
+                
+                    location /static/ {
+                            alias /var/lib/jenkins/workspace/isdcbackend/staticfiles/;
+                    }
+                
+                    location / {
+                            include proxy_params;
+                            proxy_pass http://unix:/var/lib/jenkins/workspace/isdcbackend/isdcbackend.sock;
+                            proxy_redirect off;
+                            proxy_read_timeout 240s;
+                    }
+                    }
+            </code></pre> 
+
+            <li><b>
+                    sudo ln -s /etc/nginx/sites-available/isdcbackend /etc/nginx/sites-enabled
+                </b>
+            </li>
+        </ul> 
+        <h2>PM2 Gateway</h2>
+        PM2 is a Production Runtime and Process Manager for Node.js applications with a built-in Load Balancer. <br>
+        Install Pm2 (Node.js is already installed) : <b>sudo npm install -g pm2</b> <br><br>
+        Next: <b>pm2 start /var/lib/jenkins/workspace/isdcproject/server.js</b> <br>
+        Now the application is running on the port 8080 <br>
+        Then create a file /etc/nginx/sites-available/angular and type in it the following:
+        <ul>
+            <li> 
+                <pre><code class="language-nginx">
+                    upstream my_nodejs_upstream {
+                        server 127.0.0.1:8080;
+                        keepalive 64;
+                    }
+                    
+                    server {
+                        listen 80;
+                        server_name angular.isdckft.com;
+                        root /var/lib/jenkins/workspace/isdcproject/;
+                        
+                        location / {
+                            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                            proxy_set_header Host $http_host;
+                            proxy_set_header X-NginX-Proxy true;
+                            proxy_http_version 1.1;
+                            proxy_set_header Upgrade $http_upgrade;
+                            proxy_set_header Connection "upgrade";
+                            proxy_max_temp_file_size 0;
+                            proxy_pass http://my_nodejs_upstream/;
+                            proxy_redirect off;
+                            proxy_read_timeout 240s;
+                        }
+                        }
+                </code></pre>     
+
+            <li><b>
+                    sudo ln -s /etc/nginx/sites-available/angular /etc/nginx/sites-enabled
+                </b>
+            </li>
+            <li><b>pm2 restart processid</b>: restart pm2 process</li>       
+            <li>pm2 kill — Kills all running applications</li>     
+            <li>pm2 restart — Restarts all running applications</li>
+            <li>pm2 reload — Reloads the app configuration</li>
+            <li>pm2 monit</li>
+            <li>pm2 logs — Outputs logs from all running applications</li>
+            <li>pm2 flush — Flushes all log data, freeing up disk space</li>
+            <li>pm2 install pm2-logrotate</li>
+            <li>pm2 ls — Show a list of all applications</li>
+
+        </ul> 
+    
+        <h2>GeoServer</h2>
+        Geoserver works on Java 8, so you should install itt before.
+        <ul>
+            <li><b>cd /var/www/geoserver</b>: first create the directory</li>
+            <li>
+            <b>wget https://netcologne.dl.sourceforge.net/project/geoserver/GeoServer/2.14.1/geoserver-2.14.1-bin.zip</b>
+            </li>
+            <li><b>
+                    unzip geoserver-2.14.1-bin.zip
+            </b></li>
+            <li><b>mv geoserver-2.14.1/* .</b>:  move it to the parent folder</li>
+            <li><b>echo "export GEOSERVER_HOME=/var/www/geoserver" >> ~/.profile</b></li>
+            <li><b>~/.profile</b></li>
+            <li>In the start.ini file set the port to 8082 if 8080 is not good for you</li>
+            <li><b>./bin/startup.sh</b></li>
+            <li>In the browser open http://isdckft.com:8082/geoserver/web/</li>
+            <li>default user/password: admin/geoserver: After login, please change it.</li>
+        </ul> 
+        Geoserver runs in <b>jetty</b> webserver. <br>
+        Other way: If you use <b>Glassfish</b>, then  download the the GeoServer <b>war</b> file: <br>
+        <b>wget https://sourceforge.net/projects/geoserver/files/GeoServer/2.14.1/geoserver-2.14.1-war.zip</b> <br>
+        Unzip it and copy the <b>war</b> file to this directory: <br>
+        <b>/opt/glassfish5/glassfish/domains/domain1/autodeploy</b> <br>
+        Now you can access it under your Glassfish route: isdckft.com:8080/geoserver. <br>
+        See next chapter.
+    
+        
+        <h2>Glassfish</h2>
+        <ul>
+            <li><b>cd /opt</b></li>
+            <li><b>wget http://download.java.net/glassfish/5.0/release/glassfish-5.0-web.zip</b></li>
+            <li><b>unzip glassfish-5.0-web.zip</b></li>
+            <li><b>useradd glassfish</b></li>
+            <li><b>chown -R glassfish:glassfish /opt/glassfish5</b></li>
+            <li><b>vim /etc/init.d/glassfish</b> : create this file with this content: <br>
+                <pre><code class="language-ini">
+                    #!/bin/bash
+                    #
+                    # description: Startup script for Glassfish Application Server
+                    # processname: glassfish
+                    
+                    GLASSFISH_HOME=/opt/glassfish5/glassfish
+                    export GLASSFISH_HOME
+                    GLASSFISH_USER=glassfish
+                    export GLASSFISH_USER
+                    
+                    start() {
+                    echo -n "Starting Glassfish: "
+                    su $GLASSFISH_USER -c "$GLASSFISH_HOME/bin/asadmin start-domain domain1"
+                    sleep 2
+                    echo "done"
+                    }
+                    
+                    stop() {
+                    echo -n "Stopping Glassfish: "
+                    su $GLASSFISH_USER -c "$GLASSFISH_HOME/bin/asadmin stop-domain domain1"
+                    echo "done"
+                    }
+                    
+                    case "$1" in
+                    start)
+                    start
+                    ;;
+                    stop)
+                    stop
+                    ;;
+                    restart)
+                    stop
+                    start
+                    ;;
+                    *)
+                    echo $"Usage: glassfish {start|stop|restart}"
+                    exit
+                    esac
+                </code></pre> 
+            </li>
+            <li><b>chmod 755 /etc/init.d/glassfish</b>: make it to runable</li>
+            <li>/etc/init.d/glassfish start</li>
+        </ul>
+        Now you can start your browser an you can see: <br>
+        The start page: isdckft.com:8080 : The <b>index.html</b> is located: <b>/opt/glassfish4/glassfish/domains/domian1/docroot </b> <br>
+        The admin page: isdc.com:4848. Note: You cannot login yet. To login, make these steps: <br>
+        <ul>
+            <li><b>cd /opt/glassfish5/bin</b></li>
+            <li><b>./asadmin --user admin</b>  <br>
+            At the <b>asadmin</b> prompt write: <b>change-admin-password</b>  <br>
+            Set the new password! There is not an old one, so hit ENTER.
+            </li>
+            <li>
+                <b>./asadmin --host isdckft.com --port 4848 enable-secure-admin</b> <br>
+            It will ask for the username (admin) and password</li>
+            <li>restart the server: <b>/etc/init.d/glassfish stop / start</b></li>
+    
+        </ul> 
+        <h2> Set up SSL</h2>
+        In order to use ssl, you have to set it in the <b>nginx</b> conf file for each server(We use nginx as a proxy server). <br>
+        <pre><code class="lang-ini">
+
+        server {
+            # SSL configuration
+            #
+            listen 443 ssl default_server;
+            listen [::]:443 ssl default_server;
+            server_name www.isdckft.com;
+            ssl_certificate     /yourpath/certs/www.isdckft.com.crt.pem;
+            ssl_certificate_key /yourpath/certs/www.isdckft.com.key.pem;
+        }
+        server {
+            # Angular
+            upstream my_nodejs_upstream {
+                server 127.0.0.1:4251;
+                keepalive 64;
+            }
+
+            server {
+                listen 4250 ssl;
+                server_name angular;
+                ssl_certificate     /yourpath/certs/www.isdckft.com.crt.pem;
+                ssl_certificate_key /yourpath/certs/www.isdckft.com.key.pem;
+
+                root /var/lib/jenkins/workspace/isdcproject/;
+
+
+        }
+        .....
+
+
+
+        </code></pre>
+    
+    Although we have one problem yet. We can access the old sites (for example: www.isdckft.com:4251) without https. 
+    To solve this we have to forbid the access to th 4251 port from outer the world. First list the ports: <br>
+    <b>netstat -tulpn | grep LISTEN</b> <br>
+    In our case we have two <b>node.js</b> <b>server.js</b>, which works on these ports. 
+    In the server.js file we can set the access only on localhost.
+    <pre><code class="lang-javascript">
+        app.listen(port, '127.0.0.1' ,() => {
+            console.log(`Server is up on port ${port}`);
+        });
+    </code></pre>
+    </div>
+       
+    <div id ="databases">
+        <h1>Databases</h1> 
+        <h2>PostgreSQL</h2>
+        <b>apt-get install postgresql</b> : install postgresql or if you want to install other version, follow this steps: <br>
+        <ul>
+        <li><b>apt-get install curl ca-certificates</b></li>
+        <li><b>curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -</b></li>
+        <li><b> lsb_release -c</b> : you have to know the "codename", for example it is <b>xenial</b></li>
+        <li>Create /etc/apt/sources.list.d/pgdg.list. and put this line in it: <br>
+        <b>deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main</b>
+        </li>
+    
+        <li><b>apt-get update</b></li>
+        <li><b>apt-get install postgresql-11</b></li>
+        </ul>
+    
+        <ul>
+            <br>
+        Now start <b>postgres</b>: <br>
+    
+            <li><b>passwd postgres</b> : set a password for the <b>postgres</b> linux user</li>
+            <li><b>su -postgres</b> : change to postgres user</li>
+            <li><b>service postgresql restart</b> : restart service or :</li> 
+            <li><b>/usr/lib/postgresql/11/bin/pg_ctl -D /var/lib/postgresql/11/main -l logfile start</b></li>
+            <li><b>psql</b> :  start postgres cli</li>
+            <li><b>\password</b> :  in <b>psql</b> set a password for the  <b>postgres</b> user (not linux password)</li>
+            <li><b>create database isdcbackend;</b></li>
+            <li><b>create user django with encrypted password 'password';</b></li>
+            <li><b>grant all privileges on database isdcbackend to django;</b></li>
+        </ul>
+    
+        How to connect your local <b>pgadmin</b> to your server <b>PostgreSQL</b> in a secure way, without allow remote connection to <b>PostgreSQL</b> : <br>
+        <ul>
+            <li>Install pgadmin on your local client</li>
+            <li>install <b>puTTY</b> on your local client</li>
+            <li>create a tunnel in <b>PuTTY</b>: <b>L5433 127.0.0.1:5432</b>  <br>
+            L5433: It will be the port on your client, what you will use in pgadmin <br>
+            127.0.0.1:5432: On the server Postgres is listening on this port</li>
+            <li>connect to the server with <b>PyTTY</b> and stay connected</li>
+            <li>On <b>PuTTY</b> settings go to <b>Tunels</b> and <b>apply</b> it</li>
+            <li>Start on the client <b>pgadmin</b></li>
+            <li>Create a server: <br>
+            hostname : localhost <br>
+            Port: 5433 <br>
+            database, username, password: according to the server settings</li>
+    
+        </ul>
+    
+        Install PostGis: <br>
+        <ul>
+            <li> Versions compatibility: <a href="https://trac.osgeo.org/postgis/wiki/UsersWikiPostgreSQLPostGIS" target="_blank" rel="noopener noreferrer">https://trac.osgeo.org/postgis/wiki/UsersWikiPostgreSQLPostGIS</a></li>
+    
+            <li><b>apt-get install postgresql-11-postgis-2.5</b> </li>
+            <li><b>apt-get install postgresql-11-postgis-2.5-scripts</b> </li>
+            <li> Next on every database : <br>
+                <pre><code class="lang-ini">
+                -- Enable PostGIS (includes raster)
+                CREATE EXTENSION postgis;
+                -- Enable Topology
+                CREATE EXTENSION postgis_topology;
+                -- Enable PostGIS Advanced 3D
+                -- and other geoprocessing algorithms
+                -- sfcgal not available with all distributions
+                CREATE EXTENSION postgis_sfcgal;
+                -- fuzzy matching needed for Tiger
+                CREATE EXTENSION fuzzystrmatch;
+                -- rule based standardizer
+                CREATE EXTENSION address_standardizer;
+                -- example rule data set
+                CREATE EXTENSION address_standardizer_data_us;
+                -- Enable US Tiger Geocoder
+                CREATE EXTENSION postgis_tiger_geocoder;
+    
+                </code></pre></li>
+        </ul>
+    
+        <h2>Mongodb</h2>
+        Mongodb is a NoSQL database. You can read about it here: 
+        <a href="https://www.mongodb.com/" target="_blank" rel="noopener noreferrer">https://www.mongodb.com/</a>
+    
+        <ul>
+            <li><b>apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4</b></li>
+            <li>Create the /etc/apt/sources.list.d/mongodb-org-4.0.list file for Ubuntu 16.04 (Xenial) and write this in it: <br>
+            <b></b>deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/4.0 multiverse</b></li>
+            <li><b>apt-get update</b></li>
+            <li><b>apt-get install -y mongodb-org</b></li>
+            <li><b>service mongod start</b>: it starts on port 27017</li>
+            <li><b>mongo</b> : connect to mongodb with a cli</li>
+        </ul>
+        If you installed via the package manager, the data directory /var/lib/mongodb and the log directory /var/log/mongodb are created during the installation.
+        The official MongoDB package includes a configuration file (/etc/mongod.conf).    
+
+           <h2>Oracle</h2>
+           <ul>
+               <li>Download oracle-database-xe-18c-1.0-1.x86_64.rpm</li>
+               <li>apt-get install yum</li>
+               <li>yum -y localinstall oracle-database*18c*</li>
+               <li>/etc/init.d/oracle-xe-18c configure</li>
+           </ul>
+
+    </div>
+          
+              
+    <div id ="git">
+
+        <h1>Git</h1> 
+
+        On the server: <br>
+        <ul>      
+            <li><b>apt-get install git-core</b></li>
+            <li><b>apt-get install git</b></li>
+            <li><b>git --version</b></li>
+            <li><b>useradd git</b></li>
+            <li><b>passwd git</b></li>
+            <li>In the /etc/ssh/sshd_config file AllowUser git</li>
+            <li>restart sshd: <b>systemctl restart sshd</b></li>
+            <li><b>su git</b></li>
+            <li>Navigate to the folder where you want to place the git Repository</li>
+            <li><b>mkdir project-1.git</b></li>
+            <li>git init --bare</li>
+        </ul>
+        On the client side: <br>
+        <ul>
+            <li>Start Git bash on the local client</li>
+            <li>Now generate public and private keys in the ./ssh folder</li>
+            <li>Next copy your public keyto your server <br>
+            <b>cat ~/.ssh/id_rsa.pub | ssh git@isdckft.com "mkdir -p ~/.ssh && cat >>  ~/.ssh/authorized_keys"</b>
+            </li>       
+            <li>Next on your local machine, in the git project folder: <br>
+                <b>git remote add origin ssh://git@isdckft.com:/your-path/project-1.git</b> or <br>
+                <b>git remote set-url origin ssh://git@isdckft.com:/your-path/project-1.git</b> or <br>
+            </li>
+        </ul>
+
+    </div>
+    <div id ="docker">
+        <h1>Docker</h1> 
+        <ul>
+            <li>
+                apt-get install \
+                apt-transport-https \
+                ca-certificates \
+                curl \
+                gnupg-agent \
+                software-properties-common
+            </li>
+            <li>curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -</li>
+            <li>
+                add-apt-repository \
+            "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+            $(lsb_release -cs) \
+            stable"
+            </li>
+            <li>apt-get update</li>
+            <li>apt-get install docker-ce docker-ce-cli containerd.io</li>
+            <li>docker run hello-world</li>
+        </ul>
+        More docker commands: <br>
+        <ul>
+            <li>docker info</li>
+            <li>docker --version</li>
+            <li>docker image ls</li>
+            <li>docker container ls : running containers</li>
+            <li>docker container ls --all : all containers</li>
+            <li>docker container ls -aq : in quit mode</li>
+            <li>docker container --help</li>  
+            <li>docker container rm ID: removes a container</li>  
+            <li>docker image rm <image id>  : removes an image</li>      
+            <li>docker image rm -f $(docker image ls -a -q) : remove all images with force</li> 
+            <li>docker container rm $(docker container ls -a -q)   : remove all containers</li>
+        </ul>
+        To build a <b>docker</b> image first create a <b>Dockerfile</b>, for example with this content: <br>
+        <pre><code class=lang-ini>
+            # Use an official Python runtime as a parent image
+            FROM python:2.7-slim
+
+            # Set the working directory to /app
+            WORKDIR /app
+
+            # Copy the current directory contents into the container at /app
+            COPY . /app
+
+            # Install any needed packages specified in requirements.txt
+            RUN pip install --trusted-host pypi.python.org -r requirements.txt
+
+            # Make port 80 available to the world outside this container
+            EXPOSE 80
+
+            # Define environment variable
+            ENV NAME World
+
+            # Run app.py when the container launches
+            CMD ["python", "app.py"]
+
+
+        </code></pre>
+        Next create a <b>requirements.tx</b> :
+        <pre><code class="lang-ini">
+            Flask
+            Redis
+        </code></pre>
+        Now the sampple Python app.py:
+        <pre><code class="lang-python">
+            from flask import Flask
+            from redis import Redis, RedisError
+            import os
+            import socket
+
+            # Connect to Redis
+            redis = Redis(host="redis", db=0, socket_connect_timeout=2, socket_timeout=2)
+
+            app = Flask(__name__)
+
+            @app.route("/")
+            def hello():
+                try:
+                    visits = redis.incr("counter")
+                except RedisError:
+                    visits = "<i>cannot connect to Redis, counter disabled</i>"
+
+                html = "<h3>Hello {name}!</h3>" \
+                    "<b>Hostname:</b> {hostname}<br/>" \
+                    "<b>Visits:</b> {visits}"
+                return html.format(name=os.getenv("NAME", "world"), hostname=socket.gethostname(), visits=visits)
+
+            if __name__ == "__main__":
+                app.run(host='0.0.0.0', port=80)
+
+        </code></pre>
+        Finally build into the docker image: <br>
+        <b>docker build --tag=friendlyhello .</b> <br>
+        Run the image: <br>
+        <b>docker run -p 4000:80 friendlyhello</b>
+        Now You can visit your site: <b>http://your-domain:4000</b>
+        Run the app in the background ( detached mode) : <br>
+        <b>docker run -d -p 4000:80 friendlyhello</b> <br>
+        Stop the container: <b>docker container stop CONTAINER_ID </b> <br>
+        <br>
+        Now register the app! <br>
+        Login into hun.docker.com : <b>docker login</b> <br>
+        Tag the image in the repo: <b>docker tag friendlyhello isdckft/firstrepo:one</b>
+        Upload the image: <b>docker push isdckft/firstrepo:one</b>
+        Now, if docker does not find the image locally it will pull it down: <br>
+        <b>docker run -p 4000:80 isdckft/firstrepo:one</b>
+        <br>
+        Make a sevice! <br>
+        <ul>
+            <li>Create a docker-compose.yml file: <br>
+            <pre><code class="lang-ini">
+                version: "3"
+                services:
+                web:
+                    # replace username/repo:tag with your name and image details
+                    image: username/repo:tag
+                    deploy:
+                    replicas: 5
+                    resources:
+                        limits:
+                        cpus: "0.1"
+                        memory: 50M
+                    restart_policy:
+                        condition: on-failure
+                    ports:
+                    - "4000:80"
+                    networks:
+                    - webnet
+                networks:
+                    webnet:
+            </code></pre>
+            
+            </li>
+            <li>docker swarm init</li>
+   
+            <li>docker stack deploy -c docker-compose.yml getstartedlab</li>
+            <li>docker stack ls  </li>
+            <li>docker service ps getstartedlab_web</li>
+            <li>docker service ls </li>
+            <li>docker inspect <task or container>  </li>
+            <li>docker stack rm getstartedlab</li>
+            <li>docker swarm leave --force</li>
+        </ul>
+
+    
+    </div>
+
+
+
+</div>
+</div>
+</main>
+{{> footer}}
+    <script src="/assets/js/prism.js"></script>
+</body>
+</html>

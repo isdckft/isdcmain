@@ -1,0 +1,3850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-10805370-17"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-10805370-17');
+</script>
+<!-- Global adsence code -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-6352873787606567",
+          enable_page_level_ads: true
+     });
+</script>
+<meta charset="utf-8" />
+<link rel="icon" href="favicon.png" />
+<title>Tutorial - Angular</title>
+<link rel="stylesheet" href="/assets/css/bootstrap.min.css"/>
+<link href="/assets/css/prism.css" rel="stylesheet" />   
+    
+</head>
+<body>
+{{> menu}}
+<main role="main">
+<div class="jumbotron">
+<div class="container">
+ <h1>{{pageTitle}}</h1>
+
+    <a href="#firstapp">First App</a> <br>
+    <a href="#somedesign">Let's improve the pages !</a> <br>
+    <a href="#refac">Refactoring MyStory</a> <br>
+    <a href="#templatedriven">Template driven form</a> <br>
+    <a href="#gadsense">Add Google Ad</a> <br>
+    <a href="#service">Angular Service</a> <br>
+    <a href="#crud">CRUD - Create , Read, Update, Delete</a> <br>
+    <a href="#binding">Communication between the HTML an the Typescript files</a> <br>
+    <a href="#pipe">Formatting with pipe | </a> <br>
+    <a href="#io"> Communication between components </a> <br>
+    <a href="#lifecycle"> Components lifecycle</a> <br>
+    <a href="#directives"> Directives </a> <br>
+    <a href="#rest">Call REST API, HTTP requests, RxJS </a> <br>
+    <a href="#valid"> More validation (template driven)</a> <br>
+    <a href="#reactive"> Reactive forms</a> <br>
+    <a href="#routing"> Routing</a> <br>
+    <a href="#auth"> Authentication</a> <br>
+    <a href="#modules">Multiple modules</a> <br>
+    <a href="#universal">Angular Universal</a> <br>
+    <a href="#datatable">NGX datatable</a> <br>
+    <a href="#animation">Animation</a> <br>
+    <a href="#servWork">Service Worker</a> <br>
+    <a href="#material">Angular Material</a> <br>
+    <a href="#redux">Redux</a> <br>
+    <a href="#ngxbootstrap">NGX Bootstrap</a> <br>    
+    
+    <div><a id="firstapp"></a>
+        <h1>Create your first simple application</h1>
+        <h2>Create components</h2>
+    
+        An Angular project is built up on components in a module. 
+        With the creating of a new Angular project there was created the main Angular component in the main module (app module), namely
+        the <b>AppComponent</b>. this is the entry point of our website, because in the <b>index.html</b> 
+        file there is an <b> &lt;app-root&gt; </b>tag same as the <b>selector</b> tag in the <b>app.component.ts</b> file. <br>
+        By creating a component (<b>componentname.component.ts</b>) three other files will be created too:
+        <ul>
+        <li>The <b>componentname.component.css</b> file is created  for the CSS of the component. </li>
+        <li>In the <b>componentname.component.html</b> file is the html template.</li>
+        <li>The <b>componentname.component.spec.ts</b> file is for testing.</li>
+        </ul>
+    
+    
+        Now we will create our components with the <b>ng generate component ComponentName</b> or <b>ng g c ComponentName</b>. <br>
+        First we will create our next components: navigation bar, home page, my favorite sites, my story, login. Let's do it! <br>
+        <b>ng g c navbar</b> <br>
+        <b>ng g c home</b> <br>
+        <b>ng g c login</b> <br>
+        <b>ng g c webpages/WebPages</b> <br>
+        <b>ng g c MyStory</b> <br> <br>
+    
+        What was happened? <br>
+        There were created several folders with the names of the components: navbar, home, login, my-story, web-pages.
+        In each of them there are four files as mentioned above and the <b>app.modules.ts</b> file has been changed. 
+        The components were registered in the module.
+        You can see the <b>import</b> statements and the <b>NgModule</b> declarations.
+        Now we have a few components (whit the related files) but how we could reach them? Please see the next section.
+     
+        <h2>Navigation between components</h2>
+        For navigation we need to create a router. Let's open the <b>app.module.ts</b> file and insert the next line: <br>
+        <b>import &#123; RouterModule &#125;  from '@angular/router';</b><br>
+        Put in the <b>imports</b> section the routes like these:
+        <pre><code class="language-typescript">
+        imports: [
+            BrowserModule, 
+            RouterModule.forRoot([
+            {path: '', component: HomeComponent},
+            {path: 'login', component: LoginComponent},
+            {path: 'webpages', component: WebPagesComponent},
+            {path: 'mystory', component: MyStoryComponent},
+            ])
+        ],
+        </code></pre>
+
+    
+        Now open the <b>app.component.html</b> file and insert this line in the end of the file: <br>
+        <pre><code class="language-html">
+            &ltrouter-outlet&gt&lt/router-outlet&gt
+        </code></pre>
+     
+    
+        Now you can see your new pages with these urls: <br>
+        <a href="http://localhost:4200/">http://localhost:4200/</a><br>
+        <a href="http://localhost:4200/login">http://localhost:4200/login</a><br>
+        <a href="http://localhost:4200/webpages">http://localhost:4200/webpages</a><br>
+        <a href="http://localhost:4200/mystory">http://localhost:4200/mystory</a><br>
+    
+        <br>
+        You can notice, that we did not made a route for the <b>navbar</b> component, because we want, that it will always appear. 
+        Now edit the <b>app.component.html</b> file once again, delete everything and put these two lines in it: <br>
+        <pre><code class="language-html">
+        &ltapp-navbar&gt&lt/app-navbar &gt
+        &ltrouter-outlet&gt&lt/router-outlet &gt
+        </code></pre>
+    
+        The <b>app-navbar</b> is the selector of the <b>navbar</b> component.
+    
+        <h2>Editing the <b>navbar</b> component</h2>
+        First find a sample navigation bar here: 
+        <a href="https://getbootstrap.com/docs/4.0/components/navbar/" target="_blank">https://getbootstrap.com/docs/4.0/components/navbar/</a>.
+        Copy the source code of the navigation bar, open your <b>navbar.component.html</b> and paste it. 
+        Now let's delete the unnecessary elements, the header part, the drop down element and the form and rewrite it for your application.
+        Replace the <b>href</b> element with <b>routerLink</b> . ( Some menu items does not have a target yet. We will do it later.)
+        The code will look like this: <br>
+        <pre><code class="language-html">
+        &ltnav class="navbar navbar-expand-lg navbar-dark bg-primary"&gt
+        &ltdiv class="container-fluid"&gt
+            &ltdiv class="navbar-header"&gt
+                &lta href="#" class="navbar-brand"&gtISDCPROJECT&lt/a&gt
+            &lt/div&gt
+            &ltdiv class="collapse navbar-collapse" id="navbarSupportedContent"&gt
+            &ltul class="nav navbar-nav mr-auto"&gt
+                &ltli class="nav-item active"&gt
+                &lta class="nav-link" routerLink="/" &gtHome &ltspan class="sr-only"&gt(current)&lt/span&gt&lt/a&gt
+                &lt/li&gt
+                &ltli class="nav-item"&gt
+                    &lta class="nav-link" routerLink="/mystory"&gtHow to develop this?&lt/a&gt
+                &lt/li&gt 
+                &ltli class="nav-item"&gt
+                &lta class="nav-link" routerLink="/webpages"&gtFavorite web pages&lt/a&gt
+                &lt/li&gt
+                &ltli class="nav-item"&gt
+                    &lta class="nav-link" routerLink="/webpagereactive"&gtNew webpage(reactive)&lt/a&gt
+                &lt/li&gt
+            &lt/ul&gt
+            &ltul class="nav navbar-nav navbar-right"&gt
+                &ltli class="nav-item"&gt
+                    &lta class="nav-link" routerLink="/login"&gtLogin&lt/a&gt
+                    &lt/li&gt
+                &ltli class="dropdown"&gt
+                    &lta href="#" class="dropdown-toggle nav-link" role="button"&gtAdmin &ltspan class="caret"&gt&lt/span&gt&lt/a&gt
+                    &ltul class="dropdown-menu"&gt
+                    &ltli&gt&lta href="#"&gtPage Type&lt/a&gt&lt/li&gt
+                    &ltli&gt&lta href="#"&gtWeb Pages&lt/a&gt&lt/li&gt
+                    &lt/ul&gt
+                &lt/li&gt
+                &lt/ul&gt
+            &lt/div&gt
+        &lt/div&gt
+        &lt/nav&gt 
+        </code></pre>
+
+    <div>
+    
+    
+    <div><a id="somedesign"></a>
+        <h1>Let's improve the pages !</h1>
+        Put some content in the <b>home.component.html</b> and make some css settings in the <b>styles.css</b> file. <br>
+        <pre><code class="language-css">
+        body { padding: 20px;padding-top: 10px } 
+        h1 { text-align: center; } 
+        </code></pre>
+
+    
+        In the <b>navbar.component.html</b> change the <b>nav class</b> to <b>navbar-dark bg-primary</b>. 
+        In the <b>navbar.component.css</b> put this:
+        <pre><code class="language-css">
+        nav { margin-bottom: 10px; } 
+        </code></pre>        
+        
+        It looks like better now. <br>
+        <p>
+        Now we apply a <b>form element</b> in the <b>login</b>  component. Let's see a Bootstrap example here: <br>
+        <b><a href="https://getbootstrap.com/docs/4.0/components/forms/#form-grid" target="_blank">https://getbootstrap.com/docs/4.0/components/forms/</a> </b> <br>
+        You can delete the elements which you do not need, for example the radio buttons.
+        Finally we put a <b>table</b> in the <b>web-pages.component.html</b>. See this page for help: <br>
+        <a href="https://getbootstrap.com/docs/4.0/content/tables/" target="_blank" rel="noopener noreferrer">https://getbootstrap.com/docs/4.0/content/tables/</a>
+    
+        </p>
+        <b>Great Job! We are ready with our first Angular Application.</b><br><br>
+        
+    </div>
+    
+    <div><a id="refac"></a>
+        <h1>Refactoring MyStory</h1>
+    
+        I have realized, that the My Story page will be too long, so I had to refactor it. 
+        First I have moved the <b>my-story</b> folder to the <b>mystories</b> folder and modified 
+        in the <b>app.module.ts</b> file the import statement.
+        In the <b>app.modules.ts</b> I have put new routes: <br>
+        <pre><code class="language-typescript">
+        {path: 'mystory/environment', component: EnvironmentComponent}, 
+        {path: 'mystory/angularbasic', component: AngularBasicComponent}, 
+        </code></pre>  
+    
+        Finally I have inserted <b>routerLink</b>-s in the original <b>my-story.component.html</b>
+    </div>
+    
+    <div> <a id="templatedriven"></a>
+        <h1>Template driven form</h1>
+        We create a form to create the elements of the Web Pages list: name, about and url. 
+        First we create a class for the <b>WebPage</b> model. <br>
+        <b>ng g class model/WebPage</b> <br>
+        Now find the <b>model</b> folder and insert into the <b>web-page.ts</b> file this: <br>
+        <pre><code class="language-typescript">
+        export class WebPage {
+            constructor(
+                public id : number,
+                public name: string,
+                public about: string,
+                public url: string,
+                ) {  }
+        }
+        </code></pre>  
+    
+        Now create the form!  It is a normal Angular component: <br>
+        <b>ng g c webpages/WebPageForm</b> <br>
+    
+        Next modify the <b>web-page-form.component.html</b>: <br>
+        <pre><code class="language-html">
+        &ltdiv class="container"&gt
+        &lth1&gt&#123;&#123;siteTitle&#125;&#125;&lt/h1&gt
+        &ltform #webPageForm="ngForm" (ngSubmit)="onSubmit()" &gt
+            &ltdiv class="form-group"&gt
+            &ltlabel for="name"&gtName&lt/label&gt
+            &ltinput  type="text" class="form-control" id="name" 
+                    required
+                    [(ngModel)]="model.name" name="name"
+                    #name="ngModel"
+                    &gt    
+            &ltdiv *ngIf="!name.valid && name.touched" class="alert alert-danger"&gt
+                Name is required
+            &lt/div&gt 
+            &lt/div&gt
+        
+            &ltdiv class="form-group"&gt
+            &ltlabel for="about"&gtAbout&lt/label&gt
+            &ltinput type="text" class="form-control" id="about"
+            [(ngModel)]="model.about" name="about"
+            &gt
+            &lt/div&gt
+            &ltdiv class="form-group"&gt
+            &ltlabel for="url"&gtURL&lt/label&gt
+            &ltinput type="text" class="form-control" id="url"
+            [(ngModel)]="model.url" name="url"&gt
+            &lt/div&gt
+        
+            &ltbutton type="submit" class="btn btn-success" 
+            &gtSubmit&lt/button&gt
+        &lt/form&gt
+        &lt/div&gt
+        </code></pre>  
+
+        <b>web-page-form.component.ts</b>: <br>
+        <pre><code class="language-typescript">
+        import { Component, OnInit } from '@angular/core';
+        import { WebPage } from './../../model/web-page';
+        
+        @Component({
+            selector: 'app-web-page-form',
+            templateUrl: './web-page-form.component.html',
+            styleUrls: ['./web-page-form.component.css']
+        })
+        export class WebPageFormComponent implements OnInit {
+            siteTitle = 'Insert a new site';
+        
+            model = new WebPage(null,null,null,null);
+        
+            constructor() { 
+            }
+        
+            ngOnInit() {
+            }
+            onSubmit() {
+                // later ....
+            }
+        }
+        </code></pre>         
+
+        <b>web-page-form.component.css</b>: <br>
+        <pre><code class="language-css">
+        .ng-valid[required], .ng-valid.required  {
+        border-left: 5px solid #42A948; /* green */
+        }
+        
+        .ng-invalid:not(form)  {
+        border-left: 5px solid #a94442; /* red */
+        }
+        h1 {
+        color:#a94442;
+        }
+        </code></pre>         
+        
+        <br>
+    
+        What is it all about? 
+        <ul>
+        <li>Use <b>ngModel</b> to create two-way data bindings for reading and writing input-control values.</li>
+        <li>Track state changes and the validity of form controls.</li>
+        <li>Provide visual feedback using special CSS classes that track the state of the controls.</li>
+        <li>Display validation errors to users and enable/disable form controls.</li>
+        </ul>
+    
+        First see the HTML template, check the <b>input</b> tag for the Name. <br>
+        <b>type="text"</b> - HTML element,  it defines a one-line text input field <br>
+        <b>class="form-control"</b> -  this class come from  Bootstrap <br>
+        <b>id="name"</b> - The id attribute specifies a unique id for an HTML element <br>
+        <b>required</b> - HTML5 required attribute <br>
+        <b>[(ngModel)]="model.name" name="name"</b> -[(ngModel)] makes binding the form to the model.  
+        Defining a <b>name</b>  attribute is a requirement when using [(ngModel)] in combination with a form. Outside a form it is not required.<br>
+        <b>#name="ngModel"</b> - You need a template reference variable to access the input box's Angular control from within the template. Here you created a 
+        variable called <b>name</b>  and gave it the value "ngModel". 
+        Now you can use it in the next <b>div</b> section. <br>
+        In the <b>WebPageFormComponent</b> class we have imported the <b>WebPage</b> class and have created an object, named <b>model</b>. 
+        So you can use in the template the model.name, model.about, etc. variables. <br>
+        Now check the <b>form</b> tag. <br>
+        <b>#webPageForm="ngForm" , remark: you can use <b>ngForm</b> without two-way bindings too</b>
+        <b>(ngSubmit)="onSubmit()"</b> - 
+        If you click the submit button, it triggers the <b>onSubmit</b> method in the <b>WebPageFormComponent</b>, 
+        that we are going to elaborate soon. <br> <br>
+        For more details, see Angular documentation: <a href="https://angular.io/guide/forms" target="_blank" rel="noopener noreferrer">angular.io/guide/forms</a>
+    </div>
+    
+    <div><a id="service"></a>
+        <h1>Angular Service</h1>
+        We have to share date between Angular components and we will do it with the help of a service. <br>
+        Let's create the service and put it in the <b>services</b> folder. It is good to collect the services in the same place. <br>
+        <b>ng generate service services/WebPage</b> or <b>ng g s services/WebPage</b>. <br>
+        Now Angular has created the <b>web-page.service.ts</b> file. Next open the <b>app.modules.ts</b> file and provide the service to
+        the components, insert it in the <b>providers</b> block: <br>
+        <b>providers: [WebPageService],</b>, (Angular gave the name WebPageService to our service as you are going to see). <br>
+    
+        Next open the <b>web-page.services.ts</b> and do some changes. <br>
+        <ul>
+        <li>import the <b>WebPage model</b> </li>
+        <li>create a <b> webPages</b> array of objects, which will hold all the data</li>
+        <li>put some initial values in the array of objects</li>
+        <li>create a get method, which will return the web pages</li>
+        <li>create a <b>newWebPage</b> method, that will insert a new row in the array of object</li>
+        <li>create a delete method, that will delete one row</li>
+        <li>create an update method, that will modify one row</li>
+        </ul>
+        <pre><code class="language-typescript">
+        import { Injectable } from '@angular/core';
+        import { WebPage} from './../model/web-page';
+        
+        @Injectable({
+            providedIn: 'root'
+        })
+        export class WebPageService {
+            private webPages : WebPage[];
+        
+            constructor() {
+            this.webPages = [
+                {id:1, name: 'Angular', about:'Angular doc.', url:'https://angular.io'},
+                {id:2, name: 'Bootstrap', about:'Bootstrap doc.', url:'https://getbootstrap.com/'},
+            ]
+            }
+            getWebPages() {
+            return this.webPages;
+            );
+        
+            }
+            getWebPageById (id: number) {
+            for (const webPage of this.webPages){
+                if (webPage.id === id) return webPage;
+            }
+        
+            }
+        
+            newWebPage (newWebPage: WebPage ){
+            const myid = this.webPages.length +1;
+            this.webPages.push({id: myid, name: newWebPage.name, about: newWebPage.about, url: newWebPage.url});
+        
+            }
+            deleteWebPage (id: number){
+            for (const webPage of this.webPages){
+                if (webPage.id === id) {
+                this.webPages.splice(this.webPages.indexOf(webpage),1);
+                break;
+                }
+            }
+            }
+            updateWebPage (modWebPage: WebPage){
+            for (const webPage of this.webPages){
+                if (webPage.id === modWebPage.id) {
+                const index = this.webPages.indexOf(webpage);
+                this.webPages[index] = {id: modWebPage.id, name: modWebPage.name, about: modWebPage.about, url: modWebPage.url};
+                break;
+                }
+            }
+            }
+        }
+        </code></pre> 
+
+    
+        This service is very simple. Later we will get the values from the server, from a database, so will going to modify this service.
+        Now everything happens on client side, in our browser. Now we are going to use our service.<br>
+        In the <b>web-pages.component.html</b> file we have: <br>
+        <ul>
+        <li>inserted an <b>*ngFor</b>  directive in the first row</li>
+        <li>inserted the fields of the <b>webPage</b> field</li>
+        <li>added to it the <b>Delete</b> and <b>Edit</b> buttons</li>
+        </ul>
+        <pre><code class="language-html">
+        &ltapp-web-page-form&gt&lt/app-web-page-form&gt
+        &lth1&gt&#123;&#123;title&#125;&#125;&lt/h1&gt
+        &lttable class="table"&gt
+        &ltthead&gt
+        &lttr&gt
+            &ltth scope="col"&gt#&lt/th&gt
+            &ltth scope="col"&gtName&lt/th&gt
+            &ltth scope="col"&gtAbout&lt/th&gt
+            &ltth scope="col"&gtUrl&lt/th&gt
+            &ltth scope="col"&gtDelete&lt/th&gt
+            &ltth scope="col"&gtSelect&lt/th&gt
+        &lt/tr&gt
+        &lt/thead&gt
+        &lttbody&gt
+        &lttr *ngFor="let webPage of webPages"&gt
+            &ltth scope="row"&gt&#123;&#123;webPage.id&#125;&#125;&lt/th&gt
+            &lttd&gt&#123;&#123;webPage.name&#125;&#125;&lt/td&gt
+            &lttd&gt&#123;&#123;webPage.about&#125;&#125;&lt/td&gt
+            &lttd&gt&lta href="&#123;&#123;webPage.url&#125;&#125;" target="_blank" 
+            rel="noopener noreferrer"&gt&#123;&#123;webPage.url&#125;&#125;&lt/a&gt&lt/td&gt
+            &lttd&gt&ltbutton type="submit" class="btn btn-success"  (click)="delete(webPage)"&gtDelete&lt/button&gt&lt/td&gt
+            &lttd&gt&ltbutton type="submit" class="btn btn-success"  (click)="select(webPage.id)"&gtEdit&lt/button&gt&lt/td&gt
+        &lt/tr&gt
+        &lt/tbody&gt
+        &lt/table&gt
+        </code></pre> 
+
+    
+        In the <b>web-pages.component.ts</b> file we have: <br>
+        <ul>
+        <li>imported the WebPage model and WebPageService service</li>
+        <li>created a webPages array of objects from WebPage model</li>
+        <li>injected the service in the constructor</li>
+        <li>in the <b>on init</b> called the getWebPages() method of the service</li>
+        <li>triggered by the <b>delete</b> button we have called the delete service</li>
+        <li>triggered by the <b>select</b> button we navigate to the form to edit the data</li>
+        </ul>
+        <pre><code class="language-typescript">
+        import { WebPageService } from './../../services/web-page.service';
+        import { WebPage } from './../../model/web-page';
+        import { Component, OnInit } from '@angular/core';
+        import { Router } from '@angular/router';
+        @Component({
+            selector: 'app-web-pages',
+            templateUrl: './web-pages.component.html',
+            styleUrls: ['./web-pages.component.css']
+        })
+        
+        export class WebPagesComponent implements OnInit {
+        
+            private webPages: WebPage[];
+        
+            constructor( private webPageService: WebPageService, private router: Router) { 
+            }
+            ngOnInit() {
+            this.getWebPages();
+            }
+            
+            getWebPages(): void {
+            this.webPages = this.webPageService.getWebPages();
+            }
+        
+            delete(id: number): void {
+            this.webPageService.deleteWebPage(id)
+            }
+            select(id: number): void {
+            this.router.navigate(['/webpages/'+id]);
+            }
+        }
+        </code></pre> 
+
+        Now you can check the result, it works, we have displayed the favorite sites dynamically. <br>
+        <hr>
+    
+        Now got to the <b>web-page-form.comonent.ts</b> component and do some changes. 
+        We have imported our service at the top and injected it in the constructor, then in the <b>onSubmit</b>
+        method we have called the <b>newWebPage</b> service.<br>
+        <pre><code class="language-typescript">
+        import { Component, OnInit } from '@angular/core';
+        import { WebPage } from './../../model/web-page';
+        import { WebPageService } from './../../services/web-page.service';
+        
+        @Component({
+            selector: 'app-web-page-form',
+            templateUrl: './web-page-form.component.html',
+            styleUrls: ['./web-page-form.component.css']
+        })
+        export class WebPageFormComponent implements OnInit {
+            siteTitle = 'Insert a new site';
+        
+            model = new WebPage(null,null,null,null);
+        
+            constructor(private webPageService:WebPageService) { 
+            }
+        
+            ngOnInit() {
+        
+            }
+        
+            onSubmit() {
+            this.webPageService.newWebPage(this.model);
+            }
+        }
+        </code></pre> 
+
+        Now it works! We have a service, which supplies several components.
+    
+    </div>
+    
+    <div><a id="crud"></a>
+        <h1>CRUD</h1>
+        C stands for Create : We already have seen how to create a new line in the table. <br>
+        R stands for Read: We already have seen how to display the elements of a table. <br>
+        U stands for Update : Now we are going to see how to update a row of a table. <br>
+        D stands for Delete: Now we are going to see how to delete a row of a table. <br>
+        
+        Let's begin with the <b>delete</b>, it is actually really simple. <br>
+        <ul>
+        <li>We have already added a <b>delete</b> button to each row of the table in the <b>web-pages.component.html</b></li>
+        <li>Now add the <b>delete</b> method to the <b>web-pages.component.ts</b> : 
+            <pre><code class="language-typescript">
+            delete(id: number): void {
+                this.WebPageService.deleteWebPage(id);
+                }
+            </code></pre> 
+        </li>
+        <li>We have already added the <b>delete</b> method to the <b>web-page.service.ts</b> : 
+        </li>
+        </ul>
+        Now we have to make the <b>update</b> functionality:
+        <ul>
+        <li>
+            We have already added a <b>select</b> button to each row of the table in the <b>web-pages.component.html</b> 
+        </li>
+        <li>Secondly we add the <b>select</b> method to the <b>web-pages.component.ts</b>, what will route to the 
+            <b>web-page-form.component</b> whit the ID of the selected row:
+            <pre><code class="language-typescript">
+            select(id: number): void {
+                this.router.navigate(['/webpages/'+id]);
+                } 
+            </code></pre>
+
+        </li>
+        <li>
+            Include the new route in the <b>app.module.ts</b> ( We did it earlier. ):
+            <pre><code class="language-typescript">
+            {path: 'webpages/:id', component: WebPageFormComponent},
+            {path: 'webpages', component: WebPagesComponent},
+            </code></pre>
+
+        </li>
+        <li> We have already did the <b>update</b> service <b>web-page.services.ts</b> file.</li>
+        <li> Finally do the cahnges in the <b>web-page-form.component.ts</b> file. 
+        At the initialization phase (<b>ngOninit</b>  method) we get the ID from the url. 
+        If it exist, then we call the service to read the proper row. Angular loads it in the html form.
+        In the <b>onSubmit</b> method we check whether the ID exists. 
+        If yes, then we call the update service, if not, then the <b>newWebPage</b> service. 
+        <pre><code class="language-typescript">
+        import { Component, OnInit } from '@angular/core';
+        import { WebPage } from './../../model/web-page';
+        import { WebPageService } from './../../services/web-page.service';
+        import { ActivatedRoute, Router } from '@angular/router';
+        
+        
+        @Component({
+            selector: 'app-web-page-form',
+            templateUrl: './web-page-form.component.html',
+            styleUrls: ['./web-page-form.component.css']
+        })
+        export class WebPageFormComponent implements OnInit {
+            siteTitle = 'Insert a new site';
+        
+            model = new WebPage(null,null,null,null);
+        
+            constructor(private webPageService:WebPageService, private router: Router,
+            private route: ActivatedRoute) { 
+            }
+        
+            ngOnInit() {
+            const sid = this.route.snapshot.paramMap.get('id');
+            if (sid !== null) {
+                const id : number = parseInt(sid,10);
+                this.webPageService.getWebPageById(id);
+                this.siteTitle = 'Modify the site attributes';
+            }
+        
+            }
+        
+            onSubmit() {
+            if (this.model.id === null) { // new web page
+                this.webPageService.newWebPage(this.model);
+            } else {
+                this.webPageService.updateWebPage(this.model);
+            }
+            }
+        }
+        </code></pre>
+
+        </li>
+        </ul>
+      
+        Notice that at the modify state you can see only the form, not the list below it, because we have routed to the form, not to the list.
+        Other important observation is, that the whole "new, delete and update functionality" is working until you reload the page.
+        You know everything is working in your browser until now.
+    </div>
+    
+    
+    <div><a id="binding"></a>
+        <h1>Communication between the HTML an the Typescript files</h1>
+        There are several ways how the template and the component shares their values.
+        <h2>Text interpolation</h2>
+        Example (web-page-form.component.html). In the curly brackets you can put a public field or a method.
+        <pre><code class="language-html">
+        &lth1&gt &#123;&#123; siteTitle &#125;&#125; &lt/h1 &gt 
+        &#123;&#123; getSiteTitle() &#125;&#125;
+        </code></pre>
+
+        <h2>Property binding</h2>
+        Example (web-page-form.component.html): 
+        <pre><code class="language-html">
+        &ltbutton [disabled]="!webPageForm.form.valid"&gt
+        </code></pre>
+    
+        <h2>Class binding</h2>
+        Example (web-page-form.component.html): 
+        <pre><code class="language-html">
+        &ltbutton [class.btn-primary]="isNew" [class.btn-success]="!isNew"&gt
+        </code></pre>
+
+    
+        <h2>Style binding</h2>
+        Example (web-page-form.component.html):
+        <pre><code class="language-html">
+        &ltbutton [style.borderColor]="isNew ? 'red' : 'yellow' "&gt
+        </code></pre> 
+  
+    
+        <h2>Event binding</h2>
+        Example (web-pages.component.html):
+        <pre><code class="language-html">
+        &ltbutton (click)="delete(webPage.id)" or (keyup.enter)="onKeyUp($event)"&gt
+        </code></pre> 
+  
+    
+        <h2>Template variables (local reference) with an event</h2>
+        Example (web-page-form.component.html): 
+        <pre><code class="language-html">
+        &ltinput type="text" class="form-control" id="about"
+        #abouttmp (keyup.enter)="onKeyUpAbout(abouttmp)"
+        required
+        &gt
+        </code></pre>
+    
+        <h2>Template variables (local reference) with Viewchild</h2>
+        Example (web-page-form.component.html):
+        <pre><code class="language-html">
+        &ltinput type="checkbox"  id="official"
+        #officialCheckBox&gt Official page
+        </code></pre> 
+
+        And the Typescript file:
+        <pre><code class="language-typescript">
+        import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+        //...
+        @ViewChild('officialCheckBox') officialCheckbox: ElementRef;
+        /...
+        onSubmit() {
+            console.log(this.officialCheckbox);
+            console.log(this.officialCheckbox.nativeElement.value);
+        </code></pre>
+
+        You can use <b>ViewChild</b> not only for input fields, but for other HTML elements, like forms to.
+    
+        <h2>Two-way biding</h2>
+        Example (web-page-form.component.html): 
+        <pre><code class="language-html">
+        &ltinput type="text" class="form-control" id="about"
+        [(ngModel)]="model.about" name="about"  &gt
+        </code></pre>
+       
+        If <b>[(ngModel)]</b> is in a <b>form</b> tag, then a <b>name</b> attribute is also required.
+    </div>
+    
+    <div><a id="pipe"></a>
+        <h1>Formatting with pipe | </h1>
+        Example (web-page-form.component.html):
+        <pre><code class="language-html">
+        &lth1&gt&#123;&#123;siteTitle | uppercase&#125;&#125;&lt/h1&gt
+        </code></pre>
+    
+        
+        You can also generate custom pipes: <br>
+        <b> ng g pipe pipes/CustomPipe</b> <br>
+        In the <b> web-pages.component.html</b>:
+        <pre><code class="language-html">
+        &lth1&gt&#123;&#123;title | customPipe:3 &#125;&#125;&lt/h1&gt
+        </code></pre>
+        
+        In the <b> web-pages.component.ts</b>: 
+        <pre><code class="language-typescript">
+        title = 'My Favorite Sites goes here and I like to write a lot of words, but maybe it is not a good idea';
+        </code></pre>
+        
+        The <b>custom-pipe.pipe.ts</b> here: <br>
+        <pre><code class="language-typescript">
+        import { Pipe, PipeTransform } from '@angular/core';
+
+        @Pipe({
+            name: 'customPipe'
+        })
+        export class CustomPipePipe implements PipeTransform {
+        
+            transform(value: string, args?: number){
+            return value.substr(0,17);
+            }
+        
+        }
+        </code></pre>
+        
+        Later we will see an async pipe too.
+    </div>
+    
+    <div><a id="io"></a>
+        <h1>Communication between components</h1>
+        <h2>Input property</h2>
+        We can add an input property to a component. In the <b>web-pages.component.html</b> we have another component, 
+        the <b>web-page-form.component</b> and we transfer a parameter from the parent component to the child component: <br>
+        <pre><code class="language-html">
+        &ltapp-web-page-form [sub-title] ="subTitle" (myevent)="onTriggeredEvent($event)"&gt&lt/app-web-page-form&gt
+        </code></pre>
+
+        Here the input property is the <b>"subTitle"</b> field. We have given a value to it in the <b>web-pages.component.ts</b> file. <br>
+        Now let's see the <b>web-page-form.component.ts</b>: <br>
+        <pre><code class="language-typescript">
+        import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+        ...
+        export class WebPageFormComponent implements OnInit {
+            @Input('sub-title') subTitle: string;
+        </code></pre>
+
+        In our example the input property is only a string, but it could be a Json object too.
+    
+        <h2>Output property</h2>
+        Now we will trigger an event from the <b>web-page-form.component</b> into the <b>web-pages.component</b>.
+        Now let's see the <b>web-page-form.component.ts</b> file. <br>
+        <pre><code class="language-typescript">
+        import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+        //...
+        @Output('myevent') myEvent = new EventEmitter();
+        //...
+        onSubmit() {
+        
+            if (this.model.id === null) { // new web page
+            // ....
+            
+                this.myEvent.emit(this.model.name); // we transfer the name of the model
+            });
+        </code></pre>
+
+        This event will trigger in the parent HTML the <b>onTriggeredEvent</b> method. The parameter always have to be <b>$event</b> :
+        <pre><code class="language-html">
+        &ltapp-web-page-form [sub-title] ="subTitle" (myevent)="onTriggeredEvent($event)"&gt&lt/app-web-page-form&gt
+        </code></pre>
+
+        This method is in the Typescript file,  in the the <b>web-pages.component.ts</b> file :<br>
+        <pre><code class="language-typescript">
+        onTriggeredEvent(text){
+            this.newPageInserted = 'New Web Page was added: '+ text;
+            this.getWebPages(); // app-form-component has changed
+            }
+        </code></pre>
+
+        Now let's see the <b>web-pages.component.html</b> file, where the <b>newPageInserted</b> field will appear:<br>
+        <pre><code class="language-html">
+        &lth1&gt&#123;&#123;title | customPipe:3 &#125;&#125;&lt/h1&gt
+        &ltdiv class="row"&gt
+            &ltdiv class="col-sm-10"&gt
+                &lth3&gt&#123;&#123;newPageInserted&#125;&#125;&lt/h3&gt
+            &lt/div&gt
+        </code></pre>
+
+        So in the child component we have emitted an event with a <b>name</b> parameter. This event triggered a method in the parent
+        component. That method have received the <b>name</b> parameter and displayed it in its HTML template. 
+        The parameter could be any type, even a Json object.
+    
+    
+    
+        <h2>ng-content , ng-container</h2>
+        First I have created a new component: <b>WebPageCard</b>. The component was placed in the <b>WebPages</b> component too. 
+        The <b>WebPages</b> component send data to the <b>WebPageCard</b> component. Let's see how: <br>
+        <pre><code class="language-html">
+        &ltdiv class="col-sm-4"&gt
+        &ltapp-web-page-card&gt
+            &ltdiv class="heading"&gtTitle&lt/div&gt
+            &ltdiv class="body"&gt 
+            &#123;&#123;title&#125;&#125;
+            &lt/div&gt
+            This is a great card!
+        &lt/app-web-page-card&gt
+        &lt/div&gt
+        </code></pre>
+
+        <ul>
+            <li>We have inserted the <b>app-web-page-card</b> beside the <b>app-web-page-form</b>. Notice the Bootstrap <b>col-sm</b> classes.</li>
+            <li>inside the <b>app-web-page-card</b> tags there are two classes, which we have created and the content, which goes into the <b>WebPageCard</b> component</li>
+        </ul>
+        Now see the <b>app-web-page-card.html</b> file: <br>
+        <pre><code class="language-html">
+        &ltdiv class="card" style="width: 18rem;"&gt
+        &lt!-- &ltimg class="card-img-top" src="/assets/images/card.png" alt="Card image cap"&gt --&gt
+        &ltdiv class="card-body"&gt
+            &lth5 class="card-title"&gt
+            &ltng-content select=".heading"&gt&lt/ng-content&gt
+            &lt/h5&gt
+            &ltp class="card-text"&gt
+            &ltng-content select=".body"&gt&lt/ng-content&gt
+            &lt/p&gt
+            &ltp&gt&ltng-content&gt&lt/ng-content&gt&lt/p&gt
+            &ltp&gt
+            &ltng-container&gtSome text&lt/ng-container&gt
+            &lt/p&gt
+        &lt/div&gt
+        </code></pre>
+
+        <ul>
+            <li>It is a Bootstrap card</li>
+            <li><b> &lt;ng-content select=".heading"&gt;&lt;/ng-content&gt;</b> receives the data, which is in the "heading" class, </li>
+            <li><b> &lt;ng-content select=".body"&gt;&lt;/ng-content&gt;</b> receives the data, which is in the "body" class, </li>
+            <li><b>ng-contetnt</b> receives all the content, which we put between the component selector. See the third example.</li>
+            <li><b>ng-container</b> stores a content without additional class</li>
+        </ul>
+        <h2>@ContentChild</h2>
+        With <b>ViewChild</b> you can access a template variable in the component. 
+        With <b>ContentChild</b> you can access a template variable of an <b>ngcontent</b> in the child component. 
+        To better understanding see this example! In the parent template <b>web-pages.component.html</b> there is a child component
+        <b>web-page-card</b> and between the selectors there is a template variable <b>contentHeading</b>. :
+        <pre><code class="language-html">
+        &ltdiv class="col-sm-6"&gt
+        &ltapp-web-page-card [sub-title] ="subTitle"&gt
+            &ltdiv class="heading"  #contentHeading&gtTitle&lt/div&gt
+            &ltdiv class="body"&gt 
+            &#123;&#123;title&#125;&#125;
+            &lt/div&gt
+            This is a great card!
+        &lt/app-web-page-card&gt
+        &lt/div&gt
+        </code></pre>
+
+        You can access it in the TypeScript file of the child component:
+        <pre><code class="language-typescript">
+        @ContentChild('contentHeading') contText : ElementRef;
+        // ...
+        ngAfterContentInit(){
+            console.log('WebPageCard  ngAfterContentInit()is called');
+            console.log('Contentchild: ' + this.contText.nativeElement.textContent);
+        }
+        </code></pre>
+   
+    
+    </div>
+    
+    
+    <div id="lifecycle">
+        <h1>Components lifecycle</h1>
+        During the creation phase of an Angular component there are several methods, that are running and you
+        can put some codes in them. 
+        These lifecycle hooks are the followings in the following order: <br>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>ngOnChanges</td> 
+                <td>It is called after an @Input property changes (every time)</td>
+            </tr>
+            <tr>
+                <td>ngOnInit</td> 
+                <td>It is called only once when the component is initialized</td>
+            </tr>
+            <tr>
+                <td>ngDoCheck</td> 
+                <td>It is called during every change detection run</td>
+            </tr>
+            <tr>
+                <td>ngAfterContentInit</td> 
+                <td>It is called after an ng-content has been projected into the view</td>
+            </tr>
+            <tr>
+                <td>ngngAfterContentChecked</td> 
+                <td>It is called every time the projected content has been checked</td>
+            </tr>
+            <tr>
+                <td>ngAfterViewInit</td> 
+                <td>It is called after the component’s view (and child views) has been initialized</td>
+            </tr>
+            <tr>
+                <td>ngAfterViewChecked</td> 
+                <td>It is called every time the view (and child views) have been checked</td>
+            </tr>
+            <tr>
+                <td>ngOnDestroy</td> 
+                <td>It is called once the component is about to be destroyed</td>
+            </tr>
+            </tbody>
+        </table>
+        See these examples:
+        <pre><code class="language-typescript">
+        import { Component, OnInit, Input, OnChanges, DoCheck, SimpleChanges, 
+            AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy, 
+            ViewChild, ElementRef, ContentChild } from '@angular/core';
+            
+            @Component({
+            selector: 'app-web-page-card',
+            templateUrl: './web-page-card.component.html',
+            styleUrls: ['./web-page-card.component.css']
+            })
+            export class WebPageCardComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit, AfterContentInit
+            // DoCheck, 
+            // AfterContentChecked,
+            // AfterViewChecked
+            {
+            
+            myContent = 'first';
+            @ViewChild('heading') header : ElementRef;
+            @ContentChild('contentHeadind') contText : ElementRef;
+            @Input('sub-title') subTitle: string;
+            
+            constructor() { 
+                console.log('WebPageCard constructor is called');
+            }  
+            
+            ngOnChanges(changes: SimpleChanges){
+                console.log('WebPageCard ngOnChanges() is called');
+                console.log(changes);
+            }
+            
+            ngOnInit() {
+                console.log('WebPageCard ngOnInit() is called');
+            }
+            
+            //It is called very often
+            // ngDoCheck(){
+            //   console.log('WebPageCard ngDoCheck() is called');
+            // }
+            
+            ngAfterContentInit(){
+                console.log('WebPageCard  ngAfterContentInit()is called');
+                console.log('Contentchild: ' + this.contText.nativeElement.textContent);
+                }
+            
+            // ngAfterContentChecked(){
+            //   console.log('WebPageCard  ngAfterContentChecked()is called');
+            // }
+            
+            // You can acces the element only after ViewInit
+            ngAfterViewInit(){
+                console.log('WebPageCard ngAfterViewInit() is called');
+                console.log('Viewchild: ' + this.header.nativeElement.textContent);
+            }
+            
+            // ngAfterViewChecked(){
+            //   console.log('WebPageCard ngAfterViewChecked() is called');
+            // }
+            
+            ngOnDestroy(){
+                console.log('WebPageCard ngOnDestroy is called');
+            }
+            }
+        </code></pre>
+
+    </div>
+
+    <div><a id="directives"></a>
+        <h1> Directives </h1>
+        Directives modify the DOM elements or attributes. Directives with trailing star modify the structure of the DOM.
+        Angular translates the star to another syntax. e.g. : <br>
+        <pre><code class="language-html">
+        &ltdiv *ngIf="!name.valid && name.touched"&gt
+        .....
+        &ltng-temmplate [ngIf]="!name.valid && name.touched"&gt
+        &ltdiv&gt  
+        </code></pre>
+  
+    
+        <h2>*ngIf</h2>
+        If you have a condition which result is true or false, you can use this directive. 
+        Example: If in the <b>web-pages.component.html</b> the number of the rows of the table is less than 5, 
+        then on the right side above the table you can see the text : <b>Insert new web pages</b> 
+        otherwise the number of rows. <br>
+        <pre><code class="language-html">
+        &ltdiv class="col-sm-2"&gt
+        &ltdiv *ngIf="webPages.length &lt 5; then notEnough else moreThan4 "&gt&lt/div&gt 
+        &ltng-template #moreThan4&gt There are &#123;&#123;webPages.length &#125;&#125; web pages&lt/ng-template&gt
+        &ltng-template #notEnough&gt Insert new web pages&lt/ng-template&gt
+        &lt/div&gt  
+        </code></pre>
+
+    
+        <h2>*ngSwitchCase</h2>
+        This directive is similar to <b>*ngIf</b>, but in this case you have more than two options, 
+        <b>myContent</b> is a field in the <b>web-page-card.component.ts</b> component.<br>
+        <pre><code class="language-html">
+        &ltng-container&gtPush the buttons!&lt/ng-container&gt
+        &lt/p&gt
+        &ltul class="nav nav-pills"&gt
+            &ltli class="nav-item" &gt
+                &lta class="nav-link" [class.active]="myContent == 'first'" (click)="myContent='first'" &gtOne&lt/a&gt
+            &lt/li&gt
+            &ltli class="nav-item" &gt
+                &lta class="nav-link" [class.active]="myContent == 'second'" (click)="myContent='second'" &gtTwo&lt/a&gt
+            &lt/li&gt
+            &ltli class="nav-item" &gt
+                &lta class="nav-link" [class.active]="myContent == 'third'" (click)="myContent='third'" &gtThree&lt/a&gt
+            &lt/li&gt          
+        &lt/ul&gt
+        &ltdiv [ngSwitch]="myContent"&gt
+            &ltdiv *ngSwitchCase="'first'"&gtFirst Button Pressed&lt/div&gt
+            &ltdiv *ngSwitchCase="'second'"&gtSecond Button Pressed&lt/div&gt
+            &ltdiv *ngSwitchCase="'third'"&gtThird Button Pressed&lt/div&gt
+            &ltdiv *ngSwitchCaseDefault&gtIn this case it never happens&lt/div&gt
+        &lt/div&gt  
+        </code></pre>
+
+    
+        <h2>*ngFor</h2>
+        We have already seen <b>*ngFor</b> in <b>web-pages.form.html</b>, now we have a little bit changed it. 
+        We have displayed the index of the table too (first column now), which is not the same as the ID of the web page ! <br>
+        <pre><code class="language-html">
+        &lttable class="table"&gt
+        &ltthead&gt
+            &lttr&gt
+            &ltth scope="col"&gt#&lt/th&gt
+            &ltth scope="col"&gtId&lt/th&gt
+            &ltth scope="col"&gtName&lt/th&gt
+            &ltth scope="col"&gtAbout&lt/th&gt
+            &ltth scope="col"&gtUrl&lt/th&gt
+            &ltth scope="col"&gtDelete&lt/th&gt
+            &ltth scope="col"&gtSelect&lt/th&gt
+            &lt/tr&gt
+        &lt/thead&gt
+        &lttbody&gt
+            &lttr *ngFor="let webPage of webPages;index as i"&gt
+            &ltth scope="row"&gt&#123;&#123;i&#125;&#125;&lt/th&gt
+            &lttd&gt&#123;&#123;webPage.id&#125;&#125;&lt/td&gt
+            &lttd&gt&#123;&#123;webPage.name&#125;&#125;&lt/td&gt
+            &lttd&gt&#123;&#123;webPage.about&#125;&#125;&lt/td&gt
+            &lttd&gt&lta href="&#123;&#123;webPage.url&#125;&#125;" target="_blank" 
+                rel="noopener noreferrer"&gt&#123;&#123;webPage.url&#125;&#125;&lt/a&gt&lt/td&gt
+            &lttd&gt&ltbutton type="submit" class="btn btn-success"  (click)="delete(webPage)"&gtDelete&lt/button&gt&lt/td&gt
+            &lttd&gt&ltbutton type="submit" class="btn btn-success"  (click)="select(webPage.id)"&gtEdit&lt/button&gt&lt/td&gt
+            &lt/tr&gt
+        &lt/tbody&gt
+        &lt/table&gt
+        </code></pre>
+
+        <b>*ngFor</b> has a <b>trackby</b> attribute too, we are going to see it later.
+    
+        <h2>ngClass</h2> 
+        <b>ngClass</b> (without asterisk) is an attribute modifier. Earlier we have seen this: <br>
+        <pre><code class="language-html">
+        &ltbutton [class.btn-primary]="isNew" [class.btn-success]="!isNew"&gt
+        </code></pre>
+
+        If you have more than one class attributes, you can group them : <br>
+        <pre><code class="language-html">
+        &ltbutton [style.borderColor]="isNew ? 'red' : 'yellow' " type="submit" class="btn" 
+        [disabled]="!webPageForm.form.valid" 
+        [ngClass]="{
+            'btn-primary': isNew,
+            'btn-success': !isNew
+        }"
+        &gtSubmit&lt/button&gt
+        </code></pre>
+
+    
+        <h2>ngStyle</h2>
+        This is very similar to <b>ngClass</b> <br>
+        <h2>ngModelGroup</h2>
+        With this we can group different fields and we can create a hierarchical structure. 
+        You can also validate an entire group of fields at once.
+    
+        <h2>Custom directive</h2>
+        We can create our own custom directive,  it can be generated with the CLI: <br>
+        <b>ng g d shared/directives/ChangeBackground</b> <br>
+        We would like to set a border and change the background color of an HTML element. 
+        So, it will change an attribute, not the structure of the DOM.
+        <pre><code class="language-typescript">
+        import { Directive, ElementRef, OnInit, Renderer2, HostListener, HostBinding, Input } from '@angular/core';
+
+
+        @Directive({
+            selector: '[appChangeBackground]'
+        })
+        export class ChangeBackgroundDirective implements OnInit {
+            @Input() defaultColor = 'transparent';
+            @Input() highlightColor = 'green';
+            
+            @HostBinding('style.backgroundColor') backgroundColor : string;
+        
+            constructor(private el: ElementRef, private renderer: Renderer2) { }
+        
+            ngOnInit(){
+            this.backgroundColor = this.defaultColor;
+            // set the border of the element with renderer
+            this.renderer.setStyle(this.el.nativeElement, 'border', 'thick solid');
+            }
+        
+            @HostListener('mouseenter')   // change color in case of mouse over
+            mouseover(eventDate: Event){
+            // set the color with hostbinding
+            this.backgroundColor = this.highlightColor;
+            }
+        
+            @HostListener('mouseleave') // change color in case of mouse leave
+            mouseleave(eventDate: Event){
+            // set the color with hostbinding
+            this.backgroundColor = this.defaultColor;
+            }
+        }
+        </code></pre>
+
+        We have used the <b>Renderer2</b> class to access the DOM element. More about it here:
+        <a href="https://angular.io/api/core/Renderer2" target="_blank" rel="noopener noreferrer">https://angular.io/api/core/Renderer2</a> <br>
+        We have made the color changes dynamically with <b>Hostlistener</b>.
+        Next we have to import it in the <b>app.modul.ts</b> and put it in the <b>Declaration</b> block. Then we can use the directive.
+        <pre><code class="language-html">
+        &lth5 appChangeBackground [defaultColor]="'yellow'" [highlightColor]="'grey'" class="card-title"&gt
+        .....
+        &lt/h5&gt
+        &lth3 appChangeBackground #heading&gt&#123;&#123;subTitle&#125;&#125;&lt/h3&gt
+        </code></pre>
+        
+        <h2>Custom directive, which change the DOM</h2>
+        It will display the element if the condition is true. (It is like *ngIf)<br>
+        <b>ng g d shared/directives/ShowThis</b>
+        <pre><code class="language-typescript">
+        import { Directive, Input, TemplateRef, ViewContainerRef  } from '@angular/core';
+
+        @Directive({
+            selector: '[appShowThis]'
+        })
+        export class ShowThisDirective {
+        
+            @Input() set appShowThis(condition: boolean) {
+            if (condition) {
+                this.vcRef.createEmbeddedView(this.templateRef);
+            } else {
+                this.vcRef.clear();
+            }
+            }
+            constructor(private templateRef: TemplateRef<any>, private vcRef: ViewContainerRef) { }
+        
+        }
+        </code></pre>
+
+        Example in the <b>web-page-card.component.html</b>
+        <pre><code class="language-html">
+        &ltp&gt&ltng-content *appShowThis=true&gt&lt/ng-content&gt&lt/p&gt
+        </code></pre>
+
+        More about directives: <a href="https://angular.io/api?type=directive" target="_blank" rel="noopener noreferrer">https://angular.io/api?type=directive</a>
+    </div>
+    
+    <div><a id="rest"></a>
+        <h1>Call a Rest API, HTTP requests </h1>
+        Now we are going to call our first REST APIs, which we have created here: 
+        <a  routerLink="/tutorial/python">Create a Django REST API</a> <br>
+        <h2>Setting the developing and production environment</h2>
+        
+        On localhost we are connecting the client side to our local server but on Heroku to an other one. 
+        That is one reason, why we have to set different environment for the developing and for the production mode. 
+        Set these parameters in the <b>environment.ts</b> and <b>environment.prod.ts</b> files. <br>
+        <pre><code class="language-typescript">
+        // environment.ts
+        export const environment = {
+            production: false,
+            SERVER_URL: 'http://localhost:8000'
+        };
+        
+        // environment.prod.ts
+        export const environment = {
+            production: true,
+            SERVER_URL: 'https://isdcbackend.herokuapp.com'
+        };
+            
+        </code></pre>
+
+    
+        Next, in the <b>app.module.ts</b> we have to import the <b>HttpClientModule</b>.
+        <h2>Models</h2>
+        The models have to match to the JSON what we are going to get from the server.
+        Modify the <b>web-page.ts</b> file and add the missing fields: <br>
+        <pre><code class="language-typescript">
+        export class WebPage {
+            constructor(
+                public id : number,
+                public pagetype: number,
+                public name: string,
+                public about: string,
+                public url: string,
+                public official: boolean,
+                public date: Date
+                ) {  }
+            }
+        </code></pre>
+
+        We have created the other model too: <br>
+        <pre><code class="language-typescript">
+        export class PageType {
+            constructor(
+                public id : number,
+                public name: string,
+                ) {  }
+            }
+        </code></pre>
+
+        
+        <h2>WebPage service (<b>web-page.service.ts</b>) </h2>
+        In the old service we have stored the values in an array of objects and we have modified this array. 
+        The return value of the <b>get</b> methods were also this array. 
+        Everything  has happened on the client side. 
+        Now we will not store anything in the service (on client side), we are going 
+        to retrieve data from the server with http requests and we are going to pass them to the caller components.
+        So we have to change the caller components too. Why we are doing this? <br>
+        Imagine that we insert a new row in the table. After that we would like to see the whole table, all of the rows. 
+        If somebody in the same time changed the table too, than we want to see this changes too on our display. 
+        So in our example we do not store data in Angular, we call always the server for the data. <br>
+        Now see the changes: <br>
+        <ul>
+            <li> We have imported several modules, that we need for the HTTP requests.</li>
+            <li>We have imported the environment, so Angular will apply different URL in developing and production modes </li>
+            <li>The <b>httpOptions</b>  block tells that we will send and receive the data in JSON format</li>
+            <li>We have set the server URL</li>
+            <li>We have performed a HTTP GET request to get the data from the remote server 
+            (<b>getWebPages,getWebPageById, getWebPageByName </b> ) 
+            </li>
+            <li>We have performed a HTTP POST request to post the data from the server, e.g. insert a new row</li>
+            <li>We have performed a HTTP DELETE request to delete a row from the server</li>
+            <li>We have performed a HTTP PUT request to update a row in the server</li>
+            <li>In all methods We have set the return value of the methods to <b>Observable</b>. 
+            That is the reason why we have to change the caller components. 
+            We need Observables, because the communication between the client and the server side is in asynchronous way.</li>
+            <li>Finally we add an error catching to each call.</li>
+            </ul>
+        
+        Let's see it: <br>
+        <pre><code class="language-typescript">
+        import { environment } from './../../environments/environment';
+        import { Injectable } from '@angular/core';
+        import { WebPage} from './../model/web-page';
+        import { HttpClient, HttpHeaders } from '@angular/common/http';
+        import { Observable, of, throwError } from 'rxjs';
+        import { catchError} from 'rxjs/operators';
+        
+        const httpOptions = {
+            headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+        };
+        @Injectable({
+            providedIn: 'root'
+        })
+        export class WebPageService {
+            private serverurlname = environment.SERVER_URL+'/webpage/';
+            private serverurl = environment.SERVER_URL+'/webpages/';
+        
+            constructor(private http: HttpClient) {
+            }
+            getWebPages(): Observable<WebPage[]>  {
+        
+            return this.http.get<WebPage[]>(this.serverurl).pipe(
+                catchError(this.handleError('getWebPages', []))
+            );
+        
+            }
+            getWebPageById (id: number): Observable<WebPage> {
+            return this.http.get<WebPage>(this.serverurl + id + '/').pipe(
+                catchError(this.handleError<WebPage>('getWebPageById'))
+            );
+            }
+        
+            getWebPageByName (name: string): Observable<WebPage> {
+            return this.http.get<WebPage>(this.serverurlname + name + '/').pipe(
+                catchError(this.handleError<WebPage>('getWebPageByName'))
+            );
+            }
+            newWebPage (newWebPage: WebPage ): Observable<WebPage> {
+            return this.http.post<WebPage>(this.serverurl, newWebPage, httpOptions).pipe(
+                catchError(this.handleError<WebPage>('newWebPage'))
+            );
+            }
+            deleteWebPage (webPage: WebPage): Observable<WebPage>{
+            return this.http.delete<WebPage>(this.serverurl + webPage.id + '/', httpOptions).pipe(
+                catchError(this.handleError<WebPage>('deleteWebPage'))
+            );
+            }
+            updateWebPage (modWebPage: WebPage): Observable<WebPage> {
+            return this.http.put<WebPage>(this.serverurl + modWebPage.id + '/', modWebPage, httpOptions).pipe(
+                catchError(this.handleError<WebPage>('updateWebPage'))
+            );
+            }
+        
+            /**
+            * Handle Http operation that failed.
+            * Let the app continue.
+            * @param operation - name of the operation that failed
+            * @param result - optional value to return as the observable result
+            */
+            private handleError<T> (operation = 'operation', result?: T) {
+        
+            return (error: any): Observable<T> => {
+                if (error.status === 404){
+                console.log('Not found'+ operation);
+        
+                } else if (error.status === 400) {
+                console.log('Bad Request'+ operation);
+                } else {
+                console.log('Other error'+ operation);
+                
+                console.error(error);
+                }
+        
+                return of(result as T);
+            };
+            }
+        }
+        </code></pre>
+
+        <h3>Error handling</h3>
+        As you can see we put the general error handling in the service, not in the component. 
+        So we can catch those errors in the component, which we want to. Later we will improve the error handling!
+        
+        <h2>WebPages component(<b>web-pages.component.ts</b>)</h2>
+        Good news, that we do not have to change our <b>web-pages.component.html</b>. 
+        Now look at the new <b>web-pages.component.ts</b> file: <br>
+        <pre><code class="language-typescript">
+        import { WebPageService } from './../../services/web-page.service';
+        import { WebPage } from './../../model/web-page';
+        import { Component, OnInit } from '@angular/core';
+        import { Router } from '@angular/router';
+        @Component({
+            selector: 'app-web-pages',
+            templateUrl: './web-pages.component.html',
+            styleUrls: ['./web-pages.component.css']
+        })
+        export class WebPagesComponent implements OnInit {
+            title = 'My Favorite Sites goes here and I like to write a lot of words, but maybe it is not a good idea';
+            subTitle = 'See the list bellow and complete it!';
+            newPageInserted: string = null;
+            webPages: WebPage[] =[];
+            webPage: WebPage;
+            constructor( private webPageService: WebPageService, private router: Router) { 
+            }
+            ngOnInit() {
+            this.getWebPages();
+            }
+        
+            getWebPages(): void {
+            this.webPageService.getWebPages().subscribe(webPages =>  this.webPages = webPages);
+            }
+        
+            delete(webPage: WebPage): void {
+            this.webPageService.deleteWebPage(webPage).subscribe(webPage => {
+                this.webPage = webPage;
+                console.log(webPage);
+                this.getWebPages();
+            }); 
+            }
+            select(id: number): void {
+            this.router.navigate(['/webpages/'+id]);
+            }
+            onTriggeredEvent(text){
+            this.newPageInserted = 'New Web Page was added: '+ text;
+            this.getWebPages(); // app-form-component has changed
+            }
+        }
+        </code></pre>
+
+        Changes are: <br>
+        <ul>
+            <li>In the <b>getWebPages</b> and <b>delete</b> methods we get back an Observable and we apply a <b>subscribe</b>  function to 
+            wait for the response of the server. As soon as we have got the response we loaded the values in our array.
+            </li>
+            <li>In the <b>delete</b>  and <b>onTriggeredEvent</b>  method we also called the <b>getWebpages</b>  
+            method to refresh the data in our table.</li>
+        </ul>
+        
+        <h2>WebPageForm component(<b>web-page-form.component.ts</b>)</h2>
+        In the methods you can find the same changes, which you have seen before in the <b>web-pages.component.ts</b>.
+        We have applied the <b>subscribe</b> function.<br> Note: About calling the <b>getPageTypes</b> method we will talk later.
+        <pre><code class="language-typescript">
+        import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+        import { ActivatedRoute, Router } from '@angular/router';
+        import { WebPageService } from './../../services/web-page.service';
+        import { PageTypeService } from './../../services/page-type.service';
+        import { WebPage } from './../../model/web-page';
+        import { PageType } from './../../model/page-type';
+        
+        @Component({
+            selector: 'app-web-page-form',
+            templateUrl: './web-page-form.component.html',
+            styleUrls: ['./web-page-form.component.css']
+        })
+        export class WebPageFormComponent implements OnInit {
+            @Input('sub-title') subTitle: string;
+            @Output('myevent') myEvent = new EventEmitter();
+            siteTitle = 'Insert a new site';
+            webPages : WebPage[];
+            pageTypes : PageType[];
+            isNew = false;
+        
+            model = new WebPage(null,null,null,null,null,false, null);
+        
+            constructor(private route: ActivatedRoute,private router: Router, 
+            private webPageService:WebPageService, private pageTypeService:PageTypeService) { 
+            }
+            ngOnInit() {
+                const sid = this.route.snapshot.paramMap.get('id');
+                this.pageTypeService.getPageTypes().subscribe(
+                pageTypes => this.pageTypes = pageTypes);
+            
+        
+            if (sid !== null) {
+                const id : number = parseInt(sid,10);
+                this.webPageService.getWebPageById(id).subscribe(model => this.model = model);
+                this.siteTitle = 'Modify the site attributes';
+                this.isNew = false;
+            } else { this.isNew = true;}
+            
+            }
+            onSubmit() {
+        
+            if (this.model.id === null) { // new web page
+                this.webPageService.newWebPage(this.model).subscribe(model => {
+                this.model = model;
+                this.myEvent.emit(this.model.name); 
+                this.model = new WebPage(null,null,null,null,null,false,null);
+                });
+            } else {
+                this.webPageService.updateWebPage(this.model).subscribe(
+                model => {
+                    this.model = model;
+                    this.router.navigate(['/webpages/']);
+                });
+            }
+            }
+            onKeyUp($event){
+            console.log($event.target.value)
+            }
+            onKeyUpAbout(about){
+            console.log(about.value)
+            }
+        }
+        </code></pre>
+
+    
+        <h3>Some improvements</h3>
+        From the server we are getting more fields, than we have displayed for now. Now let's amend it! <br>
+        First complete the html template <b>web-pages.component.html</b>
+        <pre><code class="language-html">
+        &lttr *ngFor="let webPage of webPages;index as i"&gt
+        &ltth scope="row"&gt&#123;&#123;i&#125;&#125;&lt/th&gt
+        &lttd&gt&#123;&#123;webPage.id&#125;&#125;&lt/td&gt
+        &lttd&gt&#123;&#123;webPage.name&#125;&#125;&lt/td&gt
+        &lttd&gt&#123;&#123;webPage.about&#125;&#125;&lt/td&gt
+        &lttd&gt&lta href="&#123;&#123;webPage.url&#125;&#125;" target="_blank" 
+            rel="noopener noreferrer"&gt&#123;&#123;webPage.url&#125;&#125;&lt/a&gt&lt/td&gt
+        &lttd&gt&#123;&#123;webPage.pagetype | pageTypePipe | async&#125;&#125;&lt/td&gt 
+        &lttd&gt&#123;&#123;webPage.date&#125;&#125;&lt/td&gt
+        &lttd&gt &ltinput type="checkbox" [checked]="webPage.official" disabled&gt&lt/td&gt
+        &lttd&gt&ltbutton type="submit" class="btn btn-success"  (click)="delete(webPage)"&gtDelete&lt/button&gt&lt/td&gt
+        &lttd&gt&ltbutton type="submit" class="btn btn-success"  (click)="select(webPage.id)"&gtEdit&lt/button&gt&lt/td&gt
+        &lt/tr&gt
+        </code></pre>
+
+        The <b>date</b> and <b>official</b> fields are very easy. <br>
+        The<b>PageType</b> field is more interesting. We do not want to display the ID, but the name. 
+        We have created a PageType model class before. Then we have to create a <b>page-type.service.ts</b> service 
+        very similarly to the <b>web-page</b> service.
+        <pre><code class="language-typescript">
+        import { Pipe, PipeTransform } from '@angular/core';
+        import { PageType } from './../../model/page-type';
+        import { PageTypeService } from './../../services/page-type.service';
+        import { Observable } from 'rxjs';
+        import { map } from 'rxjs/operators';
+        
+        @Pipe({
+            name: 'pageTypePipe'
+        })
+        export class PageTypePipePipe implements PipeTransform {
+            pageTypes: PageType[] =[];
+            
+            constructor(private pageTypeService: PageTypeService){}
+        
+            // transform(value: number, args?: any): any {
+            //   this.pageTypes = this.pageTypeService.getPageTypesArray();
+            //   for (const pageType of this.pageTypes) {
+            //     if (value === pageType.id) {
+            //       return pageType.name; 
+            //     }
+            //   };
+            //   return null;
+            // }
+        
+            transform(value: number, args?: any): Observable<string> | null {
+            return this.pageTypeService.getPageTypeById(value).pipe(
+                map(res => {
+                // if name is already taken
+                if (res.name) {
+                    // return error
+                    return res.name;
+                } else {return null;}
+                });
+        
+            };
+        }
+        </code></pre>
+
+        Now we can use our pipe to display the <b>pagetype</b> name: <br>
+        <pre><code class="language-html">
+        &lttd&gt&#123;&#123;webPage.pagetype | pageTypePipe | async&#125;&#125;&lt/td&gt 
+        </code></pre>
+
+        Because our pipe is returns an Observable, we should pipe it to en <b>async</b> pipe too. 
+        
+        <h2>Let's improve WebPageForm component(<b>web-page-form.component.ts</b>)</h2>
+        Our component is working, but not very nice. In case of inserting new rows it is located above our web page list,
+        in case of modification we have to navigate to another url and we cannot see the list. Now we will repair it.
+        The solution is in the <b>ngOnChanges()</b> method, that we have learnt earlier. 
+        In that method we can access the right id from the parent component, so we do not need the URL based identification.
+        Other changes, that in the event emitter we will transfer more than one parameters. 
+        <pre><code class="language-typescript">
+        import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
+        import { ActivatedRoute, Router } from '@angular/router';
+        import { WebPageService } from './../../services/web-page.service';
+        import { PageTypeService } from './../../services/page-type.service';
+        import { WebPage } from './../../model/web-page';
+        import { PageType } from './../../model/page-type';
+        
+        @Component({
+            selector: 'app-web-page-form',
+            templateUrl: './web-page-form.component.html',
+            styleUrls: ['./web-page-form.component.css']
+        })
+        export class WebPageFormComponent implements OnInit, OnChanges {
+            @Input('sub-title') subTitle: string;
+            @Input('webPageId') webPageId: number;
+            @Output('myevent') myEvent = new EventEmitter<{id: number, name: string, isNew: boolean }>();
+        
+        
+            @ViewChild('officialCheckBox') officialCheckbox: ElementRef;
+            siteTitle = 'Insert a new site';
+            webPages : WebPage[];
+            pageTypes : PageType[];
+            isNew = false;
+        
+            model = new WebPage(null,null,null,null,null,false, null);
+        
+            constructor(private route: ActivatedRoute,private router: Router, 
+            private webPageService:WebPageService, private pageTypeService:PageTypeService) { 
+            }
+        
+            ngOnChanges(){
+            if ( this.webPageId !== null) { // We are in the modify state
+                this.webPageService.getWebPageById(this.webPageId).subscribe(model => this.model = model);
+                this.siteTitle = 'Modify the site attributes';
+                this.isNew = false;
+            } else { this.isNew = true;}
+            }
+        
+            ngOnInit() {
+        
+                this.pageTypeService.getPageTypes().subscribe(
+                pageTypes => this.pageTypes = pageTypes);
+            }
+            onSubmit() {
+        
+            if (this.model.id === null) { // new web page
+                this.webPageService.newWebPage(this.model).subscribe(model => {
+                this.model = model;
+                this.myEvent.emit({id: this.model.id, name: this.model.name, isNew: true }); 
+                this.model = new WebPage(null,null,null,null,null,false,null);
+                });
+            } else {
+                this.webPageService.updateWebPage(this.model).subscribe(
+                model => {
+                    this.model = model;
+                    this.myEvent.emit({id: this.model.id, name: this.model.name, isNew: false });
+                    this.model = new WebPage(null,null,null,null,null,false,null);
+                });
+            } 
+            this.siteTitle = 'Insert a new site';
+            }
+            onKeyUp($event){
+            console.log($event.target.value)
+            }
+            onKeyUpAbout(about){
+            console.log(about.value)
+            }
+        }
+        </code></pre>
+
+    </div>
+    
+    <div><a id="valid"></a>
+        <h1>More validation (template driven)</h1>
+        <b>IMPORTANT!!!</b>  From now on we are building our application with HTML requests. 
+        <br>
+        We are going to complete our <b>web-page-form.html</b> with the necessary fields and add validations to the fields. <br>
+        See an example, when we have two different validation on one field: <br>
+        <pre><code class="language-html">
+        &ltdiv class="form-group"&gt
+        &ltlabel for="name"&gtName&lt/label&gt
+        &ltinput  type="text" class="form-control" id="name" 
+                required
+                minlength="3"
+                [(ngModel)]="model.name" name="name"
+                #name="ngModel"
+                &gt    
+        &ltdiv *ngIf="!name.valid && name.touched" class="alert alert-danger"&gt
+            &ltdiv *ngIf="name.errors.required"&gtName is required&lt/div&gt 
+            &ltdiv *ngIf="name.errors.minlength"&gtName is minimum &#123;&#123;name.errors.minlength.requiredLength &#125;&#125; character length&lt/div&gt 
+        &lt/div&gt 
+    
+        &lt/div&gt
+        </code></pre>
+
+        Next you can see the new <b>pagetype</b> filed. It is a <b>select</b> field. 
+        The names will appear to the user, but we will store the selected ID. <br>
+        <pre><code class="language-html">
+        &ltdiv class="form-group"&gt
+        &ltdiv class="input-group mb-3"&gt
+            &ltdiv class="input-group-prepend"&gt
+            &ltlabel class="input-group-text" for="pagetype"&gtPage type&lt/label&gt
+            &lt/div&gt
+            &ltselect class="custom-select form-control" id="pagetype"
+            required
+            [(ngModel)]="model.pagetype" name="pagetype"
+            #pagetype="ngModel"
+            &gt
+            &ltoption *ngFor="let pageType of pageTypes" [value]="pageType.id"&gt&#123;&#123;pageType.name&#125;&#125;&lt/option&gt
+            &lt/select&gt
+            &ltdiv *ngIf="!pagetype.valid && pagetype.touched"
+            class="alert alert-danger"&gt
+                Page type  is required
+        &lt/div&gt 
+        &lt/div&gt
+        &lt/div&gt
+        </code></pre>
+
+        Finally we have added the other missing fields too. <br>
+        <pre><code class="language-html">
+        &ltdiv class="form-group"&gt
+        &ltdiv class="checkbox"&gt 
+            &ltinput type="checkbox"  id="official"
+            [(ngModel)]="model.official" name="official" &gt Official page
+        &lt/div&gt
+        
+        &lt/div&gt
+    
+        &ltdiv class="form-group"&gt
+        &ltlabel for="date"&gtDate&lt/label&gt
+        &ltinput type="date" class="form-control" id="date"
+        [(ngModel)]="model.date" name="date" 
+        #date="ngModel"
+        required&gt
+    
+        &ltdiv *ngIf="!date.valid && date.touched"
+            class="alert alert-danger"&gt
+            Date  is required
+        &lt/div&gt 
+        &lt/div&gt
+        </code></pre>
+
+    
+        Finally in the <b>web-page-form.ts</b> we had to load the <b>PageTypes</b> array.You have seen it above in the
+        <b>onInit</b> method.
+        More about validation : <a href="https://angular.io/api/forms/Validators" target="_blank" rel="noopener noreferrer">https://angular.io/api/forms/Validators</a>
+    
+    </div>
+    <div><a id="reactive"></a>
+        <h1>Reactive forms</h1>
+        The validation of a reactive form can be more complex, than in a template driven form. 
+        In the template driven form we use html validators in the html template, in reactive forms we are putting
+        the validators in the Angular component. First we are going to create exactly the same form as we did earlier, later
+        we will improve it. But at the very first we have to import the reactive module in the <b>app.module.ts</b>: <br>
+        <b> imports: [..., ReactiveFormsModule,</b> <br>
+        Next, generate a new component: <br>
+        <b>ng g c WebPageReactive</b> <br>
+        Create a new route for it: <br>
+        <pre><code class="language-typescript">
+        {path: 'webpagereactive', component: WebPageReactiveComponent},
+        </code></pre>
+
+    
+        Now copy the content of the <b>web-page-form.component.html</b> into 
+        the <b>web-page-reactive.component.html</b> and do the next changes: <br>
+        <ul>
+            <li>
+            In the <b>form</b> header change <b>webPageForm="ngForm" </b> to <b>[formGroup]="webPageForm"</b>
+            </li>
+            <li>At the fields instead of <b> [(ngModel)]="model.name" name="name"</b> write <b>formControlName="name"</b> and so on</li>
+            <li>remove all html validators, like <b>required, minLength</b></li>
+            <li>At the displaying of the error messages </li>
+            <li>At the submit button we do not need the 'form' part:  <b>[disabled]="!webPageForm.valid"</b></li>
+        </ul>
+        Now you can see, that our template is cleaner. <br>
+        <pre><code class="language-html">
+        &ltform [formGroup]="webPageForm" (ngSubmit)="onSubmit()" &gt
+        &ltdiv class="form-group"&gt
+            &ltlabel for="name"&gtName&lt/label&gt
+            &ltinput  type="text" class="form-control" id="name" 
+                    formControlName="name"&gt
+            &ltdiv *ngIf="name.invalid && name.touched" class="alert alert-danger"&gt
+                &ltdiv *ngIf="name.errors.required"&gtName is required&lt/div&gt 
+                &ltdiv *ngIf="name.errors.minlength"&gtName is minimum &#123;&#123;name.errors.minlength.requiredLength &#125;&#125; character length&lt/div&gt
+            &lt/div&gt    
+        &lt/div&gt
+
+        &ltdiv class="form-group"&gt
+            &ltdiv class="input-group mb-3"&gt
+            &ltdiv class="input-group-prepend"&gt
+                &ltlabel class="input-group-text" for="pagetype"&gtPage type&lt/label&gt
+            &lt/div&gt
+            &ltselect class="custom-select form-control" id="pagetype"
+                formControlName="pagetype"&gt
+                &ltoption *ngFor="let pageType of pageTypes" [value]="pageType.id"&gt&#123;&#123;pageType.name&#125;&#125;&lt/option&gt
+            &lt/select&gt
+            &ltdiv *ngIf="pagetype.invalid && pagetype.touched"
+                    class="alert alert-danger"&gt
+                Page Type is required
+                &lt/div&gt 
+            &lt/div&gt
+        &lt/div&gt
+
+        &ltdiv class="form-group"&gt
+            &ltlabel for="about"&gtAbout&lt/label&gt
+            &ltinput type="text" class="form-control" id="about"
+            formControlName="about"&gt
+            &ltdiv *ngIf="about.invalid && about.touched"
+                class="alert alert-danger"&gt
+                About field is required
+            &lt/div&gt       
+        &lt/div&gt
+
+        &ltdiv class="form-group"&gt
+        &ltlabel for="url"&gtURL&lt/label&gt
+        &ltinput type="text" class="form-control" id="url"
+        formControlName="url"&gt
+        &ltdiv *ngIf="url.invalid && url.touched"
+                class="alert alert-danger"&gt
+                URL is required
+        &lt/div&gt 
+        &lt/div&gt
+
+        &ltdiv class="form-group"&gt
+        &ltdiv class="checkbox"&gt 
+            &ltinput type="checkbox"  id="official"
+            formControlName="official" &gt Official page
+        &lt/div&gt
+        
+        &lt/div&gt
+
+        &ltdiv class="form-group"&gt
+        &ltlabel for="date"&gtDate&lt/label&gt
+        &ltinput type="date" class="form-control" id="date"
+        formControlName="date"&gt
+        &ltdiv *ngIf="date.invalid && date.touched" class="alert alert-danger"&gt
+            &ltdiv *ngIf="date.errors.required"&gtDate is required&lt/div&gt 
+        &lt/div&gt 
+        &lt/div&gt
+
+        &ltbutton type="submit" class="btn btn-primary" 
+        [disabled]="webPageForm.invalid" 
+        &gtSubmit&lt/button&gt
+        &lt/form&gt
+        </code></pre>
+
+    
+        Now let's see the component: <br>
+        At the top of the file we have imported the <b>FormGroup, FormControl, Validators</b>. 
+        In the class first we have created a <b>FormGroup</b> object with validators. The name of the object (webPageForm) 
+        is the same as 
+        in the template in the <b>form</b> tag. The object contains the fields of the form with the validators.
+        In the <b>onSubmit</b> method we have called the <b>newWebPage</b> and cleared the form. <br>
+    
+        And finally we had to write getters to retrieve the values of the fields. 
+        That is what we use in the template at displaying the error. 
+        So here the <b>name</b> is the getter method as a property. <br>
+        <pre><code class="language-typescript">
+        import {FormGroup, Validators, FormBuilder} from '@angular/forms';
+        import { Component, OnInit} from '@angular/core';
+        import { WebPageService } from './../../services/web-page.service';
+        import { PageTypeService } from './../../services/page-type.service';
+        import { WebPage } from './../../model/web-page';
+        import { PageType } from './../../model/page-type';
+        
+        
+        @Component({
+        selector: 'app-web-page-reactive',
+        templateUrl: './web-page-reactive.component.html',
+        styleUrls: ['./web-page-reactive.component.css']
+        })
+        export class WebPageReactiveComponent implements OnInit {
+        webPageForm = new FormGroup({
+            name: new FormControl('', 
+                [Validators.required,              
+                Validators.minLength(2)]), 
+            about: new FormControl('', Validators.required),
+            pagetype: new FormControl('', Validators.required),
+            url: new FormControl('', Validators.required),
+            official: new FormControl(false),
+            date: new FormControl('', Validators.required)
+        });
+    
+        siteTitle = 'Insert a new site (Reactive Form)';
+        webPages : WebPage[];
+        pageTypes : PageType[];
+        
+        constructor(private webPageService:WebPageService, 
+                    private pageTypeService:PageTypeService) {}
+        ngOnInit() {
+        
+            this.pageTypeService.getPageTypes().subscribe(pageTypes => this.pageTypes = pageTypes);
+        }
+        onSubmit() {
+            this.webPageService.newWebPage(this.webPageForm.value).subscribe(model => {
+                this.webPageForm.reset();
+                this.webPageForm.controls['official'].setValue(false);
+            });
+        }
+        
+        get name(){
+            return this.webPageForm.get('name');
+        }
+        get pagetype(){
+            return this.webPageForm.get('pagetype');
+        }
+        get about(){
+            return this.webPageForm.get('about');
+        }
+        get url(){
+            return this.webPageForm.get('url');
+        }
+        get date(){
+            return this.webPageForm.get('date');
+        }
+        
+        }
+        </code></pre>
+       
+        <h2>Custom validator (reactive form)</h2>
+        We can create custom validators, that we can attach to the <b>FormControl</b>. <br> 
+        First create the validator class. The validator will not allow space in the name field.
+        <pre><code class="language-typescript">
+        import { AbstractControl, ValidationErrors } from '@angular/forms';
+
+        export class NameValidators {
+        
+            static cannotContainSpace(control: AbstractControl): ValidationErrors | null {
+                if ( control.value !== null && (control.value as string).indexOf(' ') > -1) { 
+                    return {cannotContainSpace : true}
+                }
+                return null;
+            }
+        }
+        </code></pre>
+
+    
+        Next, add the validator to the <b>FormControl</b> : <br>
+        <pre><code class="language-typescript">
+        name: new FormControl('',[
+        Validators.required,
+        Validators.minLength(3),
+        NameValidators.cannotContainSpace,
+        ]),
+        </code></pre>
+
+        Finally apply it in the template. : 
+        <pre><code class="language-html">
+        &ltdiv *ngIf="name.errors.cannotContainSpace"&gtName can't contain space&lt/div&gt 
+        </code></pre>
+    
+    
+        <h2>Form Builder</h2>
+        Now we are going change the <b>web-page-reactive.component.ts</b> file, we will simplify it with <b>FormBuilder</b>. <br>
+        <pre><code class="language-typescript">
+        import { NameValidators } from './../../validators/name.validators';
+        import { AsyncNameValidators } from './../../validators/asyncname.validators';
+        import {FormGroup, Validators, FormBuilder} from '@angular/forms';
+        import { Component, OnInit} from '@angular/core';
+        import { WebPageService } from './../../services/web-page.service';
+        import { PageTypeService } from './../../services/page-type.service';
+        import { WebPage } from './../../model/web-page';
+        import { PageType } from './../../model/page-type';
+        
+        
+        @Component({
+            selector: 'app-web-page-reactive',
+            templateUrl: './web-page-reactive.component.html',
+            styleUrls: ['./web-page-reactive.component.css']
+        })
+        export class WebPageReactiveComponent implements OnInit {
+            webPageForm : FormGroup;
+            
+        
+            siteTitle = 'Insert a new site (Reactive Form)';
+            webPages : WebPage[];
+            pageTypes : PageType[];
+        
+            constructor(private webPageService:WebPageService, 
+                        private pageTypeService:PageTypeService, 
+                        private service: AsyncNameValidators,
+                        fb: FormBuilder) {
+        
+                this.webPageForm = fb.group({
+                name: ['', 
+                        [Validators.required,                // Sync validators
+                        Validators.minLength(2),
+                        NameValidators.cannotContainSpace,] 
+                        , this.service.AsyncNameValidator()],// Async validators
+                about: ['', Validators.required],
+                pagetype: ['', Validators.required],
+                url: ['', Validators.required],
+                official: [false],
+                date: ['', Validators.required,]
+                });
+        
+            }
+            ngOnInit() {
+        
+            this.pageTypeService.getPageTypes().subscribe(pageTypes => this.pageTypes = pageTypes);
+            }
+            onSubmit() {
+            if (this.name.value === 'aaa') {
+                this.webPageForm.setErrors({
+                invalidForm: true,
+            })
+            } else {
+                this.webPageService.newWebPage(this.webPageForm.value).subscribe(model => {
+                    console.log(model);
+                    this.webPageForm.reset();
+                    this.webPageForm.controls['official'].setValue(false);
+            });
+            }
+            }
+        
+            get name(){
+            return this.webPageForm.get('name');
+            }
+            get pagetype(){
+            return this.webPageForm.get('pagetype');
+            }
+            get about(){
+            return this.webPageForm.get('about');
+            }
+            get url(){
+            return this.webPageForm.get('url');
+            }
+            get date(){
+            return this.webPageForm.get('date');
+            }
+        
+        
+        }
+                
+        </code></pre>
+
+        You can see, that we have imported the <b>Formbuilder</b> class and initialized in the constructor. 
+        The syntax is much simpler.
+        <h2>Form validator</h2>
+        As you can see we added a form validator to a form as a whole. Look it at the <b>onSubmit method</b>. <br>
+    
+        And in the template: <br>
+        <pre><code class="language-html">
+        &ltform [formGroup]="webPageForm" (ngSubmit)="onSubmit()" &gt
+        &ltdiv *ngIf="webPageForm.errors" class="alert alert-danger"&gt
+            Form error : "aaa" is not a nice name, sorry.
+        &lt/div&gt 
+        </code></pre>
+
+        <h2>Asynchronous validator</h2>
+        We have added an asynchronous validator too , it checks whether a name is occupied in the database. 
+        In the HTML template there is not difference between asynchronous and synchronous validators. :
+        <pre><code class="language-html">
+        &ltdiv *ngIf="name.errors.nameExists"&gtName already exists&lt/div&gt 
+        </code></pre>
+     
+        In the component they are also similar, but the asynchronous validator is placed on the third part of the array: <br>
+        <pre><code class="language-typescript">
+        name: ['', 
+        [Validators.required,                // Sync validators
+        Validators.minLength(2),
+        NameValidators.cannotContainSpace,] 
+        , this.service.AsyncNameValidator()],// Async validators
+        </code></pre>
+    
+        The validator itself: <br>
+        <pre><code class="language-typescript">
+        import { Injectable } from '@angular/core';
+        import { AbstractControl,  AsyncValidatorFn } from '@angular/forms';
+        import { Observable} from 'rxjs';
+        import { map } from 'rxjs/operators';
+        import { WebPageService } from './../services/web-page.service';
+        
+        @Injectable({ providedIn: 'root' })
+        export class AsyncNameValidators  {
+        
+            constructor(private webPageService:WebPageService) {}
+        
+            AsyncNameValidator(): AsyncValidatorFn {
+                return (control: AbstractControl): Observable<{ [key: string]: any } | null> => {
+                    return this.webPageService.getWebPageByName(control.value)
+                    .pipe(
+                        map(res => {
+                        // if name is already taken
+                        if (res.name) {
+                            // return error
+                            return { 'nameExists': true};
+                        } else {return null;}
+                        })
+                    );
+                };
+        
+            }
+            }
+        </code></pre>
+        
+    </div>
+
+    <div id="routing">
+        <h1>Routing </h1>
+        We have already seen the basics of routing. Now we are going to improve our knowledge about it.
+        <h2>Defining routes</h2>
+        Until now we have defined our routes in the <b>app.module.ts</b>. 
+        If we will have a lot of routes, then we should move them to a separate file, to a <b>routing module</b>.
+        Here is the <b>app-routing.module.ts</b>
+        <pre><code class="language-typescript">
+        import { NgModule } from '@angular/core';
+        import { Routes, RouterModule } from '@angular/router';
+        import { HomeComponent } from './home/home.component';
+        import { LoginComponent } from './login/login.component';
+        import { EnvironmentComponent } from './mystories/environment/environment.component';
+        import { ExternalJsComponent } from './mystories/external-js/external-js.component';
+        
+        import { MyStoryComponent } from './mystories/my-story/my-story.component';
+        import { PythonBasicComponent } from './mystories/python-basic/python-basic.component';
+        import { AngularBasicComponent } from './mystories/angular-basic/angular-basic.component';
+        import { TsBasicComponent } from './mystories/ts-basic/ts-basic.component';
+        import { WebPagesComponent } from './webpages/web-pages/web-pages.component';
+        import { WebPageReactiveComponent } from './webpages/web-page-reactive/web-page-reactive.component';
+        import { JavaScriptComponent } from './mystories/java-script/java-script.component';
+        import { WebPageShowComponent } from './webpages/web-page-show/web-page-show.component';
+        import { AuthGuard } from './services/auth-guard.service';
+        import { CanDeactivateGuard } from './services/can-deactivate-guard.service';
+        import { ErrorPageComponent } from './shared/error-page/error-page.component';
+        
+        
+        const appRoutes: Routes = [
+            {path: '', component: HomeComponent},
+            {path: 'login', component: LoginComponent},
+            {path: 'webpages', component: WebPagesComponent},
+            {path: 'webpagereactive', canActivate: [AuthGuard],  
+                    component: WebPageReactiveComponent, 
+                    canDeactivate: [CanDeactivateGuard]},
+            {path: 'webpage/:id', component: WebPageShowComponent},
+            {path: 'mystory', component: MyStoryComponent, children: [
+            {path: 'environment', component: EnvironmentComponent},
+            {path: 'angularbasic', component: AngularBasicComponent},
+            {path: 'extjs', component: ExternalJsComponent},
+            {path: 'pythonbasic', component: PythonBasicComponent},
+            {path: 'tsbasic', component: TsBasicComponent},
+            {path: 'js', component: JavaScriptComponent},
+            ]},
+            { path: 'not-found', component: ErrorPageComponent, data: {message: 'Page not found!'} },
+            {path: '**', redirectTo: '/not-found'},
+        ];
+        
+        @NgModule({
+            imports: [
+            RouterModule.forRoot(appRoutes)
+            ],
+            exports: [RouterModule]
+        })
+        
+        export class AppRoutingModule {
+        
+        }
+        </code></pre>
+
+        What is important in the file: <br>
+        <ul>
+        <li>Import all the necessary modules and components, including  <b>Routes</b> and <b>RouterModule</b></li>
+        <li>Define a constant with the paths, like we have defined it in the <b>app.module.ts</b> earlier</li>
+        <li>At <b>@NgModule</b> import the <b>RouterModule</b> with the defined constant and export it</li>
+        </ul>
+        Now in the <b>app.module.ts</b> all, that you have to do is importing the <b>AppRoutingModule</b>:
+        <pre><code class="language-typescript">
+        imports: [
+            BrowserModule,
+            FormsModule,
+            HttpModule,
+            AppRoutingModule
+        ],
+        </code></pre>
+    
+        <h2>Redirect to error page</h2>
+        We have created an <b>ErrorPage</b> component to display the users if they will access a route what does not exist. 
+        The error page is get a message text as a parameter, that it will display with string interpolation. 
+        The message is transferred via the routing, that we can access with the <b>ActivatedRoute</b> component.
+        <pre><code class="language-typescript">
+        import { Component, OnInit } from '@angular/core';
+        import { ActivatedRoute, Data } from '@angular/router';
+        
+        @Component({
+            selector: 'app-error-page',
+            templateUrl: './error-page.component.html',
+            styleUrls: ['./error-page.component.css']
+        })
+        export class ErrorPageComponent implements OnInit {
+            errorMessage: string;
+        
+            constructor(private route: ActivatedRoute) { }
+        
+            ngOnInit() {
+            // this.errorMessage = this.route.snapshot.data['message'];
+            this.route.data.subscribe(
+                (data: Data) => {
+                this.errorMessage = data['message'];
+                }
+            );
+            }
+        
+        }
+        </code></pre>
+
+        In the HTML :
+        <pre><code class="language-html">
+        &lth2&gt&#123;&#123;errorMessage&#125;&#125;&lt/h2&gt
+        </code></pre>
+
+        And one way how we can give the message is in the <b>AppRoutingModule</b>. 
+        In the first line bellow you can see how to transfer a date to a route dynamically. 
+        In the second line you can see how to redirect a path to another path, <b>'**'</b> means that any other path, 
+        that is not present in other path above that line. So this line have to be the last one.
+        <pre><code class="language-typescript">
+        { path: 'not-found', component: ErrorPageComponent, data: {message: 'Page not found!'} },
+        {path: '**', redirectTo: '/not-found'},
+        </code></pre>
+
+    
+        <h2>Children routes</h2>
+        We have created the <b>mystory</b> path earlier,  in it there is the content of some other tutorials, like
+        <b>mystory/environment</b>, <b>/mystory/angularbasic</b> and so on. These other pages are showed in other separate pages.
+        If we would like, that they appear in the <b>mystory</b> page, then we have to define the routes as children routes 
+        in the <b>AppRoutingModule</b>.
+        Earlier :
+        <pre><code class="language-typescript">
+        {path: 'mystory/environment', component: EnvironmentComponent}, 
+        {path: 'mystory/angularbasic', component: AngularBasicComponent}, 
+        </code></pre>
+
+        And now, with children routes:
+        <pre><code class="language-typescript">
+        {path: 'mystory', component: MyStoryComponent, children: [
+        {path: 'environment', component: EnvironmentComponent},
+        {path: 'angularbasic', component: AngularBasicComponent},
+        {path: 'extjs', component: ExternalJsComponent},
+        {path: 'pythonbasic', component: PythonBasicComponent},
+        {path: 'tsbasic', component: TsBasicComponent},
+        {path: 'js', component: JavaScriptComponent},
+        </code></pre>
+
+    
+        <h2>Navigate to routes in the template</h2>
+        In the template file we can navigate to other pages with Angular <b>routerLink</b>. 
+        We can attach to the link parameters, question parameters also.
+        Here is an example in the <b>web-pages.component.html</b> for this route: <br>
+        <b>http://localhost:4200/webpage/3?capitalize=yes</b> 
+        <pre><code class="language-html">
+        &lttd&gt&ltbutton type="submit" class="btn btn-success" 
+        [routerLink] = "['/webpage', webPage.id]"
+        [queryParams] = "{capitalize: true}" &gtShow&lt/button&gt&lt/td&gt
+        </code></pre>
+
+    
+        <h2>Navigate to routes in the TypeScript file</h2>
+        The same example as above in the TS file. In the template there is a click event.
+        <pre><code class="language-html">
+        &lttd&gt&ltbutton type="submit" class="btn btn-success"  (click)="show(webPage.id)"&gtShow&lt/button&gt&lt/td&gt
+        </code></pre>
+
+        And in the TS file:
+        <pre><code class="language-typescript">
+        constructor(  private router: Router) { 
+        }
+        ....
+        show(id: number): void {
+            this.router.navigate(['/webpage/',id], {queryParams:{capitalize: 'yes'&#125;&#125;);
+        }
+        </code></pre>
+
+    
+        <h2>Get the route parameters</h2>
+        Now, let's see the other side. We can get the routes parameters with <b>ActivatedRoute</b>.
+        Whe can apply two ways for getting the parameters of the routes. If we are sure, that the parameters 
+        cannot change during we are on the same page, then we can choose the <b>paramGet</b> method. 
+        For example we can get the <b>ID</b> parameter so:
+        <pre><code class="language-typescript">
+        constructor( private route: ActivatedRoute) { }
+        .....
+        
+        ngOnInit() {
+            const sid = this.route.snapshot.paramMap.get('id');
+            if (sid !== null) {
+            const id : number = parseInt(sid,10);
+            this.webPageService.getWebPageById(id);
+            this.siteTitle = 'Modify the site attributes';
+            }
+        </code></pre>
+
+        But if the routes can change on the same page, then use <b>params</b> and <b>queryparams</b> methods with 
+        <b>subscribe</b>. About <b>subscribe</b> we are going to talk later.
+        <pre><code class="language-typescript">
+        constructor( private route: ActivatedRoute) { }
+        .....
+        
+        ngOnInit() {
+        
+            this.route.params.subscribe((params: Params) => {
+            this.sid = params['id'];
+            console.log('route.params.subscribe: '+this.sid);
+            this.getWebPage();
+        
+            });
+            this.route.queryParams.subscribe((params: Params) => {
+            this.capitalize = params['capitalize'];
+            console.log('route.queryParams.subscribe: '+this.capitalize );
+            });
+        }
+        </code></pre>
+
+        Let's see a basic example. We are on the <b>WebPageShwow</b> and we can paginate forward and back with the buttons.
+        We simply add or subtract one to the ID or from the ID. (It is not a real word example. There is not any guarantee, that the IDs are 
+        in sequence.) In the example we can navigate between the items without reload the page. See the rest part of the code:
+        <pre><code class="language-typescript">
+        getWebPage(){
+            if (this.sid !== null) {
+                this.webPageService.getWebPageById(this.sid).subscribe(webPage => {
+                this.webPage = webPage;
+                if (this.capitalize === 'yes'){
+                    this.webPage.name = this.webPage.name.toUpperCase(); 
+                } else {
+                    this.webPage.name = this.webPage.name.toLowerCase();
+                }
+                });
+            }
+            }
+            next(id:number){
+            id = id + 1;
+            console.log('id:'+ id);
+            this.router.navigate(['/webpage/',id], {queryParams:{capitalize: 'yes'&#125;&#125;);
+            }
+            back(id:number){
+            id = id - 1;
+            console.log('id:'+ id);
+            this.router.navigate(['/webpage/',id], {queryParams:{capitalize: 'no'&#125;&#125;);
+            }
+        </code></pre>
+    
+        <h2>Auth Guard</h2>
+        In a normal web application not every page is for everyone. For example you can update some items if you are authenticated
+        for it after login. Angular helps us to deal with this tsk with <b>AuthGuard</b>. Let's do an example. 
+        From  now on we can access this page only after login: <b>http://localhost:4200/webpagereactive</b>. <br>
+        First we have created a fake auth service. It can do the login, the logout and after some time gives back whether
+        a user is authenticated or not.
+        <pre><code class="language-typescript">
+        export class AuthService {
+            loggedIn = false;
+            
+            isAuthenticated() {
+                const promise = new Promise(
+                (resolve, reject) => {
+                    setTimeout(() => {
+                    resolve(this.loggedIn);
+                    }, 800);
+                }
+                );
+                return promise;
+            }
+            
+            login() {
+                this.loggedIn = true;
+            }
+            
+            logout() {
+                this.loggedIn = false;
+            }
+            }
+        </code></pre>
+
+        In the login component we can simple login or logout.
+        <pre><code class="language-typescript">
+        constructor(private authService: AuthService) { }
+
+        ngOnInit() {
+        }
+        
+        onLogin(){
+            this.authService.login();
+        }
+        
+        onLogout(){
+            this.authService.logout();
+        }
+        </code></pre>
+
+        Now we have to create an <b>auth-guard.service.ts</b>. It checks the <b>IsAuthenticated</b> method in the
+        <b>auth-service</b> and gives back a boolean. In case of the user is not authenticated it navigates to the main page.
+        It handles the authorization of the child routes too.
+        <pre><code class="language-typescript">
+        import {
+            CanActivate,
+            ActivatedRouteSnapshot,
+            RouterStateSnapshot,
+            Router,
+            CanActivateChild
+            } from '@angular/router';
+            import { Injectable } from '@angular/core';
+            import { Observable } from 'rxjs';
+            import { AuthService } from './auth.service';
+            
+            @Injectable()
+            export class AuthGuard implements CanActivate, CanActivateChild {
+            constructor(private authService: AuthService, private router: Router) {}
+            
+            canActivate(route: ActivatedRouteSnapshot,
+                        state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+                return this.authService.isAuthenticated()
+                .then(
+                    (authenticated: boolean) => {
+                    if (authenticated) {
+                        return true;
+                    } else {
+                        this.router.navigate(['/']);
+                        return false;
+                    }
+                    }
+                );
+            }
+            canActivateChild(route: ActivatedRouteSnapshot,
+                state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+            return this.canActivate(route, state);
+            }
+        </code></pre>
+
+        Next we have to set the auth guard at the routes.
+        <pre><code class="language-typescript">
+        {path: 'webpagereactive', canActivate: [AuthGuard],  
+        component: WebPageReactiveComponent, },
+        </code></pre>
+
+        Now we can access the route after login.
+    
+        <h2>Deactivate Guard</h2>
+        Now let's suppose that we have entered some date and without saving them we navigate to other page. 
+        We would like to prevent that. First we create a guard.
+        <pre><code class="language-typescript">
+        import { Observable } from 'rxjs';
+        import { CanDeactivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+        
+        export interface CanComponentDeactivate {
+            canDeactivate: () => Observable<boolean> | Promise<boolean> | boolean;
+        }
+        
+        export class CanDeactivateGuard implements CanDeactivate<CanComponentDeactivate> {
+        
+            canDeactivate(component: CanComponentDeactivate,
+                        currentRoute: ActivatedRouteSnapshot,
+                        currentState: RouterStateSnapshot,
+                        nextState?: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+            return component.canDeactivate();
+            }
+        }
+        </code></pre>
+
+        Next we modify the route setting.
+        <pre><code class="language-typescript">
+        {path: 'webpagereactive', canActivate: [AuthGuard],  
+        component: WebPageReactiveComponent, 
+        canDeactivate: [CanDeactivateGuard]},
+        </code></pre>
+
+        And finally we have to check whether we entered any value on the form.
+        <pre><code class="language-typescript">
+        canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+
+                if ((this.name.value !== '' || this.about.value !== '' || this.pagetype.value !== '') && !this.isChangesSaved) {
+                    return confirm('Do you want to discard the changes?');
+                } else {
+                    return true;
+                }
+                }
+        </code></pre>
+
+        <h2>Resolver</h2>
+        We have seen how to read the route parameter in the TS file in, for example in the <b>onInit</b> method. 
+        There after reading the parameter we could fetch the data from the database. 
+        With Angular we can do this before the initialization of the component. Let' see how. <br>
+        First create a resolver service. It will read the route parameter (in our example only the ID) and with that ID 
+        it gets the data with the <b>WebPageService</b> from the database. 
+        <pre><code class="language-typescript">
+        import { WebPage } from './../../model/web-page';
+        import { WebPageService } from './../../services/web-page.service';
+        import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+        import { Observable } from 'rxjs';
+        import { Injectable } from '@angular/core';
+        
+        
+        @Injectable()
+        export class WebPageResolver implements Resolve<WebPage> {
+            constructor(private webPageService: WebPageService) {}
+        
+            resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<WebPage> | Promise<WebPage> | WebPage {
+            return this.webPageService.getWebPageById(+route.params['id']);
+            }
+        }
+        </code></pre>
+
+        To activate the resolver, modify the route:
+        <pre><code class="language-typescript">
+        {path: 'webpage/:id', component: WebPageShowComponent, resolve: {webpage: WebPageResolver} },
+        </code></pre>
+
+        Do not forget set the resolver service as a provider in the <b>app.module.ts</b> and read the data in the 
+        <b>ngOnInit</b> method:
+        <pre><code class="language-typescript">
+        import { ActivatedRoute, Router, Params, Data } from '@angular/router';
+        // ---
+        ngOnInit() {
+        // this.route.params.subscribe((params: Params) => {
+            //   this.sid = params['id'];
+            //   console.log('route.params.subscribe: '+this.sid);
+            //   this.getWebPage();
+        
+            // });
+            this.route.data
+            .subscribe(
+            (data: Data) => {
+                this.webPage = data['webpage'];
+            }
+            );
+            // ...
+        </code></pre>
+    
+    </div>
+
+    <div><a id="auth"></a>
+        <h1>Authentication</h1>
+    
+        SPA ( Single Page Application) authentication works otherwise than traditional web authentication. 
+        We authenticate with JWT token, not with session ID. The server does not store a session about the client.
+        When the user logs in, the server makes a token what sends back to the client. 
+        The client will add this token to the header of each HTTP request and the server will validate it every time.
+        Now let's see how did it. Here you can find the description of the client side functioning. 
+        About the server side description look here:  <a  class="nav-link" routerLink="/tutorial/python">Create a Django REST API</a>.
+        We have modified the server side urls, because we wanted more sophisticated possibility to protect the urls.
+        In general anyone can read all the data ( web pages és page types ), but only after login you can change them or 
+        add a new one.
+        First see, the new <b>WebPage</b> service:
+        <pre><code class="language-typescript">
+        import { environment } from './../../environments/environment';
+        import { Injectable } from '@angular/core';
+        import { WebPage} from './../model/web-page';
+        import { HttpClient, HttpHeaders } from '@angular/common/http';
+        import { Observable, of} from 'rxjs';
+        import { catchError} from 'rxjs/operators';
+        
+        const httpOptions = {
+            headers: new HttpHeaders({ 
+            'Content-Type': 'application/json' ,
+            })
+        };
+        @Injectable({
+            providedIn: 'root'
+        })
+        export class WebPageService {
+        
+            private serverurl = environment.SERVER_URL+'/webpages/';
+            private serverurlId = environment.SERVER_URL+'/webpage/';
+            private serverurlName = environment.SERVER_URL+'/webpage-name/';
+            private serverurlPost = environment.SERVER_URL+'/webpage-post/';
+            private serverurlPut = environment.SERVER_URL+'/webpage-put/';
+        
+            constructor(private http: HttpClient) {
+            }
+        
+            // get all web pages
+            getWebPages(): Observable<WebPage[]>  {
+        
+            return this.http.get<WebPage[]>(this.serverurl).pipe(
+                catchError(this.handleError('getWebPages', []))
+            );
+        
+            }
+        
+            // get a web page by ID
+            getWebPageById (id: number): Observable<WebPage> {
+            return this.http.get<WebPage>(this.serverurlId + id + '/').pipe(
+                catchError(this.handleError<WebPage>('getWebPageById'))
+            );
+            }
+        
+            // get a web page by name
+            getWebPageByName (name: string): Observable<WebPage> {
+            return this.http.get<WebPage>(this.serverurlName + name + '/').pipe(
+                catchError(this.handleError<WebPage>('getWebPageByName'))
+            );
+            }
+        
+            // create a new web page
+            newWebPage (webPage: WebPage ): Observable<WebPage> {
+            return this.http.post<WebPage>(this.serverurlPost, webPage, httpOptions).pipe(
+                catchError(this.handleError<WebPage>('newWebPage'))
+            );
+            }
+        
+            // delete a web page
+            deleteWebPage (webPage: WebPage): Observable<WebPage>{
+            return this.http.delete<WebPage>(this.serverurlPut + webPage.id + '/', httpOptions).pipe(
+                catchError(this.handleError<WebPage>('deleteWebPage'))
+            );
+            }
+        
+            // update a webpage
+            updateWebPage (modWebPage: WebPage): Observable<WebPage> {
+            return this.http.put<WebPage>(this.serverurlPut + modWebPage.id + '/', modWebPage, httpOptions).pipe(
+                catchError(this.handleError<WebPage>('updateWebPage'))
+            );
+            }
+        
+            /**
+            * Handle Http operation that failed.
+            * Let the app continue.
+            * @param operation - name of the operation that failed
+            * @param result - optional value to return as the observable result
+            */
+            private handleError<T> (operation = 'operation', result?: T) {
+        
+            return (error: any): Observable<T> => {
+                if (error.status === 404){
+                console.log('Not found'+ operation);
+        
+        
+                } else if (error.status === 400) {
+                console.log('Bad Request '+ operation);
+                console.error(error);
+                } else if (error.status === 401) {
+                console.log('Not Authenticated '+ operation);
+                } else {
+                console.log('Other error '+ operation);
+                console.error(error);
+                }
+        
+                return of(result as T);
+            };
+            }
+        }
+        </code></pre>
+
+        Now the <b>PageType</b> service:
+        <pre><code class="language-typescript">
+        import { Injectable} from '@angular/core';
+        import { environment } from './../../environments/environment';
+        import { PageType} from './../model/page-type';
+        import { HttpClient, HttpHeaders } from '@angular/common/http';
+        import { Observable, of} from 'rxjs';
+        import { catchError } from 'rxjs/operators';
+        
+        const httpOptions = {
+            headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+        };
+        
+        @Injectable({
+            providedIn: 'root'
+        })
+        export class PageTypeService {
+        
+            private serverurl = environment.SERVER_URL+'/pagetypes/';
+            private serverurlId = environment.SERVER_URL+'/pagetype/';
+            private serverurlPost = environment.SERVER_URL+'/pagetype-post/';
+            private serverurlPut = environment.SERVER_URL+'/pagetype-put/';
+        
+            constructor(private http: HttpClient) { }
+        
+            getPageTypes(): Observable<PageType[]>{
+            return this.http.get<PageType[]>(this.serverurl).pipe(
+                catchError(this.handleError<PageType[]>('getPagetypes', []))
+            );
+            }
+            getPageTypeById (id: number): Observable<PageType> {
+            return this.http.get<PageType>(this.serverurlId + id + '/').pipe(
+                catchError(this.handleError<PageType>('getPagetypesid'))
+            );
+            }
+            newPageType (newPageType :PageType ): Observable<PageType> {
+            return this.http.post<PageType>(this.serverurlPost, newPageType, httpOptions).pipe(
+                catchError(this.handleError<PageType>('getPagetypes'))
+            );
+            }
+        
+            deletePageType (pageType :PageType): Observable<PageType>{
+            return this.http.delete<PageType>(this.serverurlPut + pageType.id + '/', httpOptions).pipe(
+                catchError(this.handleError<PageType>('getPagetypes'))
+            );
+            }
+            updatePageType (modPageType: PageType): Observable<PageType> {
+            return this.http.put<PageType>(this.serverurlPut + modPageType.id + '/', modPageType, httpOptions).pipe(
+                catchError(this.handleError<PageType>('getPagetypes'))
+            );
+            }
+        
+                /**
+            * Handle Http operation that failed.
+            * Let the app continue.
+            * @param operation - name of the operation that failed
+            * @param result - optional value to return as the observable result
+            */
+            private handleError<T> (operation = 'operation', result?: T) {
+        
+            return (error: any): Observable<T> => {
+                if (error.status === 404){
+                console.log('Not found'+ operation);
+        
+        
+                } else if (error.status === 400) {
+                console.log('Bad Request '+ operation);
+                console.error(error);
+                } else if (error.status === 401) {
+                console.log('Not Authenticated '+ operation);
+                } else {
+                console.log('Other error '+ operation);
+                console.error(error);
+                }
+        
+                return of(result as T);
+            };
+            }
+        }
+        </code></pre>
+
+        We have created a new <b>signin</b> component in the auth folder and set the route in the <b>app-routing.module.ts</b>.
+        In the component we have created the <b>onSignin</b> and <b>onLogout</b> methods. Both use our <b>authService</b>.
+        We have created a <b>user</b> model too for the User data. In it there are only the <b>username</b> and <b>password</b> fields.
+        <pre><code class="language-typescript">
+        user: User;
+
+        constructor(private authService: AuthService ) { }
+        
+        ngOnInit() {
+        }
+        onSignin(form: NgForm) {
+            const username = form.value.username;
+            const password = form.value.password;
+            this.authService.login(username, password);
+        }
+        onLogout(){
+            this.authService.logout();
+        }
+        </code></pre>
+
+        Now , Let's see our new Auth service. We can make a real service from the fake.
+        In the <b>login</b> method we post the <b>username</b> and the <b>password</b> 
+        to the servers specific url (<b>api-token-auth</b> ) and in case of 
+        they are valid, we get back a token. This token is made by the server. Then we store our token in the local storage of the browser. <br>
+        In the <b>logout</b> method we delete the token from the local storage. <br>
+        We have also a <b>getToken</b> method, which will read the token from the local storage.
+        <pre><code class="language-typescript">
+        import { environment } from './../../environments/environment';
+        import { Injectable } from '@angular/core';
+        import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
+        import { Observable, of, throwError } from 'rxjs';
+        import { catchError} from 'rxjs/operators';
+        import { User } from './../model/user';
+        
+        
+        const httpOptions = {
+            headers: new HttpHeaders({ 
+            'Content-Type': 'application/json' ,
+            })
+        };
+        
+        @Injectable({
+            providedIn: 'root'
+        })
+        export class AuthService {
+        
+            private serverurl = environment.SERVER_URL+'/api-token-auth/';
+            loggedIn = false;
+        
+        
+            constructor(private http: HttpClient) {
+            localStorage.setItem('token', '');
+            }
+        
+        
+            isAuthenticated() {
+            const promise = new Promise(
+                (resolve, reject) => {
+                setTimeout(() => {
+                    resolve(this.loggedIn);
+                }, 100);
+                }
+            );
+            return promise;
+            }
+        
+            login(username: string, password: string){
+        
+            const user: User = {username: username, password: password };
+        
+            this.http.post<any>(this.serverurl, user, httpOptions).pipe(
+                catchError(this.handleError<User>('login'))
+            ).subscribe( resp => {
+                console.log(resp);
+                if (resp) {
+                this.loggedIn = true;
+                localStorage.setItem('token', resp.token);
+                }
+            });
+            return true;
+            }
+        
+            logout() {
+            localStorage.setItem('token', '');
+            this.loggedIn = false;
+            }
+        
+            getToken(): string {
+            return localStorage.getItem('token');
+            }
+        
+            private handleError<T> (operation = 'operation', result?: T) {
+        
+            return (error: any): Observable<T> => {
+                if (error.status === 404){
+                console.log('Not found'+ operation);
+        
+        
+                } else if (error.status === 400) {
+                console.log('Bad Request'+ operation);
+                console.error(error);
+                } else if (error.status === 401) {
+                console.log('Not Authenticated'+ operation);
+                } else {
+                console.log('Other error'+ operation);
+                console.error(error);
+                }
+        
+                return of(result as T);
+            };
+            }
+        
+        }
+        </code></pre>
+
+        Now comes the tricky part. We have to send the token in each HTTP request to the server, so it can validate it.
+        We could do it by putting the token literally in each requests header, but we can do it have a better way. 
+        We need an <b>auth.interceptor.ts</b> service. It catches  all the HTTP request before the sending, so we can 
+        add the token to the header of each request.
+        <pre><code class="language-typescript">
+        import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpHeaders } from '@angular/common/http';
+        import { Observable } from 'rxjs';
+        import { Injectable } from '@angular/core';
+        
+        import { AuthService } from './auth.service';
+        @Injectable()
+        export class AuthInterceptor implements HttpInterceptor {
+            constructor(private authService: AuthService) {
+        
+            }
+            token: any;
+        
+            intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+            console.log('Intercepted!', req);
+        
+            const headers = new HttpHeaders().set('Authorization', 'JWT '+ this.authService.getToken());
+        
+            const copiedReq = req.clone({headers: headers});
+        
+            if (this.authService.getToken()) {
+                return next.handle(copiedReq);
+            } else {
+                return next.handle(req);
+            }
+        
+            }
+        
+        }
+        </code></pre>
+
+    </div>   
+        
+    <div><a id="modules"></a>
+        <h1>Multiple modules</h1>
+        If our application is growing, it is clever to organize it in multiple modules. By now we have seen only one module, the <b>AppModule</b>.
+        First we create a feature module from <b>MyStories</b> folder. First I have renamed the folder to
+        <b>mystories-module</b>. It is absolute not necessary. Then I have put two new files in it,
+        the <b>mystories.module.ts</b> and the <b>mystories-routing.module.ts</b>. They are the counterparts of the 
+        <b>app.module.ts</b> and <b>app-routing.module.ts</b>. First let see, the first one, the <b>mystories.module.ts</b>. <br>
+        <ul>
+            <li>We moved here the relevant components from the <b>app.module.ts</b></li>
+            <li>We moved or copied the relevant modules from <b>app.module.ts</b>. For example the <b>PrismModule</b> is used only here</li>
+            <li>We have added the <b>MyStoriesRoutingModule</b>, that we will create soon</li>
+            <li>We have to exports those modules, which we want to access somewhere else</li>
+            <li>Besides we would have to import the <b>mystories.module.ts</b> in the <b>app.module.ts</b>, but not 
+        in this case, because we will load our module in a lazy loading way. </li>
+        </ul>
+        <pre><code class="language-typescript">
+        import { FormsModule } from '@angular/forms';
+        import { NgModule} from '@angular/core';
+        import { CommonModule } from '@angular/common';
+        import { EnvironmentComponent } from './environment/environment.component';
+        import { MyStoryComponent } from './my-story/my-story.component';
+        import { PythonBasicComponent } from './python-basic/python-basic.component';
+        import { AngularBasicComponent } from './angular-basic/angular-basic.component';
+        import { TsBasicComponent } from './ts-basic/ts-basic.component';
+        import { JavaScriptComponent } from './java-script/java-script.component';
+        import { CssComponent } from './css/css.component';
+        import { MyStoriesRoutingModule } from './mystories-routing.module';
+        import { PrismModule } from '@ngx-prism/core';
+        
+        @NgModule({
+            declarations: [
+            EnvironmentComponent,
+            MyStoryComponent,
+            PythonBasicComponent,
+            AngularBasicComponent,
+            TsBasicComponent,
+            JavaScriptComponent,
+            CssComponent,
+        
+            ],
+            imports: [
+            CommonModule,
+            FormsModule,
+            PrismModule,
+            MyStoriesRoutingModule,
+            ],
+            exports: [CommonModule, PrismModule,],
+        })
+        export class MyStoriesModule { }
+        </code></pre>
+
+        Now let's see, the <b>MyStoriesRoutingModule</b>. <br>
+        <ul>
+            <li>We moved here our relevant routes from the <b>app-routing.module.ts</b> </li>
+            <li>We have changed the main path because of the lazy loading to ''</li>
+            <li>Notice, that here is <b>RouterModule.forChild(authRoutes)</b> not <b>forRoot()</b></li>
+        </ul>
+        <pre><code class="language-typescript">
+        import { NgModule } from '@angular/core';
+        import { Routes, RouterModule } from '@angular/router';
+        import { MyStoryComponent } from './my-story/my-story.component';
+        import { EnvironmentComponent } from './environment/environment.component';
+        import { AngularBasicComponent } from './angular-basic/angular-basic.component';
+        import { CssComponent } from './css/css.component';
+        import { PythonBasicComponent } from './python-basic/python-basic.component';
+        import { TsBasicComponent } from './ts-basic/ts-basic.component';
+        import { JavaScriptComponent } from './java-script/java-script.component';
+        
+        
+        const authRoutes: Routes = [
+            {path: '', component: MyStoryComponent, children: [
+            {path: 'environment', component: EnvironmentComponent},
+            {path: 'angularbasic', component: AngularBasicComponent},
+            {path: 'css', component: CssComponent},
+            {path: 'pythonbasic', component: PythonBasicComponent},
+            {path: 'tsbasic', component: TsBasicComponent},
+            {path: 'js', component: JavaScriptComponent},
+            ]},
+        ];
+        
+        @NgModule({
+            imports: [
+            RouterModule.forChild(authRoutes)
+            ],
+            exports: [RouterModule]
+        })
+        </code></pre>
+
+        Now let's see our <b>app-routing.module.ts</b>. This is the final version, we have moved all the modul routes to them place. <br>
+        <pre><code class="language-typescript">
+        import { NgModule } from '@angular/core';
+        import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
+        import { HomeComponent } from './core-module/home/home.component';
+        import { ErrorPageComponent } from './shared-module/error-page/error-page.component';
+        
+        const appRoutes: Routes = [
+            {path: '', component: HomeComponent},
+            {path: 'mystory', loadChildren:'./mystories-module/mystories.module#MyStoriesModule'},
+            { path: 'not-found', component: ErrorPageComponent, data: {message: 'Page not found!'} },
+            {path: '**', redirectTo: '/not-found'},
+        ];
+        
+        @NgModule({
+            imports: [
+            RouterModule.forRoot(appRoutes, {preloadingStrategy: PreloadAllModules})
+            ],
+            exports: [RouterModule]
+        })
+        
+        export class AppRoutingModule {}
+        </code></pre>
+
+        
+        We also have created a feature module for the <b>WebPages</b> folder and for the <b>Auth</b> folder. 
+        Beside that we have created a <b>shared</b> modul and a <b>core</b> modul. We have moved lot of files to it's new place.
+        Now let's see the finale <b>app.module.ts</b> too:
+        <pre><code class="language-typescript">
+
+        import { NgModule} from '@angular/core';
+        import { BrowserModule } from '@angular/platform-browser';
+        import { HttpClientModule} from '@angular/common/http';
+        
+        import { CoreModule } from './core-module/core.module';
+        import { AuthModule } from './auth-module/auth.module';
+        import { WebPagesModule } from './webpages-module/webpages.module';
+        import { AppRoutingModule } from './app-routing.module';
+        import { SharedModule } from './shared-module/shared.module';
+        
+        import { AppComponent } from './app.component';
+        
+        @NgModule({
+            declarations: [
+            AppComponent,
+            ],
+            imports: [
+            BrowserModule,
+            HttpClientModule,
+        
+            // Own modules
+            WebPagesModule, 
+            SharedModule,
+            AuthModule, // have to be before the routing module, if we have routs in it
+            CoreModule,
+            AppRoutingModule,
+            ],
+            bootstrap: [AppComponent]
+        })
+        export class AppModule { }
+        </code></pre>
+
+    
+        And some other example. <b>core.module.ts</b> Here we do not have own routing module, 
+        we import the <b>app-routing.module.ts</b>. We have moved here all major providers.
+        <pre><code class="language-typescript">
+        import { FormsModule } from '@angular/forms';
+        import { NgModule} from '@angular/core';
+        import { CommonModule } from '@angular/common';
+        import { NavbarComponent } from './navbar/navbar.component';
+        import { HomeComponent } from './home/home.component';
+        import { AppRoutingModule } from '../app-routing.module';
+        import { AdsenseModule } from 'ng2-adsense';
+        import { AuthGuard } from '../auth-module/auth-guard.service';
+        import { AuthService } from '../auth-module/auth.service';
+        import { CanDeactivateGuard } from './services/can-deactivate-guard.service';
+        import { HTTP_INTERCEPTORS } from '@angular/common/http';
+        import { AuthInterceptor } from '../auth-module/auth.interceptor';
+        
+        @NgModule({
+            declarations: [
+            NavbarComponent,
+            HomeComponent,
+        
+            ],
+            imports: [
+            CommonModule,
+            FormsModule,
+            AdsenseModule.forRoot({ adClient: 'ca-pub-6352873787606567', adSlot: 5405656268, }),
+            AppRoutingModule
+            ],
+        
+            exports: [CommonModule, AppRoutingModule,AdsenseModule,NavbarComponent],
+            providers: [AuthGuard, AuthService, CanDeactivateGuard,
+            {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+            ],
+        })
+        export class CoreModule { }
+        </code></pre>
+
+        
+        Here is the <b>webpages.modul.ts</b> with its own providers. <br>
+        <pre><code class="language-typescript">
+        import { NgModule} from '@angular/core';
+        import { WebPagesComponent } from './web-pages/web-pages.component';
+        import { WebPageFormComponent } from './web-page-form/web-page-form.component';
+        import { WebPageCardComponent } from './web-page-card/web-page-card.component';
+        import { WebPageReactiveComponent } from './web-page-reactive/web-page-reactive.component';
+        import { WebPageShowComponent } from './web-page-show/web-page-show.component';
+        import { CommonModule } from '@angular/common';
+        import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+        import { SharedModule } from '../shared-module/shared.module';
+        import { WebPageResolver } from './web-page-show/web-page-resolver.service';
+        import { WebPagesRoutingModule } from './webpages-routing.module';
+        import { WebPageService } from './services/web-page.service';
+        import { PageTypeService } from './services/page-type.service';
+        
+        
+        @NgModule({
+            declarations: [
+            WebPagesComponent,
+            WebPageFormComponent,
+            WebPageCardComponent,
+            WebPageReactiveComponent,
+            WebPageShowComponent,
+            ],
+            imports: [
+            ReactiveFormsModule, // for reactice forms
+            FormsModule, // For template driven forms
+            CommonModule,
+            SharedModule,
+            WebPagesRoutingModule,
+        
+            ],
+            providers: [WebPageResolver,WebPageService,PageTypeService
+            ],
+        })
+        export class WebPagesModule { }
+        </code></pre>
+
+        And the <b>webpages-routing.module.ts</b>
+        <pre><code class="language-typescript">
+        import { NgModule } from '@angular/core';
+        import { Routes, RouterModule } from '@angular/router';
+        import { WebPagesComponent } from './web-pages/web-pages.component';
+        import { AuthGuard } from '../auth-module/auth-guard.service';
+        import { WebPageReactiveComponent } from './web-page-reactive/web-page-reactive.component';
+        import { CanDeactivateGuard } from '../core-module/services/can-deactivate-guard.service';
+        import { WebPageShowComponent } from './web-page-show/web-page-show.component';
+        import { WebPageResolver } from './web-page-show/web-page-resolver.service';
+        
+        
+        
+        
+        const webPagesRoutes: Routes = [
+            {path: 'webpages', component: WebPagesComponent},
+            {path: 'webpagereactive', canActivate: [AuthGuard],  
+                    component: WebPageReactiveComponent, 
+                    canDeactivate: [CanDeactivateGuard]},
+            {path: 'webpage/:id', component: WebPageShowComponent, resolve: {webpage: WebPageResolver} },
+        ];
+        
+        @NgModule({
+            imports: [
+            RouterModule.forChild(webPagesRoutes)
+            ],
+            exports: [RouterModule]
+        })
+        
+        export class WebPagesRoutingModule {
+        
+        }
+        </code></pre>
+    
+        Important: One component declaration can be only in one modul.
+        Now let's see the whole new folder structure. <br>
+        <img src="/images/modulefolders.jpg" alt="">
+        <img src="/images/modulefolders1.jpg" alt="">
+        <img src="/images/modulefolders2.jpg" alt=""> <br>
+    
+        Now we create a new component with the CLI in the <b>MyStoriesModul</b> <br>
+        <b>ng g c mystories-module/AngularAdvanced -m=mystories-module/MyStories</b> <br>
+    
+    </div>
+
+   
+    <div id="universal">
+        <h1>Angular Universal</h1>
+        The Angular Universal project is a community driven project to expand on the core APIs from Angular (platform-server) to enable developers to do server side rendering of Angular applications in a variety of scenarios.
+        More about it here: <a href="https://github.com/angular/angular-cli/wiki/stories-universal-rendering" target="_blank" rel="noopener noreferrer">Angular Universal Rendering</a>. <br>
+        <hr>
+        Our goal is, that the server should compile the code and serve the html, not the browser, so Google can search in it.
+        On the other side, it still will remain an SPA (Single Page Application). Now go for it! <br>
+        
+        Fisrt install the dependencies: <br>
+        <ul>
+            <li><b>
+                    npm install --save @angular/platform-server @nguniversal/module-map-ngfactory-loader express
+            </b></li>
+            <li><b>npm install --save-dev ts-loader webpack-cli</b></li>
+        </ul>
+        Next modify in the <b>app.module.ts</b> the import of the <b>BrowserModule</b>:
+        <pre><code class="language-typescript">
+        BrowserModule.withServerTransition({appId: 'isdcp'}),
+        </code></pre>
+
+        Next, create a module specifically for your application when running on the server. It's recommended to call this module AppServerModule.
+        <pre><code class="language-typescript">
+        import {NgModule} from '@angular/core';
+        import {ServerModule} from '@angular/platform-server';
+        import {ModuleMapLoaderModule} from '@nguniversal/module-map-ngfactory-loader';
+        
+        import {AppModule} from './app.module';
+        import {AppComponent} from './app.component';
+        
+        @NgModule({
+            imports: [
+            // The AppServerModule should import your AppModule followed
+            // by the ServerModule from @angular/platform-server.
+            AppModule,
+            ServerModule,
+            ModuleMapLoaderModule // -- *Important* to have lazy-loaded routes work
+            ],
+            // Since the bootstrapped component is not inherited from your
+            // imported AppModule, it needs to be repeated here.
+            bootstrap: [AppComponent],
+        })
+        export class AppServerModule {}
+        </code></pre>
+
+        Next create a <b>main.server.ts</b> file in the <b>src</b> folder:
+        <pre><code class="language-typescript">
+        export { AppServerModule } from './app/app.server.module';
+        </code></pre>
+
+        Next create a <b>tsconfig.server.json</b> file:
+        <pre><code class="language-typescript">
+        {
+            "extends": "../tsconfig.json",
+            "compilerOptions": {
+                "outDir": "../out-tsc/app",
+                "baseUrl": "./",
+                // Set the module format to "commonjs":
+                "module": "commonjs",
+                "types": []
+            },
+            "exclude": [
+                "test.ts",
+                "**/*.spec.ts"
+            ],
+            // Add "angularCompilerOptions" with the AppServerModule you wrote
+            // set as the "entryModule".
+            "angularCompilerOptions": {
+                "entryModule": "app/app.server.module#AppServerModule"
+            }
+            }
+        </code></pre>
+
+        Finally create a new targer in <b>angular.json</b>
+        <pre><code class="language-typescript">
+        "server": {
+            "builder": "@angular-devkit/build-angular:server",
+            "options": {
+                "outputPath": "dist/your-project-name-server",
+                "main": "src/main.server.ts",
+                "tsConfig": "src/tsconfig.server.json"
+            }
+            }
+        </code></pre>
+
+        And run the application: <br>
+        <b> ng run isdcproject:server</b> <br>
+        <hr>
+        Now how to run compiled application? <br>
+        Create a <b>server.ts</b> file in the project root folder.
+        <pre><code class="language-typescript">
+
+        // These are important and needed before anything else
+        import 'zone.js/dist/zone-node';
+        import 'reflect-metadata';
+        
+        import { renderModuleFactory } from '@angular/platform-server';
+        import { enableProdMode } from '@angular/core';
+        
+        import * as express from 'express';
+        import { join } from 'path';
+        import { readFileSync } from 'fs';
+        
+        // Import module map for lazy loading
+        import { provideModuleMap } from '@nguniversal/module-map-ngfactory-loader';
+        
+        // Faster server renders w/ Prod mode (dev mode never needed)
+        enableProdMode();
+        
+        // Express server
+        const app = express();
+        
+        //const PORT = process.env.PORT || 4000;
+        const PORT = process.env.PORT || 8080;
+        const DIST_FOLDER = join(process.cwd(), 'dist');
+        
+        // Our index.html we'll use as our template
+        const template = readFileSync(join(DIST_FOLDER, 'isdcproject', 'index.html')).toString();
+        
+        // * NOTE :: leave this as require() since this file is built Dynamically from webpack
+        //const { AppServerModuleNgFactory, LAZY_MODULE_MAP } = require('./dist/server/main');
+        
+        //const { provideModuleMap } = require('@nguniversal/module-map-ngfactory-loader');
+        
+        app.engine('html', (_, options, callback) => {
+            renderModuleFactory(AppServerModuleNgFactory, {
+            // Our index.html
+            document: template,
+            url: options.req.url,
+            // DI so that we can get lazy-loading to work differently (since we need it to just instantly render it)
+            extraProviders: [
+                provideModuleMap(LAZY_MODULE_MAP)
+            ]
+            }).then(html => {
+            callback(null, html);
+            });
+        });
+        
+        app.set('view engine', 'html');
+        app.set('views', join(DIST_FOLDER, 'isdcproject'));
+        
+        // Server static files from /isdcproject-server
+        app.get('*.*', express.static(join(DIST_FOLDER, 'isdcproject')));
+        
+        // All regular routes use the Universal engine
+        app.get('*', (req, res) => {
+            res.render(join(DIST_FOLDER, 'isdcproject', 'index.html'), { req });
+        });
+        
+        // Start up the Node server
+        app.listen(PORT, () => {
+            console.log('Node server listening on http://localhost:{PORT}');
+        });
+        </code></pre>
+
+        In the file set the source route to the  route of your normally built versions path in the  <b>dist</b>
+        folder. In our case it is the <b>isdcproject.</b> See in the <b>angular.json</b>
+        <pre><code class="language-typescript">
+        "build": {
+            "builder": "@angular-devkit/build-angular:browser",
+            "options": {
+                "outputPath": "dist/isdcproject",
+                "index": "src/index.html",
+                "main": "src/main.ts",
+            //......
+        
+            "server": {
+            "builder": "@angular-devkit/build-angular:server",
+            "options": {
+                "outputPath": "dist/isdcproject-server",
+                "main": "src/main.server.ts",
+                "tsConfig": "src/tsconfig.server.json"
+            }
+            },
+        </code></pre>
+
+        Now build the project normally: <br>
+        <b>ng build --prod</b>
+        Now we have two folders in the <b>dist</b> folder, one for the browser side (isdcproject) and one for the server side (isdcproject-server).
+        <br>
+        Next create a <b>webpack.server.config.js</b> in the root level.( js, not ts). It will compile the <b>server.ts</b> to <b>server.js</b> and runs the app.
+        <pre><code class="language-typescript">
+        const path = require('path');
+        const webpack = require('webpack');
+        
+        module.exports = {
+            mode: 'none',
+            entry: {
+            server: './server.ts',
+            },
+            target: 'node',
+            resolve: { extensions: ['.ts', '.js'] },
+            optimization: {
+            minimize: false
+            },
+            output: {
+            // Puts the output at the root of the dist folder
+            path: path.join(__dirname, 'dist'),
+            filename: '[name].js'
+            },
+            module: {
+            rules: [
+                { test: /\.ts$/, loader: 'ts-loader' },
+                {
+                // Mark files inside '@angular/core' as using SystemJS style dynamic imports.
+                // Removing this will cause deprecation warnings to appear.
+                test: /(\\|\/)@angular(\\|\/)core(\\|\/).+\.js$/,
+                parser: { system: true },
+                },
+            ]
+            },
+            plugins: [
+            new webpack.ContextReplacementPlugin(
+                // fixes WARNING Critical dependency: the request of a dependency is an expression
+                /(.+)?angular(\\|\/)core(.+)?/,
+                path.join(__dirname, 'src'), // location of your src
+                {} // a map of your routes
+            ),
+            new webpack.ContextReplacementPlugin(
+                // fixes WARNING Critical dependency: the request of a dependency is an expression
+                /(.+)?express(\\|\/)(.+)?/,
+                path.join(__dirname, 'src'),
+                {}
+            )
+            ]
+        }
+        </code></pre>
+
+        Then add to <b>package.json</b> this line:
+        <pre><code class="language-typescript">
+        "scripts": {
+            "ng": "ng",
+            // ...
+            "webpack:server": "webpack --config webpack.server.config.js --progress --colors"
+        </code></pre>
+
+        Now run the server: <b>npm run webpack:server</b> and test it: <br>
+        <b>node dist/server.js</b> <br>
+        Now you can access the application in the browser: <b>http://localhost:8080</b> <br>
+        Server-side rendering (SSR) can make sense because of SEO considerations (crawler should see what your users see) or because you want to deliver a finished page to your users (rather than creating the page in the browser).
+        
+        But that also has one important implication: You MUST NOT use any browser-only APIs like document.querySelector()  in your Angular code!
+        
+        Sorry, not finished yet :-) <br>
+        <b>We have one task ahead to work it on Heroku! </b>
+        <br>
+        <ul>
+            <li>
+                Copy the compiled <b>server.js</b> file from the <b>dist</b> folder to the main folder.
+            </li>
+            <li>
+                In the <b>package.json</b> file add to the <b>postinstall</b> part: <br>
+                <pre><code class="language-typescript">
+                "postinstall": "ng build --aot --prod && ng run isdcproject:server",
+                </code></pre>
+        
+            </li>
+        </ul>
+        
+        And from now on your local machine, do not forget: <br>
+        <ul>
+            <li><b>ng build --prod</b></li>
+            <li><b>ng run isdcproject:server</b></li>
+            <li><b>node server.js</b></li>
+        </ul>
+        <br>
+        Although on your local machine <b>ng serve</b> works fine. <br>
+        
+        We have done! If you now look in the browser at the source of the page, you can see the html part too. Google can do its job .
+    </div>
+    
+    <div id="datatable">
+        <h1>NGX datatable</h1>
+        <b>npm install @swimlane/ngx-datatable</b><br>
+        After installing it, you have to import it in the module:
+        <pre><code class="language-typescript">
+        import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+        ...
+        imports: [
+            NgxDatatableModule
+        </code></pre>
+
+        I have created a new route for the new module. <br>
+        <pre><code class="language-typescript">
+        {path: 'webngxdtable', component: WebNgxdTableComponent},
+        </code></pre>
+
+        In the HTML template there are some interesting things: <br>
+        <ul>
+            <li>the <b>rowClass</b> attribute get values from a method</li>
+            <li>We use pipe pageTypePipe</li>
+            <li>Look at the <b>Official</b> column, there are two css class from our own css file</li>
+            <li>look at <b>isAuthenticated</b> </li>
+        </ul>
+        <pre><code class="language-html">
+        &ltdiv&gt
+        &lth1&gtWeb Pages in NGX DataTable&lt/h1&gt
+        &ltngx-datatable class="bootstrap"
+            [rows]="rows"
+            [loadingIndicator]="loadingIndicator"
+            [reorderable]="reorderable"
+            [limit]="limit"
+            [rowHeight]="rowHeight"
+            [headerHeight]="50"
+            [footerHeight]="40"
+            [summaryRow]="summaryRow"
+            [summaryPosition]="summaryPosition"
+            [columnMode]="columnMode"
+            [scrollbarH]="true"
+            [rowClass]="getRowClass"
+            &gt
+            
+            &ltngx-datatable-column name="Id"&gt&lt/ngx-datatable-column&gt
+            &ltngx-datatable-column name="Name"&gt&lt/ngx-datatable-column&gt
+            &ltngx-datatable-column name="About"&gt&lt/ngx-datatable-column&gt
+            &ltngx-datatable-column name="Pagetype"&gt
+                &ltng-template ngx-datatable-cell-template let-value="value"&gt
+                    &#123;&#123;value | pageTypePipe | async&#125;&#125;
+                &lt/ng-template&gt
+            &lt/ngx-datatable-column&gt
+            &ltngx-datatable-column name="Url"&gt&lt/ngx-datatable-column&gt
+            &ltngx-datatable-column name="Official" headerClass= "is-header" cellClass="is-official text-right"&gt&lt/ngx-datatable-column&gt
+            &ltngx-datatable-column name="Date" cellClass = "text-center"&gt&lt/ngx-datatable-column&gt
+            &ltngx-datatable-column name="Delete"&gt
+                &ltng-template ngx-datatable-cell-template let-row="row"&gt
+                    &ltbutton type="submit" class="btn btn-success"  
+                    [disabled]="!isAuthenticated()"
+                    (click)="delete(row)"&gtDelete&lt/button&gt
+                &lt/ng-template&gt
+            &lt/ngx-datatable-column&gt
+
+            &ltngx-datatable-column name="Show"&gt
+                &ltng-template ngx-datatable-cell-template let-row="row" let-rowIndex="rowIndex" let-value="value"&gt
+                    &ltbutton type="submit" class="btn btn-success"  (click)="show(row.id)"&gtShow&lt/button&gt
+                &lt/ng-template&gt
+            &lt/ngx-datatable-column&gt
+        
+        &lt/ngx-datatable&gt
+        &lt/div&gt
+        </code></pre>
+
+        The css works only in the global <b>styles.css</b> or if we tourn out the <b>View encapsulation</b>. We did the last one:
+        <pre><code class="language-css">
+        .is-official {
+            background: #ffc91f;
+            }
+        .is-header{
+            background: blue;
+            color: white;
+        }
+        .row-color {
+            background: pink;
+        }
+        </code></pre>
+
+        And the TypeScript code:
+        <pre><code class="language-typescript">
+        import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+        import { WebPageService } from '../services/web-page.service';
+        import { WebPage } from './../../model/web-page';
+        import { timer } from 'rxjs/observable/timer';
+        import { Router } from '@angular/router';
+        import { AuthService } from '../../auth-module/auth.service';
+        
+        @Component({
+            selector: 'app-web-ngxd-table',
+            templateUrl: './web-ngxd-table.component.html',
+            styleUrls: ['./web-ngxd-table.component.css'],
+            encapsulation: ViewEncapsulation.None
+        })
+        export class WebNgxdTableComponent implements OnInit {
+            // columns = [
+            //   { name: 'Id' },
+            //   { name: 'Name' },
+            //   { name: 'About' },
+            //   { name: 'Url' },
+            //   { name: 'Pagetype'},
+            //   { name: 'Date' , cellClass : 'text-center'},
+            //   { name: 'Official', headerClass: 'is-header' , cellClass : 'is-official text-right'},
+            //   { name: 'Delete' },
+            //   { name: 'Show' }
+            // ];
+            rows;
+            loadingIndicator: boolean;
+            reorderable: boolean = true;
+            summaryRow = false;
+            limit = 4;
+            summaryPosition = 'bottom';
+            columnMode = 'force';  //  could be:  standard , flex,force
+            rowHeight = 'auto';
+        
+            webPage: WebPage;
+            webPageId: number = null;
+        
+            constructor(private webPageService: WebPageService,private router: Router,
+            private authService: AuthService) { }
+        
+            ngOnInit() {
+            this.loadingIndicator= true;
+            this.getWebPages();
+            }
+        
+            getWebPages(): void {
+            const source = timer(1000);
+            this.webPageService.getWebPages().subscribe(webPages =>{
+                this.rows = webPages;
+                // Wait to see the loading indicator
+                const subscribe = source.subscribe(val =>  this.loadingIndicator= false);
+            });
+            } 
+        
+            getRowClass(row) {
+            return {
+                'row-color': row.official
+        
+            };
+            }
+        
+            delete(webPage: WebPage): void {
+            this.webPageService.deleteWebPage(webPage).subscribe(webPage => {
+                this.webPage = webPage;
+                this.getWebPages();
+            }); 
+            }
+        
+            show(id: number): void {
+            this.router.navigate(['/webpage/',id], {queryParams:{capitalize: 'yes'&#125;&#125;);
+            }
+        
+            isAuthenticated(){
+            return this.authService.isAuthenticated();
+            }
+        }
+        </code></pre>
+ 
+    </div>
+
+    <div id="animation">
+        <h1>Animation</h1>
+        For animation import the next module:
+        <pre><code class="language-typescript">
+        import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+        </code></pre>
+
+        In the <b>HTML</b> change this:
+        <pre><code class="language-typescript">
+        &ltbutton class="btn btn-success"  (click)="onMove()"&gtMove&lt/button&gt
+        &ltbutton class="btn btn-primary" (click)="onSqueeze()"&gtSqueeze&lt/button&gt
+        &ltdiv 
+            style="width: 200px; height: 200px"
+            [@divState]="state"
+            (@divState.start)="animationStarted($event)"
+            (@divState.done)="animationEnded($event)"
+        &gt
+            
+        &lt/div&gt
+        &ltbr&gt
+        &ltdiv
+            style="width: 100px; height: 100px"
+            [@wildState]="wildState"&gt
+        &lt/div&gt
+        
+        .....
+        
+        &lttbody&gt
+        &lttr 
+        [@list1]
+        *ngFor="let webPage of webPages;index as i"&gt
+        </code></pre>
+
+                    
+        And the typescript code:
+        <pre><code class="language-typescript">
+        import { WebPageService } from '../services/web-page.service';
+        import { WebPage } from './../../model/web-page';
+        import { Component, OnInit} from '@angular/core';
+        import { Router } from '@angular/router';
+        import { AuthService } from '../../auth-module/auth.service';
+        import {
+            trigger,
+            state,
+            style,
+            transition,
+            animate,
+            keyframes,
+            group
+        } from '@angular/animations'; 
+        @Component({
+            selector: 'app-web-pages',
+            templateUrl: './web-pages.component.html',
+            styleUrls: ['./web-pages.component.css'],
+            animations: [
+            trigger('divState', [
+                state('normal', style({
+                'background-color': 'red',
+                transform: 'translateX(0)'
+                })),
+                state('highlighted', style({
+                'background-color': 'blue',
+                transform: 'translateX(100px)'
+                })),
+                transition('normal => highlighted', animate(200)),
+                transition('highlighted => normal', animate(800))
+            ]),
+            trigger('wildState', [
+                state('normal', style({
+                'background-color': 'blue',
+                transform: 'translateX(0) scale(1)'
+                })),
+                state('highlighted', style({
+                'background-color': 'green',
+                transform: 'translateX(100px) scale(1)'
+                })),
+                state('shrunken', style({
+                'background-color': 'green',
+                transform: 'translateX(0) scale(0.2)'
+                })),
+                transition('normal => highlighted', animate(300)),
+                transition('highlighted => normal', animate(400)),
+                transition('shrunken <=> *', [
+                style({
+                    'background-color': 'orange'
+                }),
+                animate(1000, style({
+                    borderRadius: '50px'
+                })),
+                animate(700)
+                ])
+            ]),
+            trigger('list1', [
+                state('in', style({
+                opacity: 1,
+                transform: 'translateX(0)'
+                })),
+                transition('void => *', [
+                style({
+                    opacity: 0,
+                    transform: 'translateX(-100px)'
+                }),
+                animate(300)
+                ]),
+                transition('* => void', [
+                animate(300, style({
+                    transform: 'translateX(100px)',
+                    opacity: 0
+                }))
+                ])
+            ]),
+            ]
+        }) 
+        export class WebPagesComponent implements OnInit {
+            state = 'normal';
+            wildState = 'normal';
+        
+            ....
+            onMove() {
+            this.state == 'normal' ? this.state = 'highlighted' : this.state = 'normal';
+            this.wildState == 'normal' ? this.wildState = 'highlighted' : this.wildState = 'normal';
+            }
+            
+            onSqueeze() {
+            this.wildState = 'shrunken';
+            }
+        
+            animationStarted(event) {
+            // console.log(event);
+            }
+            
+            animationEnded(event) {
+                //console.log(event);
+            }
+        </code></pre>
+
+    </div>
+
+    <div id="servWork">
+        <h1>Service Worker</h1>
+        Actually we do not user Service Worker yet, but you can learn about it here: <br>
+        <a href="https://angular.io/guide/service-worker-intro" target="_blank" rel="noopener noreferrer">https://angular.io/guide/service-worker-intro</a>
+        <br>
+        <a href="https://academind.com/learn/progressive-web-apps/" target="_blank" rel="noopener noreferrer">https://academind.com/learn/progressive-web-apps/</a>
+    </div>
+    
+    <div id="material">
+        <h1>Angular Material</h1>
+        It is similar to <b>Boostrap</b>, made by other company. We do not use yet, but you can read about it:
+        <br>
+        <a href="https://material.angular.io/" target="_blank" rel="noopener noreferrer">https://material.angular.io/</a>
+    
+    </div>
+    
+    <div id="redux">
+        <h1>Redux</h1>
+        Redux is a library that helps you manage the state of the application. The building bocks of <b>Redux</b> is the 
+        <b>Store</b>, the <b>Actions</b> and the <b>Reducers</b>.
+        <ul>
+            <li>Store: Like local database</li>
+            <li>Actions: Like events</li>
+            <li>Redicers :Pure functions</li>
+        </ul>
+        Two implementation: <br>
+        <a href="https://github.com/ngrx/store" target="_blank" rel="noopener noreferrer">https://github.com/ngrx/store</a> <br>
+        <a href="https://www.npmjs.com/package/ng2-redux" target="_blank" rel="noopener noreferrer">https://www.npmjs.com/package/ng2-redux</a>
+        <br>
+    </div>
+    
+    <div id = "ngxbootstrap">
+        <h1> NGX Bootstrap</h1>
+        More here: <a href="https://valor-software.com/ngx-bootstrap/#/getting-started" target="_blank" rel="noopener noreferrer">https://valor-software.com/ngx-bootstrap/#/getting-started</a>
+        <b>ng add ngx-bootstrap </b>
+        <h2>Progressbar</h2>
+        <pre><code class="language-html">
+        &ltdiv class="row"&gt
+        &ltdiv class="col-sm-4"&gt
+            &ltdiv class="mb-2"&gt
+            &ltprogressbar [value]="55"&gt&lt/progressbar&gt
+            &lt/div&gt
+        &lt/div&gt
+        &ltdiv class="col-sm-4"&gt
+            &ltdiv class="mb-2"&gt
+            &ltprogressbar [value]="22" type="warning" [striped]="true"&gt22%&lt/progressbar&gt
+            &lt/div&gt
+        &lt/div&gt
+        &ltdiv class="col-sm-4"&gt
+            &ltdiv class="mb-2"&gt
+            &ltprogressbar max="200" [value]="166" type="danger" [striped]="true" [animate]="true"&gt&lti&gt166 / 200&lt/i&gt&lt/progressbar&gt
+            &lt/div&gt
+        &lt/div&gt
+        &lt/div&gt
+        </code></pre>
+
+        <h2>Popover</h2>
+        <pre><code class="language-html">
+        &ltli class="nav-item" &gt
+        &lta class="nav-link" [class.active]="myContent == 'first'" (click)="myContent='first'" 
+        popover="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."
+        popoverTitle="Popover on top"
+        placement="top"&gtOne&lt/a&gt
+        &lt/li&gt
+        </code></pre>
+
+        <h2>Tooltip</h2>
+        <pre><code class="language-html">
+        &ltli class="nav-item" &gt
+        &lta class="nav-link" [class.active]="myContent == 'second'" (click)="myContent='second'" 
+        tooltip="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."
+        placement="right"&gtTwo&lt/a&gt
+        &lt/li&gt
+        </code></pre>
+
+        <h2>Tabs</h2>
+        <pre><code class="language-html">
+        &lttabset&gt
+        &lttab heading="First step" id="tab1"&gtClick on Back button to navigate to the previous item!&lt/tab&gt
+        &lttab heading="Second step"&gtClick on Next button to navigate to the next item!&lt/tab&gt
+        &lttab heading="Last step"&gtIf you got en error, than go back to the menu.&lt/tab&gt
+        &lt/tabset&gt
+        </code></pre>
+
+        <h2>Modal</h2>
+        <pre><code class="language-html">
+        &ltbutton type="button" class="btn btn-primary" (click)="openModal(template)"&gtConfirm test&lt/button&gt
+        &ltbr&gt&ltbr&gt
+        &ltpre class="card card-block card-header"&gt&#123;&#123;message&#125;&#125;&lt/pre&gt
+        &ltng-template #template&gt
+        &ltdiv class="modal-body text-center"&gt
+            &ltp&gtDo you want to confirm?&lt/p&gt
+            &ltbutton type="button" class="btn btn-default" (click)="confirm()" &gtYes&lt/button&gt
+            &ltbutton type="button" class="btn btn-primary" (click)="decline()" &gtNo&lt/button&gt
+        &lt/div&gt
+        &lt/ng-template&gt
+        </code></pre>
+
+        <pre><code class="language-typescript">
+        import { Component, TemplateRef } from '@angular/core';
+        import { BsModalService } from 'ngx-bootstrap/modal';
+        import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+            
+        @Component({
+            selector: 'demo-modal-service-confirm-window',
+            templateUrl: './service-confirm-window.html'
+        })
+        export class DemoModalServiceConfirmWindowComponent {
+            modalRef: BsModalRef;
+            message: string;
+            constructor(private modalService: BsModalService) {}
+            
+            openModal(template: TemplateRef<any>) {
+            this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+            }
+            
+            confirm(): void {
+            this.message = 'Confirmed!';
+            this.modalRef.hide();
+            }
+            
+            decline(): void {
+            this.message = 'Declined!';
+            this.modalRef.hide();
+            }
+        }
+        </code></pre>
+
+        <h2>Dropdown</h2>
+        <pre><code class="language-html">
+        &ltli class="btn-group" dropdown&gt
+        &ltbutton id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+                aria-controls="dropdown-basic"&gt
+            Classic Web Development &ltspan class="caret"&gt&lt/span&gt
+        &lt/button&gt
+        &ltul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
+            role="menu" aria-labelledby="button-basic"&gt
+            &ltli role="menuitem"&gt&lta class="dropdown-item" routerLink="/basic/html"&gtPure HTML&lt/a&gt&lt/li&gt
+            &ltli role="menuitem"&gt&lta class="dropdown-item" routerLink="/basic/css"&gtCSS&lt/a&gt&lt/li&gt
+            &ltli role="menuitem"&gt&lta class="dropdown-item" routerLink="/basic/js"&gtJavaScript&lt/a&gt&lt/li&gt
+        &lt/ul&gt
+        &lt/li&gt
+        </code></pre>
+        <h2>Collapse</h2>
+        <pre><code class="language-html">
+        &ltdiv id="collapseBasic" [collapse]="isCollapsed" class="card card-block card-header"&gt
+            &ltdiv class="well well-lg"&gt
+            
+                    &ltp&gtIt uses utility classes for typography and spacing to space content out within the larger container.&lt/p&gt
+                    &ltlabel for="name"&gt&ltspan class="fas fa-smile"&gt&lt/span&gt Id: &lt/label&gt &#123;&#123;webPage.id&#125;&#125; &ltbr&gt
+                    &ltlabel for="name"&gt&ltspan class="fas fa-registered"&gt&lt/span&gt Name: &lt/label&gt &#123;&#123;webPage.name&#125;&#125;&ltbr&gt
+                    &ltlabel for="name"&gt&ltspan class="fas fa-quote-left"&gt&lt/span&gt About: &lt/label&gt &#123;&#123;webPage.about&#125;&#125;&ltbr&gt
+                    &ltlabel for="name"&gt&ltspan class="fas fa-pen"&gt&lt/span&gt Page Type: &lt/label&gt &#123;&#123;webPage.pagetype | pageTypePipe | async&#125;&#125;&ltbr&gt
+                    &ltlabel for="name"&gt&ltspan class="icon-home"&gt&lt/span&gt URL: &lt/label&gt &#123;&#123;webPage.url&#125;&#125;&ltbr&gt
+                    &ltlabel for="name"&gt&ltspan class="icon-pacman"&gt&lt/span&gt Official: &lt/label&gt &#123;&#123;webPage.official&#125;&#125;&ltbr&gt
+                    &ltlabel for="name"&gt&ltspan class="fas fa-calendar-alt"&gt&lt/span&gt Date: &lt/label&gt &#123;&#123;webPage.date&#125;&#125;&ltbr&gt
+            
+            &lt/div&gt
+        &lt/div&gt
+        </code></pre>
+    
+    </div>   
+</div>
+</div>
+</main>
+{{> footer}}
+<script src="/assets/js/prism.js"></script>
+</body>
+</html>

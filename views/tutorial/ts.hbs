@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-10805370-17"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-10805370-17');
+</script>
+<!-- Global adsence code -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-6352873787606567",
+          enable_page_level_ads: true
+     });
+</script>
+<meta charset="utf-8" />
+<title>Welcome to the isdckft project site!</title>
+<link rel="stylesheet" href="/assets/css/bootstrap.min.css"/>
+<link href="/assets/css/prism.css" rel="stylesheet" />  
+</head>
+<body>
+{{> menu}} 
+<main role="main">
+<div class="jumbotron">
+<div class="container">
+<h1>{{pageTitle}}</h1>
+Angular is a Typescript framework, so we need to know some Typescript basics. <br>
+TypeSrcipt is a superset of JavaScript. Every JavaScript code is valid in TypeSrcipt. 
+The browsers understands JavaScript, so every TypeSrcipt code is translated to JavaScript code.
+TypeSrcipt documentation is available here: <a href="https://www.Typescriptlang.org/docs/home.html" 
+target="_blank" rel="noopener noreferrer">https://www.Typescriptlang.org/docs/home.html</a>.
+
+<h2>TypeSrcipt types</h2>
+<b>
+<ul>
+  <li>let x: number;</li>
+  <li>let s: string;</li>
+  <li>let b: boolean;</li>
+  <li>let a: any;</li>
+  <li>let e: number[] = [1,2,3];</li>
+  <li>let f: Array&lt;string&gt; </li>
+  <li>emum Color &#123; Red = 0, Blue = 1; Green = 2 &#125; ; let myColor = Color.Green;</li>
+</ul>
+</b>
+For custom types we can use interfaces. Usually it goes to a separate file.
+<pre><code class="lang-typescript">
+interface Car { //naming convention: the name of an interface begins with uppercase
+    speed: number,
+    x: number,
+    y: number,
+    }
+    let driveTo = (goal: Car) =&gt {
+    // drive the car to x,y coordinates with speed ...
+    }
+
+    driveTo = ({speed:70, x: 100, y: 100 }) 
+</code></pre>
+
+
+<h2>Type assertion</h2>
+If you do not declare the type og the variable, then later you have to tell it to the compiler. That is type assertion. 
+There is to way for this. See an example: <br>
+<pre><code class="lang-typescript">
+let text; 
+text = 'something'; 
+(<string>text) or: 
+(text as string)
+</code></pre>
+
+<h2>Arrow function</h2>
+Arrow function is an abbreviation method of using functions. See this JavaScript function: <br>
+<pre><code class="lang-typescript">
+let mylog = function(text) {
+    console.log(text);
+    }
+    
+    //The same in TypeSrcipt :
+    let mylog = (text) =&gt {
+        console.log(text);
+    }
+    
+    //If you have one line code in the function, you even do not need the curly braces :
+    let mylog = (text) =&gt console.log(text);
+
+    //In some other programming languages you call it lambda expression.
+</code></pre>
+
+
+<h2>Class and Object</h2>
+In object oriented languages the class groups variables (properties or fields) and functions (methods) that are related. 
+Let's the Car example above in a class. <br>
+<pre><code class="lang-typescript">
+class Car {   //naming convention: the name of a class begins with uppercase
+    speed: number; // semicolon instead of colon
+    x: number;
+    y: number;
+
+    constructor( // parameters here if we need ) { // some code here ... } 
+
+    driveTo = ()  {  // we do not need the parameters, because we have them in the same class 
+    // drive the car to x,y coordinates with speed ...
+    }
+    }
+    
+
+    // How we can use this class? Of course with creating an Object. An object is an instance of a class.
+
+    let car = new Car( //parameters if the constructor of the class needs them); // we have allocated memory by creating an object
+    car.driveTo();
+    x = car.x;
+</code></pre>
+
+
+  In a class there is a <b>Constructor</b>, which is a method that is called when we create an object. 
+  With constructor we can initialize the object. Constructor with parameters: <br>
+  <b>constructor (x: int, y: int) &#123; &#125; <br></b>  
+  Constructor with optional parameters: <br>
+  <b>constructor (x?: int, y?: int) &#123; &#125; <br> </b>  
+
+  If you prefix the parameters of the constructor with access modifiers, 
+  then the compiler will create the class properties and initialize them. <br>
+  <b>constructor (x: private int, private y: int) &#123; &#125; <br></b>  
+  <b>Access modifiers</b> <br>
+  Access modifiers controls the accessibility fields, properties and methods of the class.
+  <ul>
+    <li>public (by default) - you can access it from extern of the class </li>
+    <li>private - only accessible in the class, usually you will use a setter or getter method to access them</li>
+    <li>protected</li>
+  </ul>
+  <b>What is the difference between properties and fields?</b>
+  <pre><code class="lang-typescript">
+    class Car { 
+    
+        // fields
+        private _speed: number; 
+        _x: number;
+        _y: number;
+    
+        constructor() { } 
+    
+        driveTo = ()  {  }
+        
+        get x() {  // getter method
+            return this._x;
+        } 
+    
+        }
+        
+        let car = new Car(); 
+        car.driveTo();  // we can access the method, because it is public
+        x = car.x;      // this is x property, we can access it by a getter method like it would be a field 
+        y = car._y      // we can acces this field, because it is public, we usually do not use this 
+    </code></pre>
+
+  
+  <h2>Typescript shortcut for classes. </h2>
+    A class should be look like this:
+    <pre><code class="lang-typescript">
+    export class WebPage {
+        public id : number;
+        public pagetype: number;
+        public name: string;
+        public about: string;
+        public url: string;
+        public official: boolean;
+        public date: Date;
+    
+        constructor( id : number, pagetype: number, name: string, about: string, url: string, official: boolean, date: Date) {
+            this.id = id;
+            this.pagetype = pagetype;
+            this.name = name;
+            this.about = about;
+            this.url = url;
+            this.official = official;
+            this.date = date;
+            }
+        }
+    
+        //But you can shortcut it these way and Typescript creates the public fields automatically. 
+        export class WebPage {
+            constructor(
+                public id : number,
+                public pagetype: number,
+                public name: string,
+                public about: string,
+                public url: string,
+                public official: boolean,
+                public date: Date
+            ) {  }
+        } 
+    </code></pre>
+
+
+  <h2>Interface</h2>
+  Interfaces allow us to create contracts, which other classes/ objects have to implement. We can use them to define custom types without creating classes.
+    <pre><code class="lang-typescript">
+    // Example interface
+
+    interface User {
+        username: string;
+        password: string;
+        confirmPassword?: string; // Optional property => Does not have to be implemented
+    }
+    
+    let user:User;
+    
+    // This value satisfies the interface
+    user = {username: 'max', password: 'supersecret'};
+    
+    // Interfaces can also contain functions (without the function body)
+    
+    interface CanDrive {
+        accelerate(speed:number): void;
+    }
+    
+    let car:CanDrive = {
+        accelerate: function (speed:number) {
+            // ...
+        }
+    };
+    </code></pre>
+
+  <h2>Generics</h2>
+  Generics are types which can hold/ use several types. An <b>Array</b> can be a generic.
+
+  <h2>Typescript module</h2>
+    Module is a class in a separate file with the <b>export</b>  modifier, so we can access it in other module with the <b>import</b> statement.
+    In <b>cars.ts</b> file: <br>
+    <b> export class Car &#123;</b>  <br>
+    in the other module, where we would like to access the Car class: <br>
+    <b>import &#123; Car &#125; from './cars' </b> - We do not write the <b>.ts</b> <br>
+    Notice: Later in Angular you will import from a module, not from a file. An Angular modul is not the same as Typescript module.
+</div>
+</div>
+</main>
+{{> footer}}
+    <script src="/assets/js/prism.js"></script>
+</body>
+</html>

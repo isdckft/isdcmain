@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-10805370-17"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-10805370-17');
+</script>
+
+<title>Welcome to the isdckft project site!</title>
+<link rel="stylesheet" href="/assets/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="/assets/css/jumbotron.css"/>
+<link rel="stylesheet" href="/assets/css/common.css"/>
+
+</head>
+<body>
+{{> menu}}
+<main role="main">
+
+  <!-- Main jumbotron for a primary marketing message or call to action -->
+  <div class="jumbotron">
+    <div class="container">
+
+      <h1 class="display-3">{{pageTitle}}</h1> 
+
+On this page we have built a very simple application, what is served by <b>Node.js</b> on the server side.
+On the client side we use only pure <b>HTML</b>, <b>CSS</b> and <b>JavaScript</b>. We apply also <b>Bootstrap</b>. 
+We do not use here any <b>JavaScript</b> framework. <br>
+We have also here a <b>Node.Js</b> REST API back-end collection, which serves for the 
+<a href="https://www.isdckft.com:4250" target="_blank" rel="noopener noreferrer">Angular</a> site. 
+The database for the REST APIs is <b>Mongodb</b>.
+ 
+    </div>
+  </div>
+</main>
+
+{{> footer}}
+</body>
+</html>

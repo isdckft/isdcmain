@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-10805370-17"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-10805370-17');
+</script>
+<!-- Global adsence code -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-6352873787606567",
+          enable_page_level_ads: true
+     });
+</script>
+<meta charset="utf-8" />
+<link rel="icon" href="favicon.png" />
+<title>Tutorial-HTML</title>
+<link rel="stylesheet" href="/assets/css/bootstrap.min.css"/>
+<link href="/assets/css/prism.css" rel="stylesheet" />   
+
+</head> 
+<body>
+{{> menu}}
+<main role="main">
+<div class="jumbotron">
+<div class="container">
+    <h1>{{pageTitle}}</h1>
+
+    You can learn about HTML here : <a href="https://www.w3schools.com/html/" 
+    target="_blank" rel="noopener noreferrer">https://www.w3schools.com/html/</a>
+    I have built a simple HTML page. Check the different elements and the form. <br>
+    The webpage is here: <a href="/basic/basichtml.html" >Basic HTML</a>  
+    <pre><code class="lang-html">
+    &lth1&gtSimple HTML Page&lt/h1&gt
+    Here is an "a" tag, a link: &ltbr&gt
+    &lta href="https://www.djangoproject.com/"&gt
+        Here is a link to the official Django Website&lt/a&gt
+    
+    &ltp&gtHere is a picture of the Python Logo:&lt/p&gt
+    &ltimg src="https://www.python.org/static/community_logos/python-logo-master-v3-TM.png" alt=""&gt
+    
+    &ltp&gtHere is an ordered list&lt/p&gt
+        &ltol&gt
+        &ltli&gtFirst one&lt/li&gt
+        &ltli&gtSecond&lt/li&gt
+        &ltli&gtThird&lt/li&gt
+        &lt/ol&gt
+    
+    &lth2&gtThis is the first form, request with GET&lt/h2&gt
+    
+    &ltp&gtPlease Note: First Name, Last Name, Password, and Email are required&lt/p&gt
+    &ltform action="https://postman-echo.com/get" method="get"&gt
+        
+        &lth3&gtClick on the color picker&lt/h3&gt
+        &ltinput type="color" &gt
+        &ltbr&gt
+        &ltlabel for="FirstName"&gtFirst Name:&lt/label&gt
+        &ltinput type="text" id="FirstName" placeholder="First Name" required name="firstname" value=""&gt
+    
+        &ltlabel for="LastName"&gtLast Name:&lt/label&gt
+        &ltinput type="text" id="LastName" placeholder="Last Name" required name="lastname" value=""&gt
+        &ltp&gt&lt/p&gt
+    
+        &ltlabel for="email"&gtEmail:&lt/label&gt
+        &ltinput type="email" id="email" placeholder="name@email.com" name="email" value=""&gt
+    
+        &ltlabel for="pass"&gtPassword:&lt/label&gt
+        &ltinput type="password" id="pass" name ="password" value="123"&gt
+        &ltbr&gt
+        &ltinput type="submit" name="" value="Submit with GET"&gt
+        After clicking the button, check the URL !
+    
+    
+    &lth2&gtThis is the second form, request with POST&lt/h2&gt
+    &ltform action="https://postman-echo.com/post" method="post"&gt
+        &ltp&gtDo you have a Credit Card or PayPal?&lt/p&gt
+        &ltselect name="payment"&gt
+        &ltoption value="cc"&gtCredit Card&lt/option&gt
+        &ltoption value="pp"&gtPayPal&lt/option&gt
+        &lt/select&gt
+    
+        &ltp&gtAre you over the age of 18?&lt/p&gt
+        &ltlabel for="yes"&gtYes:&lt/label&gt
+        &ltinput type="radio" name="Over18" id="yes" value="yesOver"&gt
+        &ltlabel for="no"&gtNo:&lt/label&gt
+        &ltinput type="radio" name="Over18" id="no" value="noOver"&gt
+        &ltbr&gt
+        &ltinput type="submit" name="" value="Submit with POST"&gt
+    &lt/form&gt
+    &lth2&gtTable&lt/h2&gt
+    &lttable border="2"&gt
+        &ltthead&gt
+            &ltth&gtCountry Name&lt/th&gt
+            &ltth&gtCountry Flag&lt/th&gt
+            &ltth&gtGDP (Millions of USD)&lt/th&gt
+        &lt/thead&gt
+        &lttr&gt
+            &lttd&gtUSA&lt/td&gt
+            &lttd&gt&ltimg src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/190px-Flag_of_the_United_States.svg.png" alt=""&gt&lt/td&gt
+            &lttd&gt 18,561,930&lt/td&gt
+        &lt/tr&gt
+        &lttr&gt
+            &lttd&gtIndia&lt/td&gt
+            &lttd&gt&ltimg src="https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/150px-Flag_of_India.svg.png" alt=""&gt&lt/td&gt
+            &lttd&gt 2,250,990&lt/td&gt
+        &lt/tr&gt
+        &lttr&gt
+            &lttd&gtUnited Kingdom&lt/td&gt
+            &lttd&gt&ltimg src="https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Flag_of_the_United_Kingdom.svg/200px-Flag_of_the_United_Kingdom.svg.png" alt=""&gt&lt/td&gt
+            &lttd&gt2,649,890&lt/td&gt
+        &lt/tr&gt
+    
+    &lt/table&gt
+            
+    </code></pre>
+<h2>How TO - Include HTML</h2>
+If you have several HTML pages, then you have literally several <b>html</b> files. If you would like, that they will 
+look like similar, then you have to copy the same content in every file, for example a navigation bar.
+<b>w3-include-html</b>  attribute and some JavaScript code helps you to avoid this.  Let's see, how it works! <br>
+First put the common code in a separate file, for example <b>menu.html</b>: 
+<pre><code class="lang-html">
+        &ltnav class="navbar navbar-expand-lg bg-dark mynav" role="navigation" id="navbar"&gt
+        &ltdiv class="container"&gt
+            &lta class="navbar-brand" href="https://www.isdckft.com"&gtisdckft.com&lt/a&gt
+
+            &ltdiv class="navbar-nav ml-auto"&gt
+                    &ltdiv class="dropdown"&gt
+                            &ltbutton class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"&gt
+                                What is this?
+                            &lt/button&gt
+                            &ltdiv class="dropdown-menu" aria-labelledby="dropdownMenuButton"&gt
+                                &lta class="nav-item nav-link" href="/tutorial/html.html" class="btn btn-simple"&gtHTML&lt/a&gt
+                                &lta class="nav-item nav-link" href="/tutorial/css.html" class="btn btn-simple"&gtCss - Bootstrap&lt/a&gt
+                                &lta class="nav-item nav-link" href="/tutorial/js.html" class="btn btn-simple"&gtJavaSript&lt/a&gt
+                                &lta class="nav-item nav-link" href="/tutorial/ts.html" class="btn btn-simple"&gtTypeScript&lt/a&gt
+                                &lta class="nav-item nav-link" href="/tutorial/angular.html" class="btn btn-simple"&gtAngular&lt/a&gt
+                                &lta class="nav-item nav-link" href="/tutorial/python.html" class="btn btn-simple"&gtPython - Django&lt/a&gt
+                                &lta class="nav-item nav-link" href="/tutorial/ml.html" class="btn btn-simple"&gtMachine learning&lt/a&gt
+                                &lta class="nav-item nav-link" href="/tutorial/environment.html" class="btn btn-simple"&gtInstall on Windows and deploy&lt/a&gt
+                                &lta class="nav-item nav-link" href="/tutorial/linux.html" class="btn btn-simple"&gtLinux server&lt/a&gt 
+                            &lt/div&gt
+                    &lt/div&gt
+                &lta class="nav-item nav-link" href="/basichtml.html" class="btn btn-simple"&gtBasic HTML&lt/a&gt  
+                &lta class="nav-item nav-link" href="/basiccss.html" class="btn btn-simple"&gtBasic CSS&lt/a&gt  
+                &lta class="nav-item nav-link" href="/basicjavascript.html" class="btn btn-simple"&gtBasic JavaScript&lt/a&gt  
+
+                &lta class="nav-item nav-link" href="https://www.isdckft.com:4250/" class="btn btn-simple"&gtAngular&lt/a&gt
+                &lta class="nav-item nav-link" class="btn btn-simple" href="https://www.isdckft.com:8000/"&gtDjango&lt/a&gt
+            &lt/div&gt
+        &lt/div&gt
+&lt/nav&gt
+
+</code></pre>
+Now put these lines in the other files, where you want to include <b>menu.html</b>. <br>
+In the header part put this JavaScript code: <br>
+<pre><code class="lang-javascript">
+        &ltscript&gt  
+                function includeHTML() {
+                var z, i, elmnt, file, xhttp;
+                /* Loop through a collection of all HTML elements: */
+                z = document.getElementsByTagName("*");
+                for (i = 0; i < z.length; i++) {
+                    elmnt = z[i];
+                    /*search for elements with a certain atrribute:*/
+                    file = elmnt.getAttribute("w3-include-html");
+                    if (file) {
+                    /* Make an HTTP request using the attribute value as the file name: */
+                    xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {
+                        if (this.readyState == 4) {
+                        if (this.status == 200) {elmnt.innerHTML = this.responseText;}
+                        if (this.status == 404) {elmnt.innerHTML = "Page not found.";}
+                        /* Remove the attribute, and call this function once more: */
+                        elmnt.removeAttribute("w3-include-html");
+                        includeHTML();
+                        }
+                    } 
+                    xhttp.open("GET", file, true);
+                    xhttp.send();
+                    /* Exit the function: */
+                    return;
+                    }
+                }
+                }
+        &lt/script&gt  
+</code></pre>
+Next in the <b>body</b> part insert this line where you want to place the navigation bar: <br>
+<pre><code class="lang-html">
+        &ltdiv w3-include-html="/menu.html"&gt&lt/div&gt
+</code></pre>
+Finally put this line at the end of the <b>body</b> section:
+<pre><code class="lang-javascript">
+        &ltscript&gt   includeHTML();  &lt/script&gt  
+</code></pre>
+Two notes: <br>
+<ul>
+    <li>As JavaScript will load the content of the <b>menu.html</b>, so it will be slower, than if it would be in the file.</li>
+    <li>This will work for you only on the server. It does not work if you just click on the html file in your folder.</li>
+</ul>
+
+</div>
+</div>
+</main>
+{{> footer}}
+    <script src="/assets/js/prism.js"></script>
+
+</body>
+</html>

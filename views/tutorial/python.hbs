@@ -1,0 +1,1786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-10805370-17"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-10805370-17');
+</script>
+<!-- Global adsence code -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-6352873787606567",
+          enable_page_level_ads: true
+     });
+</script>
+<meta charset="utf-8" />
+<link rel="icon" href="favicon.png" />
+<title>Tutorial-Python-Django</title>
+<link rel="stylesheet" href="/assets/css/bootstrap.min.css"/>
+<link href="/assets/css/prism.css" rel="stylesheet" />   
+</head>
+<body> 
+{{> menu}}
+<main role="main">
+<div class="jumbotron">
+    <div class="container">
+    <h1>{{pageTitle}}</h1>
+        About Python : <a href="https://docs.python.org/3/tutorial/" target="_blank" rel="noopener noreferrer">https://docs.python.org/3/tutorial/</a>
+        <br>
+        <a href="#basics">Basics</a> <br>
+        <a href="#firstapp">Create your first Django App</a> <br>
+        <a href="#djangomodel">Create Django Models</a> <br>
+        <a href="#djangorest">Create Django REST Api</a> <br>
+        <a href="#jwt">Create JWT authentication</a> <br>
+        <a href="#mvt">Model, View, Template</a> <br>
+        <a href="#form">Django Form</a> <br>
+        <a href="#template">Templates</a> <br>
+        <a href="#auth">Authentication</a> <br>
+        <a href="#view">Views, CRUD</a> <br>
+        <a href="#accounts">Django accounts</a> <br>
+        <a href="#bootstrap">Bootstrap</a> <br>
+        
+        
+        <div id ="basics">
+        <h1>Basics</h1>
+        Datatypes:
+        <pre><code class="language-python">
+        #number
+        a = 2+3;
+    
+        # Set a to be a boolean
+        a = True
+    
+        #strings
+        s = 'Hello World'
+        print(s)
+        print(s[1])
+        s[0] = 'x'
+        s = s + ' concatenate me!'
+        # We can use this to print a string backwards
+        s[::-1]
+        # Upper Case a string
+        s.upper()
+        # Lower case
+        s.lower()
+        # Split by a specific element (doesn't include the element that was split on)
+        s.split('r')
+    
+        # format print,  multiple times:
+        print('One: {p}, Two: {p}, Three: {p}'.format(p='Hi!'))
+    
+        # list
+        my_list = ['a string',23,1.4,'s']
+        # Grab everything UP TO index 3
+        my_list[:3]
+        # Append
+        l.append('append me!')
+    
+        # Pop off the 0 indexed item
+        l.pop(0)
+    
+        # Use reverse to reverse order (this is permanent!)
+        list.reverse()
+        list.sort()
+    
+        matrix[0][0]
+    
+        # Build a list comprehension by deconstructing a for loop within a []
+        first_col = [row[0] for row in matrix]
+    
+        #dictionary
+    
+        my_dict = {'key1':123,'key2':[12,23,33],'key3':['item0','item1','item2']}
+        my_dict['key1'] -= 123
+        # Method to return a list of all keys
+        d.keys()
+    
+        # Method to grab all values
+        d.values()
+    
+        # Method to return tuples of all items  
+        
+        d.items()
+    
+        #  a tuple 
+        t = (1,2,3)
+        # Use indexing just like we did in lists
+        t[0]
+    
+        # Sets are an unordered collection of unique elements.
+        x = set()
+    
+        # We add to sets with the add() method
+        x.add(1)
+        </code></pre>
+        Control flows:
+        <pre><code class="language-python">
+        # AND operator
+        (1 > 2) and (2 < 3)
+    
+        if 1 == 2:
+            print('first')
+        elif 3 == 3:
+            print('second')
+        else:
+            print('Last')
+        
+        for item in seq:
+            print(item)
+    
+        i = 1
+        while i < 10:
+            print('i is: {}'.format(i))
+            i = i+1
+        </code></pre>
+
+        Functions:
+        <pre><code class="language-python">
+        def addNumbers(num1,num2):
+            """
+            INPUT: Two numbers
+            OUTPUT: the sum of the numbers
+            
+            """
+            return num1+num2
+
+        x = addNumbers(1,2)
+
+        def count_evens(nums):
+            count = 0
+            for element in nums:
+                if element % 2 == 0:
+                count += 1
+            return count
+        </code></pre>
+
+        Object Oriented programming:
+        <pre><code class="language-python">
+                print type(1) # prints the class name
+                class Circle():
+                    pi = 3.14
+                
+                    # Circle get instantiated with a radius 
+                    def __init__(self, radius=2):
+                        self.radius = radius
+                
+                    # Area method calculates the area. 
+                    def area(self):
+                        return self.radius * self.radius * Circle.pi
+                
+                    # Method for resetting Radius
+                    def setRadius(self, radius):
+                        self.radius = radius
+                
+                    # Method for getting radius
+                    def getRadius(self):
+                        return self.radius
+                
+                c = Circle()
+                
+                c.setRadius(2)
+                
+                class Book():
+                    def __init__(self, title, author, pages):
+                        self.title = title
+                        self.author = author
+                        self.pages = pages
+                
+                    def __str__(self):
+                        return "Title:%s , author:%s, pages:%s " %(self.title, self.author, self.pages)
+                
+                    def __len__(self):
+                        return self.pages
+                
+                    def __del__(self):
+                        print "A book is deleted"
+                
+                book = Book("Python Book!", "X Man", 200)
+                
+                #Special Methods
+                print book
+                print len(book)
+                del book
+        </code></pre>
+        
+        </div>
+        
+        <div  id="firstapp">
+          <h1>Create your first Django App</h1>
+          After creating your <b>Django</b> project, navigate to the project folder and create the app with the name <b>home</b>: <br>
+         <b>python manage.py startapp home</b> <br>
+         Now open the <b>settings.py</b> and register your app:
+        <pre><code class="language-django">
+            INSTALLED_APPS = [
+                'django.contrib.admin',
+                'django.contrib.auth',
+                'django.contrib.contenttypes',
+                'django.contrib.sessions',
+                'django.contrib.messages',
+                'django.contrib.staticfiles',
+                'home.apps.HomeConfig',
+            ]
+        </code></pre>
+
+         In the <b>home</b> folder open the <b>views.py</b> file and create a simple view.In the view we render an <b>HTML</b>
+         template and give the <b>title</b> parameter to it. Very similar to <b>Angular</b>.
+         <pre><code class="language-django">
+                from django.shortcuts import render
+                from django.http import HttpResponse
+                
+                # Create your views here.
+                def home(request):
+                    my_dict = {'title':"This is ISDCbackend "}
+                    return render(request,'home/index.html',context=my_dict)
+         </code></pre>
+
+         Next create a <b>templates</b> folder in the <b>home</b> folder. In the <b>templates</b> folder create another <b>home</b> folder
+         and place in it an <b>index.html</b> file:
+        <pre><code class="language-html">
+            &lt!DOCTYPE html&gt
+            {% load static %}
+            &lthtml&gt
+                &lthead&gt
+                &ltmeta charset="utf-8"&gt
+                &lttitle&gtISDCbackend Home Page&lt/title&gt
+                &ltlink rel="stylesheet" href="{% static "home/css/mystyle.css" %}"/&gt
+                &lt/head&gt
+                &ltbody&gt
+                &lth1&gt&#123;&#123;title&#125;&#125;&lt/h1&gt
+                See more here: &lta href="https://www.isdckft.com:4250" target="_blank" rel="noopener noreferrer"&gthttps://www.isdckft.com:4250&lt/a&gt
+                
+                &ltbr&gt
+                &ltimg src="{% static "home/images/python.jpg" %}" alt="image missing!"&gt
+                &lt/body&gt
+            &lt/html&gt
+        </code></pre>
+        You can see, that we put the <b>title</b> variable between curly bracket, like in the <b>Angular</b> template.
+         In the main <b>home</b> folder create a <b>static</b> folder. In it create a <b>home</b> folder and place the <b>css</b> 
+         and image files in it. <br>
+         Next create an <b>urls.py</b> file in the <b>home</b> folder and set the url for the view, which will render the template:
+        <pre><code class="language-django">
+                from django.urls import path
+                from home import views
+                
+                urlpatterns = [
+                    path('', views.home, name='home'),
+                
+                ]
+        </code></pre>
+  
+         Finally register this url in the main url file i.e. in the <b>urls.py</b> in the main project app, i.e. <b>isdcbacken/isdcbackend</b> folder.
+        <pre><code class="language-django">
+                urlpatterns = [
+                path('', include('home.urls')),
+                path('admin/', admin.site.urls),
+                path('rest/', include('webpages.urls')),
+                path('api-token-auth/', obtain_jwt_token),
+                path('ml/', include('ml.urls')),
+                path('app/', include('webpages_app.urls')),
+            ]
+        </code></pre>
+
+         Some words about the static files. We can have a <b>static</b> folder in the project root and in all of the app folders.
+         If type the <b>'host'/static/</b> url, then Django will search in all <b>static</b> folder.
+        <pre><code class="language-django">
+                STATIC_DIR = os.path.join(BASE_DIR, "static")
+                ...
+                STATIC_URL = '/static/'
+                
+                STATICFILES_DIRS = [
+                    STATIC_DIR,
+                    os.path.join(BASE_DIR, "home/static"),
+                    os.path.join(BASE_DIR, "ml/static"),
+                ]
+                
+                # Activate Django-Heroku. IT activates 'staticfiles' as STATIC_ROOT
+                django_heroku.settings(locals())
+        </code></pre>
+
+         More about <b>static</b> here: <a href="https://docs.djangoproject.com/en/2.1/howto/static-files/" target="_blank" rel="noopener noreferrer">https://docs.djangoproject.com/en/2.1/howto/static-files/</a>
+        
+        <div  id="djangomodel">
+          <h1>Create Django Models</h1>
+          We are assuming, that you have created your <b>webpages</b> app. 
+          If not, see <a href="mystory/environment#djangoapp">Create a Django Application</a>. <br>
+          Now we are going to create two models, one for the list of the web pages and one for the types of them, 
+          for example 'front-end', 'back-end', etc.
+          First create the models in the <b>models.py</b>, e.g. :
+        <pre><code class="language-django">
+                from django.db import models
+
+                class PageType(models.Model):
+                    name = models.CharField(max_length=128, unique=True)
+                    def __str__(self):
+                        return self.name
+                
+                class WebPage(models.Model):
+                    pagetype = models.ForeignKey(PageType, on_delete=models.CASCADE)
+                    name = models.CharField(max_length=128,unique=True)
+                    about = models.CharField(max_length=128)
+                    url = models.URLField(max_length=254)
+                    official = models.BooleanField()
+                    date = models.DateField()
+                    
+                    def __str__(self):
+                        return self.name
+        </code></pre>
+          
+          Notice: We do not have to add explicitely the ID fields. Django will do it. Next: <br>
+          <ul>
+            <li>Insert into the <b>settings.py</b> at the <b>INSTALLED_APPS = </b> <b> 'webpages.apps.WebpagesConfig',</b></li>
+            <li>Crate migrations: <b>python manage.py makemigrations webpages</b></li>
+            <li>Migrate the database: <b>python manage.py migrate</b></li>
+          </ul>
+          Now we have done all the migrations and we have two datatable in the database. 
+          To see this, insert this in the <b>admin.py</b> file: <br>
+        <pre><code class="language-django">
+                from django.contrib import admin
+
+                # Register your models here.
+                from .models import PageType
+                admin.site.register(PageType)
+                
+                from .models import WebPage
+                admin.site.register(WebPage)  
+        </code></pre>
+          
+          Now you can run the server, open in the browser the <b>http://localhost:8000/admin</b>  page, 
+          look at the two tables and insert data into them.
+          <div  id="djangorest">
+            <h1>Create Django REST API</h1>
+            With Django we will create a whole website, with views, templates, Bootstrap and so on. But here we create REST API for our Angular front end. 
+            What we need from Django now is to store the date, manage the server side and propagate the date
+            in Json format to the front-end. That is why we use the Django Rest Api.
+            It is very simple at basic level: <br>
+            <ul>
+              <li>Open <b>settings.py and add this row to <b>INSTALLED_APPS</b>: <b>'rest_framework',</b></b></li>
+              <li>Create a new file in the <b>webpages</b> folder: <b>serializers.py</b>, The code is this: <br>
+                <pre><code class="language-django">
+                        from rest_framework import serializers
+                        from webpages.models import WebPage,PageType
+                        
+                        class PageTypeSerializer(serializers.ModelSerializer):
+                            class Meta:
+                                model = PageType
+                                fields = ('id','name')
+                        
+                        class WebPageSerializer(serializers.ModelSerializer):
+                            class Meta:
+                                model = WebPage
+                                fields = ('id','pagetype','name','about','url','official','date')  
+                </code></pre>
+                It transforms the model data to JSON format.
+              
+              </li>
+              <li>Next write the code of the <b>views.py</b> , see bellow!</li>
+              <li>Put the urls in the <b>urls.py</b> in your <b>webpages</b> folder. It is included in the main url, see above.
+                <pre><code class="language-django">
+                        from django.urls import path
+                        from webpages import views
+                        
+                        urlpatterns = [
+                            path('pagetypes/', views.pagetype_list),
+                            path('pagetypes/<int:pk>/', views.pagetype_detail),
+                            path('webpages/', views.webpage_list),
+                            path('webpages/<int:pk>/', views.webpage_detail),
+                            path('webpage/<str:name>/', views.webpage_name),
+                        ]
+                </code></pre>
+
+        
+              For example with <b>http://localhost:8000/rest/webpages</b> we get the date of the <b>WebPages</b> model from the database in JSON format, what we need. <br>
+              With <b>http://localhost:8000/rest/webpages/2/</b> we get the webpage data with the ID=2 <br>
+        
+              </li>
+            </ul>
+            Let's see the <b>views.py</b> file: <br>
+            <pre><code class="language-python">
+                    from django.http import HttpResponse, JsonResponse
+                    from django.views.decorators.csrf import csrf_exempt
+                    from rest_framework.renderers import JSONRenderer
+                    from rest_framework.parsers import JSONParser
+                    from webpages.models import PageType
+                    from webpages.serializers import PageTypeSerializer
+                    from webpages.models import WebPage
+                    from webpages.serializers import WebPageSerializer
+                    
+                    @csrf_exempt
+                    def pagetype_list(request):
+                    
+                        # Get all of the Page types
+                        if request.method == 'GET': 
+                            pagetypes = PageType.objects.all()
+                            serializer = PageTypeSerializer(pagetypes, many=True)
+                            return JsonResponse(serializer.data, safe=False)
+                    
+                        # Create a new Page type
+                        elif request.method == 'POST':
+                            data = JSONParser().parse(request)
+                            serializer = PageTypeSerializer(data=data)
+                            if serializer.is_valid():
+                                serializer.save()
+                                return JsonResponse(serializer.data, status=201)
+                            return JsonResponse(serializer.errors, status=400) # Bad request
+                    
+                    @csrf_exempt
+                    def webpage_list(request):
+                    
+                        # Get all web pages
+                        if request.method == 'GET':
+                            webpages = WebPage.objects.all()
+                            serializer = WebPageSerializer(webpages, many=True)
+                            return JsonResponse(serializer.data, safe=False)
+                        
+                        # Create a new web page
+                        elif request.method == 'POST':
+                            data = JSONParser().parse(request)
+                            serializer = WebPageSerializer(data=data)
+                            if serializer.is_valid():
+                                serializer.save()
+                                return JsonResponse(serializer.data, status=201)
+                            return JsonResponse(serializer.errors, status=400)
+                    
+                    @csrf_exempt
+                    def pagetype_detail(request, pk):
+                        pagetype = PageType()
+                        try:
+                            pagetype = PageType.objects.get(pk=pk)
+                        except pagetype.DoesNotExist:
+                            return HttpResponse(status=404) # Not Found
+                        
+                        # Get one web page type by ID
+                        if request.method == 'GET':
+                            serializer = PageTypeSerializer(pagetype)
+                            return JsonResponse(serializer.data)
+                        
+                        # Update one page type
+                        elif request.method == 'PUT':
+                            data = JSONParser().parse(request)
+                            serializer = PageTypeSerializer(pagetype, data=data)
+                            if serializer.is_valid():
+                                serializer.save()
+                                return JsonResponse(serializer.data)
+                            return JsonResponse(serializer.errors, status=400)
+                        
+                        # detete one page type
+                        elif request.method == 'DELETE':
+                            pagetype.delete()
+                            return HttpResponse(status=204)
+                    
+                    @csrf_exempt
+                    def webpage_detail(request, pk):
+                        webpage = WebPage()
+                        try:
+                            webpage = WebPage.objects.get(pk=pk)
+                        except webpage.DoesNotExist:
+                            return HttpResponse(status=404)
+                    
+                        # Get one web page by ID
+                        if request.method == 'GET':
+                            serializer = WebPageSerializer(webpage)
+                            return JsonResponse(serializer.data)
+                    
+                        # update one web page    
+                        elif request.method == 'PUT':
+                            data = JSONParser().parse(request)
+                            serializer = WebPageSerializer(webpage, data=data)
+                            if serializer.is_valid():
+                                serializer.save()
+                                return JsonResponse(serializer.data)
+                            return JsonResponse(serializer.errors, status=400)
+                        
+                        # delete one web page
+                        elif request.method == 'DELETE':
+                            webpage.delete()
+                            return HttpResponse(status=204)
+                    
+                    @csrf_exempt
+                    def webpage_name(request, name):
+                        webpage = WebPage()
+                        try:
+                            webpage = WebPage.objects.get(name=name)
+                        except webpage.DoesNotExist:
+                            return HttpResponse(status=404)
+                        
+                        # get one web page by name
+                        if request.method == 'GET':
+                            serializer = WebPageSerializer(webpage)
+                            return JsonResponse(serializer.data) 
+            </code></pre>
+
+          </div>
+          
+        <div  id="jwt">
+          <h1>Create JWT authentication</h1>
+        
+        It is time to add some security. Until now anybody could modify, delete our data or add new rows.
+        Now we will protect our urls. From now on anybody can read anything, but only the logged in users can modify data.
+        We have already installed <b>djangorestframework-jwt</b>, now we do the settings in the <b>settings.py</b>.
+        Add these codes to the file. <br>
+        <pre><code class="language-python">
+                from datetime import timedelta
+  
+                REST_FRAMEWORK = {
+                    'DEFAULT_PERMISSION_CLASSES': (
+                        'rest_framework.permissions.IsAuthenticated',
+                        #'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+                    ),
+                    'DEFAULT_AUTHENTICATION_CLASSES': (
+                        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+                        # 'rest_framework.authentication.SessionAuthentication',
+                        # 'rest_framework.authentication.BasicAuthentication',
+                    ),
+                }
+                # JWT settings
+                JWT_AUTH = {
+                    'JWT_ENCODE_HANDLER':
+                    'rest_framework_jwt.utils.jwt_encode_handler',
+                
+                    'JWT_DECODE_HANDLER':
+                    'rest_framework_jwt.utils.jwt_decode_handler',
+                
+                    'JWT_PAYLOAD_HANDLER':
+                    'rest_framework_jwt.utils.jwt_payload_handler',
+                
+                    'JWT_PAYLOAD_GET_USER_ID_HANDLER':
+                    'rest_framework_jwt.utils.jwt_get_user_id_from_payload_handler',
+                
+                    'JWT_RESPONSE_PAYLOAD_HANDLER':
+                    'rest_framework_jwt.utils.jwt_response_payload_handler',
+                
+                    'JWT_SECRET_KEY': SECRET_KEY,
+                    'JWT_GET_USER_SECRET_KEY': None,
+                    'JWT_PUBLIC_KEY': None,
+                    'JWT_PRIVATE_KEY': None,
+                    'JWT_ALGORITHM': 'HS256',
+                    'JWT_VERIFY': True,
+                    'JWT_VERIFY_EXPIRATION': True,
+                    'JWT_LEEWAY': 0,
+                    'JWT_EXPIRATION_DELTA': timedelta(seconds=3000),
+                    'JWT_AUDIENCE': None,
+                    'JWT_ISSUER': None,
+                
+                    'JWT_ALLOW_REFRESH': False,
+                    'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=7),
+                
+                    'JWT_AUTH_HEADER_PREFIX': 'JWT',
+                    'JWT_AUTH_COOKIE': None,
+                }
+        </code></pre>
+
+        Next we have separated our urls to separate the read access from the others.
+        <pre><code class="language-django">
+                urlpatterns = [
+                path('pagetypes/', views.pagetype_list),
+                path('pagetype/<int:pk>/', views.pagetype_detail),
+                path('pagetype-post/', views.pagetype_post),
+                path('pagetype-put/<int:pk>/', views.pagetype_put),
+                path('webpages/', views.webpage_list),
+                path('webpage/<int:pk>/', views.webpage_detail),
+                path('webpage-name/<str:name>/', views.webpage_name),
+                path('webpage-post/', views.webpage_post),
+                path('webpage-put/<int:pk>/', views.webpage_put),
+            ]
+        </code></pre>
+
+        Now here is the new <b>views.py</b> file. In our <b>setting.py</b> we have did the settings so, that only authenticated
+        users can see anything. Here in this file, we allow the access to the read methods for anybody. So here we overwrite the 
+        base settings.
+        <pre><code class="language-django">
+                from django.http import HttpResponse, JsonResponse
+                from django.views.decorators.csrf import csrf_exempt
+                from rest_framework.views import APIView
+                from rest_framework.renderers import JSONRenderer
+                from rest_framework.parsers import JSONParser
+                from webpages.models import PageType
+                from webpages.serializers import PageTypeSerializer
+                from webpages.models import WebPage
+                from webpages.serializers import WebPageSerializer
+                from rest_framework.decorators import api_view, permission_classes
+                from rest_framework import permissions
+                
+                
+                # Page Type List
+                @csrf_exempt
+                @api_view(['GET'])
+                @permission_classes([permissions.AllowAny,]) # everybody cab access it
+                def pagetype_list(request):
+                
+                    pagetypes = PageType.objects.all()
+                    serializer = PageTypeSerializer(pagetypes, many=True)
+                    return JsonResponse(serializer.data, safe=False)
+                
+                
+                # Get One Page Type
+                @csrf_exempt
+                @api_view(['GET'])
+                @permission_classes([permissions.AllowAny,]) # everybody can access it
+                def pagetype_detail(request, pk):
+                    pagetype = PageType()
+                    try:
+                        pagetype = PageType.objects.get(pk=pk)
+                    except pagetype.DoesNotExist:
+                        return HttpResponse(status=404) # Not Found
+                
+                    serializer = PageTypeSerializer(pagetype)
+                    return JsonResponse(serializer.data)
+                
+                # Post a new page type
+                @csrf_exempt
+                @api_view(['POST'])
+                def pagetype_post(request):
+                
+                    data = JSONParser().parse(request)
+                    serializer = PageTypeSerializer(data=data)
+                    if serializer.is_valid():
+                        serializer.save()
+                        return JsonResponse(serializer.data, status=201)
+                    return JsonResponse(serializer.errors, status=400) # Bad request
+                
+                # Update or delete a Page type
+                @csrf_exempt
+                @api_view(['PUT','DELETE'])
+                def pagetype_put(request, pk):
+                    pagetype = PageType()
+                    try:
+                        pagetype = PageType.objects.get(pk=pk)
+                    except pagetype.DoesNotExist:
+                        return HttpResponse(status=404) # Not Found
+                    
+                    # Update one page type
+                    if request.method == 'PUT':
+                        data = JSONParser().parse(request)
+                        serializer = PageTypeSerializer(pagetype, data=data)
+                        if serializer.is_valid():
+                            serializer.save()
+                            return JsonResponse(serializer.data)
+                        return JsonResponse(serializer.errors, status=400)
+                    
+                    # detete one page type
+                    elif request.method == 'DELETE':
+                        pagetype.delete()
+                        return HttpResponse(status=204)
+                
+                # Get all web pages
+                @csrf_exempt
+                @api_view(['GET'])
+                @permission_classes([permissions.AllowAny,]) # everybody can access it
+                def webpage_list(request):
+                
+                    webpages = WebPage.objects.all()
+                    serializer = WebPageSerializer(webpages, many=True)
+                    return JsonResponse(serializer.data, safe=False)
+                
+                
+                # Get a web page by ID
+                @csrf_exempt
+                @api_view(['GET'])
+                @permission_classes([permissions.AllowAny,]) # everybody can access it
+                def webpage_detail(request, pk):
+                    webpage = WebPage()
+                    try:
+                        webpage = WebPage.objects.get(pk=pk)
+                    except webpage.DoesNotExist:
+                        return HttpResponse(status=404)
+                
+                    serializer = WebPageSerializer(webpage)
+                    return JsonResponse(serializer.data)
+                
+                # Get a web page by Name
+                @csrf_exempt
+                @api_view(['GET'])
+                @permission_classes([permissions.AllowAny,]) # everybody can access it
+                def webpage_name(request, name):
+                    webpage = WebPage()
+                    try:
+                        webpage = WebPage.objects.get(name=name)
+                    except webpage.DoesNotExist:
+                        return HttpResponse(status=404)
+                   
+                    serializer = WebPageSerializer(webpage)
+                    return JsonResponse(serializer.data)
+                
+                
+                # Post a new webpage
+                @csrf_exempt
+                @api_view(['POST'])
+                def webpage_post(request):
+                
+                    data = JSONParser().parse(request)
+                    serializer = WebPageSerializer(data=data)
+                    if serializer.is_valid():
+                        serializer.save()
+                        return JsonResponse(serializer.data, status=201)
+                    return JsonResponse(serializer.errors, status=400)
+                
+                # Update or delete a webpage
+                @csrf_exempt
+                @api_view(['PUT','DELETE'])
+                def webpage_put(request, pk):
+                    webpage = WebPage()
+                    try:
+                        webpage = WebPage.objects.get(pk=pk)
+                    except webpage.DoesNotExist:
+                        return HttpResponse(status=404)
+                
+                    # update one web page    
+                    if request.method == 'PUT':
+                        data = JSONParser().parse(request)
+                        serializer = WebPageSerializer(webpage, data=data)
+                        if serializer.is_valid():
+                            serializer.save()
+                            return JsonResponse(serializer.data)
+                        return JsonResponse(serializer.errors, status=400)
+                    
+                    # delete one web page
+                    elif request.method == 'DELETE':
+                        webpage.delete()
+                        return HttpResponse(status=204)
+        </code></pre>
+
+        </div>
+        <div id="mvt">
+          <h1>Model, View, Template</h1>
+          We already have seen the model-view-template approach in the REST API part. Now let's see it in the normal mode.
+          Just for remember, our <b>webpages</b> model is:
+        <pre><code class="language-django">
+                from django.db import models
+
+                class PageType(models.Model):
+                    name = models.CharField(max_length=128, unique=True)
+                    def __str__(self):
+                        return self.name
+                
+                class WebPage(models.Model):
+                    pagetype = models.ForeignKey(PageType, on_delete=models.CASCADE)
+                    name = models.CharField(max_length=128,unique=True)
+                    about = models.CharField(max_length=128)
+                    url = models.URLField(max_length=254)
+                    official = models.BooleanField()
+                    date = models.DateField()
+                    
+                    def __str__(self):
+                        return self.name
+        </code></pre>
+
+          Now, let's the <b>view</b> part. I have put this function in the same <b>views.py</b> file where the REST functions are.
+        <pre><code class="language-django">
+                from django.shortcuts import render
+                ....
+                
+                def webpage_list_django(request):
+                    
+                    webpages = WebPage.objects.order_by('name')
+                    webpage_dict = {"webpages":webpages}
+                    return render(request,'webpages/webpages.html',context=webpage_dict)
+        </code></pre>  
+
+          Next see the template! 
+          Notice, how we have passed the parameters in the <b>if</b> and in the <b>for</b> directives in the template.
+        <pre><code class="language-html">
+                &lt!DOCTYPE html&gt
+                &lthtml&gt
+                  &lthead&gt
+                    &ltmeta charset="utf-8"&gt
+                    &lttitle&gtWeb Pages&lt/title&gt
+                  &lt/head&gt
+                  &ltbody&gt
+                    &lth1&gtHere are the web pages:&lt/h1&gt
+                
+                    {% if webpages %}
+                        &lttable&gt
+                            &ltthead&gt
+                            &ltth&gtId&lt/th&gt
+                            &ltth&gtName&lt/th&gt
+                            &ltth&gtAbout&lt/th&gt
+                            &ltth&gtUrl&lt/th&gt
+                            &ltth&gtPage Type&lt/th&gt
+                            &ltth&gtDate&lt/th&gt
+                            &ltth&gtOfficial&lt/th&gt
+                            &lt/thead&gt
+                
+                            {% for webpage in webpages %}
+                            &lttr&gt
+                                &lttd&gt&#123;&#123;webpage.id&#125;&#125;&lt/td&gt
+                                &lttd&gt&#123;&#123;webpage.name&#125;&#125;&lt/td&gt
+                                &lttd&gt&#123;&#123;webpage.about&#125;&#125;&lt/td&gt
+                                &lttd&gt&#123;&#123;webpage.url&#125;&#125;&lt/td&gt
+                                &lttd&gt&#123;&#123;webpage.pagetype&#125;&#125;&lt/td&gt
+                                &lttd&gt&#123;&#123;webpage.date&#125;&#125;&lt/td&gt
+                                &lttd&gt&#123;&#123;webpage.official&#125;&#125;&lt/td&gt
+                            &lt/tr&gt
+                            {% endfor %}
+                        &lt/table&gt 
+                
+                    {% else %}
+                        &ltp&gtNo Web Pages Records. Table is empty.&lt/p&gt
+                
+                    {% endif %}
+                  &lt/body&gt
+                &lt/html&gt
+        </code></pre>
+
+          Then I have renamed the <b>urls.py</b> file in the <b>webpages</b> folder to <b>urls-rest.py</b> and I have created a new
+          <b>urls.py</b> file:
+        <pre><code class="language-django">
+                from django.urls import path
+                from webpages import views
+                
+                urlpatterns = [
+                    path('webpages/', views.webpage_list_django),
+                
+                ]
+        </code></pre>
+
+          Finally I have changed the main <b>urls.py</b> file:
+        <pre><code class="language-django">
+                urlpatterns = [
+                path('', include('home.urls')),
+                path('admin/', admin.site.urls),
+                path('rest/', include('webpages.urls-rest')), # rest api
+                path('', include('webpages.urls')), # Sites here in django
+                path('api-token-auth/', obtain_jwt_token),
+                path('ml/', include('ml.urls')),
+            ]
+        </code></pre>
+
+        
+        </div>
+        
+        <div id="form">
+        <h1>Django Forms</h1>
+        First create a <b>forms.py</b> file. In our example I have created a Django <b>form</b> for insert a new <b>webpage</b> 
+        and a <b>ModelForm</b> for insert a <b>pagetype</b>. In the normal form we have done more validations. Botcacher is a simple 
+        hidden field against bots.
+        <pre><code class="language-django">
+                from django import forms
+                from django.core import validators
+                from .models import PageType, WebPage
+                
+                def own_validator(value):
+                    if value[0].upper() =='X':
+                        raise forms.ValidationError("Do not do that: Name starting with X?")
+                    if value == 'aaa':
+                        raise forms.ValidationError("Invalid name")
+                
+                class PageTypeForm(forms.ModelForm):
+                    class Meta:
+                        model = PageType
+                        fields = '__all__'
+                
+                class WebPageForm(forms.Form):
+                        
+                    name = forms.CharField(max_length=128,validators=[own_validator])
+                    pagetype = forms.ModelChoiceField(queryset=PageType.objects.all())
+                    about = forms.CharField(widget=forms.Textarea)
+                    url = forms.URLField(max_length=254)
+                    official = forms.BooleanField(required =  False)
+                    date = forms.DateField()
+                    botcatcher = forms.CharField(required =  False, widget = forms.HiddenInput, 
+                                                validators=[validators.MaxLengthValidator(0)])
+                
+                
+                    # def clean(self):
+                    #     all_clean_data = super().clean()
+                    #     name = all_clean_data ['name']
+                    #     botcatcher = all_clean_data ['botcatcher']
+                
+                    #     if name == 'aaa':
+                    #          raise forms.ValidationError("Invalid name")
+                    #     if name[0].upper() =='X':
+                    #         raise forms.ValidationError("Do not do that: Name starting with X?")
+        </code></pre>
+
+        Next we have created two functions in the <b>views.py</b> file. <b>PageTypeForm</b> is a <b>ModelForm</b>, so we can save it into 
+        the database more simple. <b>WebPageForm</b> is a simple <b>form</b>, so we have to grab its values and store it in the model and save the model.
+        <pre><code class="language-django">
+                def webpage_form(request):
+                form = WebPageForm()
+            
+                if request.method == 'POST':
+                    form = WebPageForm(request.POST)
+            
+                    if form.is_valid():
+                        model = WebPage()
+                        model.name = form.cleaned_data['name']
+                        model.about = form.cleaned_data['about']
+                        model.url = form.cleaned_data['url']
+                        model.date = form.cleaned_data['date']
+                        model.pagetype = form.cleaned_data['pagetype']
+                        model.official = form.cleaned_data['official']
+                        model.save()
+                        return webpage_list_django(request)
+                    else:
+                        print("webpage form invalid")
+            
+                return render(request,'webpages/webpage_form.html',{'form':form})
+            
+            
+            def pagetype_form(request):
+                form = PageTypeForm()
+                
+                if request.method == 'POST':
+                    form = PageTypeForm(request.POST)
+               
+                    if form.is_valid():
+                        print(" PAGETYPE VALIDATION SUCCESS!")
+                        form.save(commit=True)
+                        return webpage_list_django(request)
+            
+                    else:
+                        print("Pagetype form invalid")
+            
+                return render(request,'webpages/pagetype_form.html',{'form':form})
+        </code></pre>
+
+        After that we have to set the urls for the view functions.
+        <pre><code class="language-django">
+                urlpatterns = [
+                path('webpages/', views.webpage_list_django),
+                path('webpage/', views.webpage_form),
+                path('pagetype/', views.pagetype_form),
+            ]
+        </code></pre>
+
+        Finally we have created the templates, one for the <b>WebPage</b>:
+        <pre><code class="language-html">
+                &lt!DOCTYPE html&gt
+                &lthtml&gt
+                  &lthead&gt
+                    &ltmeta charset="utf-8"&gt
+                    &lttitle&gtForms&lt/title&gt
+                    &ltlink rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+                    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"&gt
+                  &lt/head&gt
+                  &ltbody&gt
+                
+                    &lth1&gtFill out the Web Page form!&lt/h1&gt
+                    &ltdiv class="container"&gt
+                      &ltform method="POST"&gt
+                          &#123;&#123; form.as_p &#125;&#125;
+                          {% csrf_token %}
+                        &ltinput type="submit" class="btn btn-primary" value="Submit"&gt
+                      &lt/form&gt
+                    &lt/div&gt
+                
+                  &lt/body&gt
+                &lt/html&gt
+        </code></pre>
+
+        and one for the <b>PageType</b>:
+        <pre><code class="language-html">
+                &lt!DOCTYPE html&gt
+                &lthtml&gt
+                  &lthead&gt
+                    &ltmeta charset="utf-8"&gt
+                    &lttitle&gtForms&lt/title&gt
+                    &ltlink rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+                    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"&gt
+                  &lt/head&gt
+                  &ltbody&gt
+                
+                    &lth1&gtInsret Page type&lt/h1&gt
+                    &ltdiv class="container"&gt
+                      &ltform method="POST"&gt
+                          &#123;&#123; form.as_p &#125;&#125;
+                          {% csrf_token %}
+                        &ltinput type="submit" class="btn btn-primary" value="Submit"&gt
+                      &lt/form&gt
+                    &lt/div&gt
+                
+                  &lt/body&gt
+                &lt/html&gt
+        </code></pre>
+
+        We have put some <b>Bootstrap</b> css in them too. Check the form tag, it is for the form values. 
+        The <b>csrf_token</b> is for security reason.
+        </div>
+        
+        <div id="template">
+        <h1>Templates</h1>
+        <h2>Relative urls</h2>
+        In the template files we can use relative urls. First we have to register the app names in the <b>urls.py</b> file.
+        <pre><code class="language-django">
+                # SET THE NAMESPACE!
+                app_name = 'webpages'
+                
+                urlpatterns = [
+                    path('webpages/', views.webpage_list_django,name='webpage_list'),
+                    path('webpage/', views.webpage_form, name='webpage_form'),
+                    path('pagetype/', views.pagetype_form, name='pagetype_form'),
+                ]
+        </code></pre>
+
+        Next in the template file we can refer to it.
+        <pre><code class="language-html">
+                &ltdiv class="navbar-nav"&gt
+                &lta class="navbar-brand" href="{% url 'home:home' %}"&gtHome&lt/a&gt
+                &lta class="nav-item nav-link" href="{% url 'webpages:webpage_list' %}"&gtWeb page list&lt/a&gt
+                &lta class="nav-item nav-link" href="{% url 'webpages:webpage_form' %}"&gtNew Web page&lt/a&gt
+                &lta class="nav-item nav-link" href="{% url 'webpages:pagetype_form' %}"&gtNew Page Type&lt/a&gt
+                &lta class="nav-item nav-link" href="{% url 'ml:iris' %}"&gtIris&lt/a&gt
+            &lt/div&gt
+            
+        </code></pre>
+         <h2>Base templates</h2>
+        In Django we can use template inheritance. First create a <b>base.html</b>  template. I put it in the <b>templates</b> folder in the project folder.
+        Write in it everything, that you want to see on every pages, for example the header, the navigation bar, the footer, the main css and so on.
+        The content of the other sites will go between the <b>block</b> and <b>endblock</b> directives.
+        <pre><code class="language-html">
+                &lt!DOCTYPE html&gt
+                {% load static %} 
+                &lthtml&gt
+                  &lthead&gt
+                    &ltmeta charset="utf-8"&gt
+                    &lttitle&gtBase&lt/title&gt
+                    &lt!-- Latest compiled and minified CSS --&gt
+                    &ltlink rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+                    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"&gt
+                    &ltlink rel="stylesheet" href="{% static "/css/mystyle.css" %}"/&gt
+                  &lt/head&gt
+                  &ltbody&gt
+                    &ltnav class="navbar navbar-expand-lg navbar-light bg-light"&gt
+                      &ltdiv class="navbar-nav"&gt
+                        &lta class="navbar-brand" href="{% url 'home:home' %}"&gtHome&lt/a&gt
+                        &lta class="nav-item nav-link" href="{% url 'webpages:webpage_list' %}"&gtWeb page list&lt/a&gt
+                        &lta class="nav-item nav-link" href="{% url 'webpages:webpage_form' %}"&gtNew Web page&lt/a&gt
+                        &lta class="nav-item nav-link" href="{% url 'webpages:pagetype_form' %}"&gtNew Page Type&lt/a&gt
+                        &lta class="nav-item nav-link" href="{% url 'ml:iris' %}"&gtIris&lt/a&gt
+                      &lt/div&gt
+                    &lt/nav&gt
+                
+                    &ltdiv class="container"&gt
+                        {% block body_block %}
+                        {# Anything outside of this will be inherited if you use extend.#}
+                        {% endblock %}
+                    &lt/div&gt
+                
+                        
+                    &ltscript src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"&gt&lt/script&gt
+                    &ltscript src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"&gt&lt/script&gt
+                    &ltscript src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"&gt&lt/script&gt
+                
+                  &lt/body&gt
+                &lt/html&gt
+        </code></pre>
+
+        Now, let's see how to refer to the <b>base.html</b>
+        <pre><code class="language-html">
+                &lt!DOCTYPE html&gt
+                {% extends "base.html" %}
+                  {% block body_block %}
+                    &lth1&gtHere are the web pages:&lt/h1&gt
+                    &lth2&gt&#123;&#123; text|cutout:"cool" &#125;&#125;&lt/h2&gt
+                
+                    {% if webpages %}
+                        &lttable&gt
+                            &ltthead&gt
+                            &ltth&gtId&lt/th&gt
+                            &ltth&gtName&lt/th&gt
+                            &ltth&gtAbout&lt/th&gt
+                            &ltth&gtUrl&lt/th&gt
+                            &ltth&gtPage Type&lt/th&gt
+                            &ltth&gtDate&lt/th&gt
+                            &ltth&gtOfficial&lt/th&gt
+                            &lt/thead&gt
+                
+                            {% for webpage in webpages %}
+                            &lttr&gt
+                                &lttd&gt&#123;&#123;webpage.id&#125;&#125;&lt/td&gt
+                                &lttd&gt&#123;&#123;webpage.name&#125;&#125;&lt/td&gt
+                                &lttd&gt&#123;&#123;webpage.about&#125;&#125;&lt/td&gt
+                                &lttd&gt&#123;&#123;webpage.url&#125;&#125;&lt/td&gt
+                                &lttd&gt&#123;&#123;webpage.pagetype&#125;&#125;&lt/td&gt
+                                &lttd&gt&#123;&#123;webpage.date&#125;&#125;&lt/td&gt
+                                &lttd&gt&#123;&#123;webpage.official&#125;&#125;&lt/td&gt
+                            &lt/tr&gt
+                            {% endfor %}
+                        &lt/table&gt 
+                
+                    {% else %}
+                        &ltp&gtNo Web Pages Records. Table is empty.&lt/p&gt
+                
+                    {% endif %}
+                {% endblock %}
+        </code></pre>
+
+        
+        <h2>Template filter</h2>
+        A template filter is the same as the <b>pipe</b> in <b>Angular</b>, you can modify the content of the template variable. 
+        There are built in template filters and you can make your own. See examples about them:
+        <pre><code class="language-html">
+            &lth1&gt&#123;&#123;title | title&#125;&#125;&lt/h1&gt
+            &lth2&gt&#123;&#123;text | upper&#125;&#125;&lt/h2&gt
+            
+            ....
+            
+            &lth2&gt&#123;&#123; text|cutout:"cool" &#125;&#125;&lt/h2&gt
+        </code></pre>
+
+        
+        Here is the code of the custom filter. You have to put it in the <b>templatetag</b> folder in your app folder.
+        <pre><code class="language-django">
+            from django import template
+            register = template.Library()
+            
+            @register.filter
+            def cutout(value, arg):
+                return value.replace(arg, '')
+        </code></pre>
+
+        
+        </div>
+        <div id="auth">
+        <h1>Authentication</h1>
+        We use the built in hashing algorithm, but you can install, if you want. For example: <br>
+        <b>pip install bcrypt</b>. 
+        After that you have to set some values in the <b>settings.py</b> file. For more, please see the documentation. <br>
+        We would like to upload images, for that we have installed this: <br>
+        <b>pip install pillow </b> <br>
+        For the upload images create a <b>media</b> folder in the project folder, in that create an <b>auth_app</b> folder and in it 
+        a <b>profile_pic</b> folder. In the <b>settings.py</b> set write this:
+        <pre><code class="language-django">
+            MEDIA_DIR = os.path.join(BASE_DIR, "media")
+            ..
+            MEDIA_ROOT = MEDIA_DIR
+            MEDIA_URL='/media/'
+        </code></pre>
+
+        First create a new app: <br>
+        <b>python manage.py startapp auth_app</b>
+        Then register it in the <b>settings.py</b>  file. <br>
+        In the app create an <b>urls.py</b> then do not forget include it in the main <b>urls.py</b>
+        <pre><code class="language-django">
+            app_name = 'auth_app'
+
+            urlpatterns = [
+                path('login/', views.user_login,name='user_login'),
+                path('logout/', views.user_logout,name='user_logout'),
+                path('register/', views.register,name='register'),
+            ]
+        </code></pre>
+ 
+        We make a new model, which will extend the Django <b>user</b> table, so in the <b>models.py</b>
+        <pre><code class="language-django">
+            from django.db import models
+            from django.contrib.auth.models import User
+            
+            # Create your models here.
+            class UserProfileInfo(models.Model):
+            
+                # Create relationship (don't inherit from User!)
+                user = models.OneToOneField(User, on_delete=models.CASCADE)
+            
+                # Add any additional attributes 
+                portfolio_site = models.URLField(blank=True)
+                profile_pic = models.ImageField(upload_to='auth_app/profile_pics',blank=True)
+            
+                def __str__(self):
+                    # Built-in attribute of django.contrib.auth.models.User !
+                    return self.user.username
+            
+        </code></pre>
+
+        Then register it in the <b>admin.py</b>
+        <pre><code class="language-django">
+            from django.contrib import admin
+            from .models import UserProfileInfo
+            
+            admin.site.register(UserProfileInfo)
+        </code></pre>
+
+        After that start the command line editor and migrate it: <b></b>
+        <b>python manage.py makemigrations auth_app</b> <br>
+        <b>python manage.py migrate</b> <br>
+        
+        Now create a the forms for registration and login (forms.py): <br>
+        <pre><code class="language-django">
+            from django import forms
+            from django.contrib.auth.models import User
+            from .models import UserProfileInfo
+            
+            class UserForm(forms.ModelForm):
+                password = forms.CharField(widget=forms.PasswordInput())
+            
+                class Meta():
+                    model = User
+                    fields = ('username','email','password')
+            
+            
+            class UserProfileInfoForm(forms.ModelForm):
+                class Meta():
+                    model = UserProfileInfo
+                    fields = ('portfolio_site','profile_pic')
+            
+        </code></pre>
+
+        In the <b>views.py</b> see the login, logout method and the <b>login_required</b> directive! 
+        We have applied it in other views too in the <b>webpages</b> app.
+        <pre><code class="language-django">
+            from django.shortcuts import render
+            from .forms import UserForm,UserProfileInfoForm
+            
+            # Extra Imports for the Login and Logout Capabilities
+            from django.contrib.auth import authenticate, login, logout
+            from django.http import HttpResponseRedirect, HttpResponse
+            from django.urls import reverse
+            from django.contrib.auth.decorators import login_required
+            
+            @login_required
+            def user_logout(request):
+                # Log out the user.
+                logout(request)
+                # Return to homepage.
+                return HttpResponseRedirect(reverse('home:home'))
+            
+            def register(request):
+            
+            
+                registered = False
+            
+                if request.method == 'POST':
+            
+                    # Get info from "both" forms
+                    # It appears as one form to the user on the .html page
+                    user_form = UserForm(data=request.POST)
+                    profile_form = UserProfileInfoForm(data=request.POST)
+            
+                    # Check to see both forms are valid
+                    if user_form.is_valid() and profile_form.is_valid():
+            
+                        # Save User Form to Database
+                        user = user_form.save()
+            
+                        # Hash the password
+                        user.set_password(user.password)
+            
+                        # Update with Hashed password
+                        user.save()
+            
+                        # Now we deal with the extra info!
+            
+                        # Can't commit yet because we still need to manipulate
+                        profile = profile_form.save(commit=False)
+            
+                        # Set One to One relationship between
+                        # UserForm and UserProfileInfoForm
+                        profile.user = user
+            
+                        # Check if they provided a profile picture
+                        if 'profile_pic' in request.FILES:
+                            print('found it')
+                            # If yes, then grab it from the POST form reply
+                            profile.profile_pic = request.FILES['profile_pic']
+            
+                        # Now save model
+                        profile.save()
+            
+                        # Registration Successful!
+                        registered = True
+            
+                    else:
+                        # One of the forms was invalid if this else gets called.
+                        print(user_form.errors,profile_form.errors)
+            
+                else:
+                    # Was not an HTTP post so we just render the forms as blank.
+                    user_form = UserForm()
+                    profile_form = UserProfileInfoForm()
+            
+                # This is the render and context dictionary to feed
+                # back to the registration.html file page.
+                return render(request,'auth_app/registration.html',
+                                      {'user_form':user_form,
+                                       'profile_form':profile_form,
+                                       'registered':registered})
+            
+            def user_login(request):
+            
+                if request.method == 'POST':
+                    # First get the username and password supplied
+                    username = request.POST.get('username')
+                    password = request.POST.get('password')
+            
+                    # Django's built-in authentication function:
+                    user = authenticate(username=username, password=password)
+            
+                    # If we have a user
+                    if user:
+                        #Check it the account is active
+                        if user.is_active:
+                            # Log the user in.
+                            login(request,user)
+                            # Send the user back to some page.
+                            # In this case their homepage.
+                            return HttpResponseRedirect(reverse('home:home'))
+                        else:
+                            # If account is not active:
+                            return HttpResponse("Your account is not active.")
+                    else:
+                        print("Someone tried to login and failed.")
+                        print("They used username: {} and password: {}".format(username,password))
+                        return HttpResponse("Invalid login details supplied.")
+            
+                else:
+                    #Nothing has been provided for username or password.
+                    return render(request, 'auth_app/login.html', {})
+            
+            
+        </code></pre>
+
+        
+        
+        The last step is to create the templates. Registration:
+        <pre><code class="language-html">
+            {% extends "base.html" %}
+            {% load staticfiles %}
+            
+            {% block body_block %}
+              &ltdiv class="container"&gt
+                &ltdiv class="jumbotron"&gt
+                  {% if registered %}
+                    &lth1&gtThank you for registering!&lt/h1&gt
+                  {% else %}
+                    &lth1&gtRegister Here&lt/h1&gt
+                    &lth3&gtJust fill out the form.&lt/h3&gt
+            
+                    &ltform enctype="multipart/form-data" method="POST"&gt
+                      {% csrf_token %}
+                      &#123;&#123; user_form.as_p &#125;&#125;
+                      &#123;&#123; profile_form.as_p &#125;&#125;
+                      &ltinput type="submit" name="" value="Register"&gt
+                    &lt/form&gt
+            
+                  {% endif %}
+            
+                &lt/div&gt
+            
+              &lt/div&gt
+            
+            {% endblock %}
+            
+        </code></pre>
+
+        Login:
+        <pre><code class="language-html">
+            {% extends 'base.html' %}
+            {% block body_block %}
+              &ltdiv class="container"&gt
+                &ltdiv class="jumbotron"&gt
+                  &lth1&gtPlease Login&lt/h1&gt
+            
+                    &ltform method="post" action="{% url 'auth_app:user_login' %}"&gt
+                      {% csrf_token %}
+                      &ltlabel for="username"&gtUsername:&lt/label&gt
+                      &ltinput type="text" name="username" placeholder="Username"&gt
+            
+                      &ltlabel for="password"&gt&lt/label&gt
+                      &ltinput type="password" name="password"&gt
+            
+                      &ltinput type="submit" name="" value="Login"&gt
+            
+                    &lt/form&gt
+            
+                &lt/div&gt
+              &lt/div&gt
+            {% endblock %}
+        </code></pre>
+
+        Here is the modified base template:
+        <pre><code class="language-html">
+            &ltnav class="navbar navbar-expand-lg navbar-light bg-light"&gt
+            &ltdiv class="navbar-nav"&gt
+              &lta class="navbar-brand" href="{% url 'home:home' %}"&gtHome&lt/a&gt
+              &lta class="nav-item nav-link" href="{% url 'webpages:webpage_list' %}"&gtWeb page list&lt/a&gt
+              &lta class="nav-item nav-link" href="{% url 'webpages:webpage_form' %}"&gtNew Web page&lt/a&gt
+              &lta class="nav-item nav-link" href="{% url 'webpages:pagetype_form' %}"&gtNew Page Type&lt/a&gt
+              &lta class="nav-item nav-link" href="{% url 'ml:iris' %}"&gtIris&lt/a&gt
+              {% if user.is_authenticated %}
+                &lta class="nav-link" href="{% url 'auth_app:user_logout' %}"&gtLogout&lt/a&gt
+              {% else %}
+                &lta class="nav-item nav-link" href="{% url 'auth_app:register' %}"&gtRegister&lt/a&gt
+                &lta class="nav-item nav-link" href="{% url 'auth_app:user_login' %}"&gtLogin&lt/a&gt
+              {% endif %}
+            &lt/div&gt
+            &lt/nav&gt
+        </code></pre>
+        
+        </div>
+        
+        </div>
+        <div id="view">
+        <h1>Views</h1>
+        By now we have used functions for views, next we will use classes. There are several class views for easy building
+        web pages. In the <b>urls.py</b> files we have to refer to a class view so:
+        <pre><code class="language-django">
+            urlpatterns = [
+            path('', views.HomeView.as_view(), name='home'),
+        
+        ]
+        </code></pre>
+
+        First see a simple view, a logout class view. See, the method decorator too!
+        <pre><code class="language-django">
+            @method_decorator(login_required, name='get')
+            class UserLogoutView(View):
+                # Log out the user.
+                def get(self,request):
+                    logout(request)
+                    # Return to homepage.
+                    return HttpResponseRedirect(reverse('home:home'))
+        </code></pre>
+
+        Now see a template view. It is for a simple page with parameters.
+        <pre><code class="language-django">
+            from django.views.generic import (TemplateView)
+
+            class HomeView(TemplateView):
+                template_name = 'home/index.html'
+                def get_context_data(self,**kwargs):
+                    context  = super().get_context_data(**kwargs)
+                    context['title'] = "This is the isdcbackend site"
+                    context['text'] = 'Welcome'
+                    return context
+        </code></pre>
+
+        A list view is for listing items list. You can use a query method in the class.
+        <pre><code class="language-django">
+            class WebpageListView(ListView):
+            template_name = 'webpages/webpages.html'
+            context_object_name = 'webpages'
+            model = WebPage
+        
+            def get_context_data(self, **kwargs):
+                context = super().get_context_data(**kwargs)
+                context['text'] = 'These are my favorite cool webpages'
+                return context
+        
+            def get_queryset(self):
+                return WebPage.objects.order_by('name')
+        </code></pre>
+
+        It is a detail view.
+        <pre><code class="language-django">
+            class WebPageDetailView(DetailView):
+            context_object_name = 'webpage_details'
+            model = WebPage
+            template_name = 'webpages/webpage_detail.html'
+        </code></pre>
+
+        And the html: 
+        <pre><code class="language-html">
+            {% extends "base.html" %}
+            {% block body_block %}
+              &ltdiv class="jumbotron"&gt
+                &lth1&gtWelcome to the Web Page Detail Page&lt/h1&gt
+                &lth2&gtWeb Page Details:&lt/h2&gt
+                &ltp&gtId_num: &#123;&#123;webpage_details.id&#125;&#125;&lt/p&gt
+                &ltp&gtName: &#123;&#123;webpage_details.name&#125;&#125;&lt/p&gt
+                &ltp&gtAbout: &#123;&#123;webpage_details.about&#125;&#125;&lt/p&gt
+                &ltp&gtUrl: &#123;&#123;webpage_details.url&#125;&#125;&lt/p&gt
+                &ltp&gtPage Type: &#123;&#123;webpage_details.pagetype&#125;&#125;&lt/p&gt
+                &ltp&gtDate: &#123;&#123;webpage_details.date&#125;&#125;&lt/p&gt
+                &ltp&gtOfficial: &#123;&#123;webpage_details.official&#125;&#125;&lt/p&gt
+            {% endblock %}
+        </code></pre>
+ 
+        Now let's see a create view for creating a new record. If you are not logged in, it will redirect you to the login page.
+        <pre><code class="language-django">
+            class PageTypeCreateView(LoginRequiredMixin,CreateView):
+            template_name = 'webpages/pagetype_form.html'
+            #fields = ("name",)
+            
+            login_url = '/auth/login/'
+            form_class = PageTypeForm
+            model = PageType
+        </code></pre>
+
+        The update view is very similar to it:
+        <pre><code class="language-django">
+            class PageTypeUpdateView(LoginRequiredMixin,UpdateView):
+            template_name = 'webpages/pagetype_form.html'
+            fields = ("name",)
+            login_url = '/auth/login/'
+            model = PageType
+        </code></pre>
+
+        Here is the html for both:
+        <pre><code class="language-html">
+            &lt!DOCTYPE html&gt
+            {% extends "base.html" %}
+              {% block body_block %}
+                {% if not form.instance.pk %}
+                  Create Page Type
+                {% else %}
+                  Update Page Type
+                {% endif %}
+                  &ltform method="POST"&gt
+                      &#123;&#123; form.as_p &#125;&#125;
+                      {% csrf_token %}
+            
+                    &ltinput type="submit" class="btn btn-primary" value="Submit"&gt
+                  &lt/form&gt
+            
+            {% endblock %}
+        </code></pre>
+        
+        Now delete view. It is a confirmation page for deleting.
+        <pre><code class="language-django">
+            class WebPageDeleteView(LoginRequiredMixin,DeleteView):
+            template_name = 'webpages/webpage_delete.html'
+            model = WebPage
+            login_url = '/auth/login/'
+            success_url = reverse_lazy("webpages:webpage_list")
+        </code></pre>
+
+        And the html for it:
+        <pre><code class="language-html">
+            {% extends "base.html" %}
+            {% block body_block %}
+              &ltdiv class="jumbotron"&gt
+                &lth1&gtDelete &#123;&#123;webpage.name&#125;&#125;?&lt/h1&gt
+            
+                &ltform method="post"&gt
+                  {% csrf_token %}
+                  &ltinput type="submit" class="btn btn-danger" value="Delete"&gt
+                  &lta href="{% url 'webpages:webpage_list' %} "&gtCancel&lt/a&gt
+                
+                &lt/form&gt
+            
+            {% endblock %}
+        </code></pre>
+        
+        </div>
+        <div id="accounts">
+          <h1>Django accounts</h1>
+        For registration, login and logout <b>Django</b> offers a much simpler method, than we have seen before. <br>
+        The model:
+        <pre><code class="language-django">
+            from django.db import models
+            from django.utils import timezone
+            from django.contrib import auth
+            
+            class User(auth.models.User, auth.models.PermissionsMixin):
+            
+                def __str__(self):
+                    return "@{}".format(self.username)
+        </code></pre>
+
+        The <b>forms.py</b>
+        <pre><code class="language-django">
+            from django.contrib.auth import get_user_model
+            from django.contrib.auth.forms import UserCreationForm
+            
+            
+            class UserCreateForm(UserCreationForm):
+                class Meta:
+                    fields = ("username", "email", "password1", "password2")
+                    model = get_user_model()
+            
+                def __init__(self, *args, **kwargs):
+                    super().__init__(*args, **kwargs)
+                    self.fields["username"].label = "Display name"
+                    self.fields["email"].label = "Email address"
+        </code></pre>
+
+        The view:
+        <pre><code class="language-django">
+            from .forms import UserCreateForm
+            from django.urls import reverse_lazy
+            from django.views.generic import CreateView
+            
+            class SignUp(CreateView):
+                form_class = UserCreateForm
+                success_url = reverse_lazy("login")
+                template_name = "accounts/signup.html"
+        </code></pre>
+
+        And the urls:
+        <pre><code class="language-django">
+            from django.urls import path
+            from .import views
+            from django.contrib.auth import views as auth_views
+            
+            # SET THE NAMESPACE!
+            app_name = 'accounts'
+            
+            urlpatterns = [
+                path('login/', auth_views.LoginView.as_view(template_name="accounts/login.html"),name='login'),
+                path('logout/', auth_views.LogoutView.as_view(), name="logout"),
+                path('register/', views.SignUp.as_view(),name='register'),
+        </code></pre>
+
+        The main url:
+        <pre><code class="language-django">
+            urlpatterns = [
+            path('', views.HomeView.as_view(), name='home'),
+            path('test/', views.TestPage.as_view(), name="test"),
+            path('thanks/', views.ThanksPage.as_view(), name="thanks"),
+            path('admin/', admin.site.urls),
+            path('rest/', include('webpages.urls-rest')), # rest api
+            path('', include('webpages.urls')), # Sites here in django
+            path('api-token-auth/', obtain_jwt_token),
+            path('ml/', include('ml.urls')),
+            path('accounts/', include("accounts.urls", namespace="accounts")),
+            path('accounts/', include("django.contrib.auth.urls")),
+            ]
+        </code></pre>
+
+        The login template:
+        <pre><code class="language-html">
+            {% extends "base.html" %}
+
+            {% load bootstrap4 %}
+            
+            {% block body_block %}
+            &ltdiv class="container"&gt
+              &lth1&gtLogin&lt/h1&gt
+              &ltform method="POST" class="form"&gt
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                {% buttons %}
+                  &ltbutton type="submit" class="btn btn-primary"&gtLogin&lt/button&gt
+                {% endbuttons %}
+              &lt/form&gt
+            &lt/div&gt
+            {% endblock %}
+        </code></pre>
+
+        And the registration template:
+        <pre><code class="language-html">
+            {% extends "base.html" %}
+            {% load staticfiles %}
+            
+            {# at the terminal, run pip install django-bootstrap4 #}
+            {% load bootstrap4 %}
+            
+            {% block body_block %}
+            &ltdiv class="container"&gt
+              &lth1&gtSign Up&lt/h1&gt
+              &ltform method="POST" class="form"&gt
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                {% buttons %}
+                  &ltbutton type="submit" class="btn btn-primary"&gtSign Up&lt/button&gt
+                {% endbuttons %}
+              &lt/form&gt
+            &lt/div&gt
+            {% endblock %}
+        </code></pre>
+
+        And the <b>settings.py</b>
+        <pre><code class="language-django">
+            INSTALLED_APPS = [
+            'bootstrap4',
+            ]
+            
+            LOGIN_REDIRECT_URL = 'test'
+            LOGOUT_REDIRECT_URL = 'thanks'
+        </code></pre>
+
+        </div>
+        <div id="bootstrap">
+        <h1>Bootstrap</h1>
+        We can use some <b>Bootstrap</b> style and Javascripts. Fisrt install Django Booststrap. <br>
+        <b>pip install django-bootstrap4</b> <br>
+        Most of the design elements we have applied in the <b>base.html</b>
+        <pre><code class="language-html">
+            &lt!DOCTYPE html&gt
+            {% load static %} 
+            &lthtml&gt
+              &lthead&gt
+                &ltmeta charset="utf-8"&gt
+                &lttitle&gtISDCBackend
+                  {% block title_block %}
+                  {% endblock %}
+            
+                &lt/title&gt
+                &lt!-- Latest compiled and minified CSS --&gt
+                &ltlink rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+                integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"&gt
+            
+                &lt!-- Optional theme --&gt
+                &lt!-- &ltlink rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"&gt --&gt
+            
+                &lt!-- Alternative to Bootstrap 3 Glyphicons --&gt
+                &ltlink href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"&gt
+            
+                &ltlink href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"&gt
+            
+                &ltlink rel="stylesheet" href="{% static 'css/master.css'%}"&gt
+              &lt/head&gt
+              &ltbody&gt
+                &ltnav class="navbar navbar-expand-lg bg-dark mynav" role="navigation" id="navbar"&gt
+                  &ltdiv class="container"&gt
+                    &ltdiv class="navbar-nav align-items-center"&gt
+                      &lta class="navbar-brand mynav" href="{% url 'home' %}"&gtHome&lt/a&gt
+                    &lt/div&gt
+                    &ltdiv class="navbar-nav ml-auto"&gt
+                      &lta class="nav-item nav-link" href="{% url 'webpages:webpage_list' %}" class="btn btn-simple"&gtWeb page list&lt/a&gt
+                      &lta class="nav-item nav-link" href="{% url 'webpages:pagetype_list' %}" class="btn btn-simple"&gtPage Type list&lt/a&gt
+                      &lta class="nav-item nav-link" href="{% url 'ml:iris' %}" class="btn btn-simple"&gtML Iris&lt/a&gt
+                      {% if user.is_authenticated %}
+                        &lta class="nav-item nav-link" href="{% url 'webpages:webpage_form' %}" class="btn btn-simple"&gtNew Web Page&lt/a&gt
+                        &lta class="nav-item nav-link" href="{% url 'webpages:pagetype_form' %}" class="btn btn-simple"&gtNew Page Type&lt/a&gt
+                        &lta class="nav-item nav-link" href="{% url 'accounts:logout' %}" class="btn btn-simple"&gtLog out&lt/a&gt
+                      {% else %}
+                        &lta class="nav-item nav-link" href="{% url 'accounts:login' %}" class="btn btn-simple"&gtLog in&lt/a&gt
+                        &lta class="nav-item nav-link" href="{% url 'accounts:register' %}" class="btn btn-simple"&gtSign up&lt/a&gt
+                      {% endif %}
+                    &lt/div&gt
+                  &lt/div&gt
+                &lt/nav&gt
+                &ltdiv class="container"&gt
+                    {% block body_block %}
+                    {% endblock %}
+                &lt/div&gt
+                &ltcanvas id="canvas"&gt&lt/canvas&gt
+            
+                &ltscript src="{% static "js/master.js"%}" type="text/javascript" &gt&lt/script&gt
+            
+                &lt!-- Latest compiled and minified jQuery --&gt
+                &ltscript src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"&gt&lt/script&gt
+                &lt!-- Latest compiled and minified JavaScript --&gt
+                &ltscript src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"&gt&lt/script&gt
+            
+              &lt/body&gt
+            &lt/html&gt
+        </code></pre>
+
+        Our own css:
+        <pre><code class="language-css">
+            html,
+            body {
+              height: 100%;
+              width: 100%;
+              overflow: hidden;
+              background: black;;
+              color: white;
+              margin: 0;
+            }
+            
+            pre {
+              color: white;
+            }
+            
+            
+            .jumbotron{
+              color: black!important;
+            } 
+        </code></pre>
+
+        </div>
+
+</div>
+</div>
+</main>
+{{> footer}}
+    <script src="/assets/js/prism.js"></script>
+</body>
+</html>

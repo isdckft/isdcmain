@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Pure HTML!</title>
+<link rel="stylesheet" href="/assets/css/bootstrap.min.css"/>
+</style>
+</head>
+<body>
+ 
+<div class="container">
+        <h1>Simple HTML Page</h1>
+        Here is an "a" tag, a link: <br>
+        <a href="https://www.djangoproject.com/">
+          Here is a link to the official Django Website</a>
+        
+        <p>Here is a picture of the Python Logo:</p>
+        <img src="https://www.python.org/static/community_logos/python-logo-master-v3-TM.png" alt="">
+        
+        <p>Here is an ordered list</p>
+          <ol>
+            <li>First one</li>
+            <li>Second</li>
+            <li>Third</li>
+          </ol>
+        
+        <h2>This is the first form, request with GET</h2>
+        
+        <p>Please Note: First Name, Last Name, Password, and Email are required</p>
+        <form action="https://postman-echo.com/get" method="get">
+          
+          <h3>Click on the color picker</h3>
+          <input type="color" >
+          <br>
+          <label for="FirstName">First Name:</label>
+          <input type="text" id="FirstName" placeholder="First Name" required name="firstname" value="">
+        
+          <label for="LastName">Last Name:</label>
+          <input type="text" id="LastName" placeholder="Last Name" required name="lastname" value="">
+          <p></p>
+        
+          <label for="email">Email:</label>
+          <input type="email" id="email" placeholder="name@email.com" name="email" value="">
+        
+          <label for="pass">Password:</label>
+          <input type="password" id="pass" name ="password" value="123">
+          <br>
+          <input type="submit" name="" value="Submit with GET">
+          After clicking the button, check the URL !
+        
+        
+        <h2>This is the second form, request with POST</h2>
+        <form action="https://postman-echo.com/post" method="post">
+          <p>Do you have a Credit Card or PayPal?</p>
+          <select name="payment">
+            <option value="cc">Credit Card</option>
+            <option value="pp">PayPal</option>
+          </select>
+        
+          <p>Are you over the age of 18?</p>
+          <label for="yes">Yes:</label>
+          <input type="radio" name="Over18" id="yes" value="yesOver">
+          <label for="no">No:</label>
+          <input type="radio" name="Over18" id="no" value="noOver">
+          <br>
+          <input type="submit" name="" value="Submit with POST">
+        </form>
+        <h2>Table</h2>
+        <table border="2">
+        
+        
+            <thead>
+              <th>Country Name</th>
+              <th>Country Flag</th>
+              <th>GDP (Millions of USD)</th>
+            </thead>
+            <tr>
+              <td>USA</td>
+              <td><img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/190px-Flag_of_the_United_States.svg.png" alt=""></td>
+              <td> 18,561,930</td>
+            </tr>
+            <tr>
+              <td>India</td>
+              <td><img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/150px-Flag_of_India.svg.png" alt=""></td>
+              <td> 2,250,990</td>
+            </tr>
+            <tr>
+              <td>United Kingdom</td>
+              <td><img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Flag_of_the_United_Kingdom.svg/200px-Flag_of_the_United_Kingdom.svg.png" alt=""></td>
+              <td>2,649,890</td>
+            </tr>
+        
+            </table>
+<section>
+  <h1>Django REST API from here</h1>
+<p>(4 ways of writing AJAX requests)</p>
+<section class="container">
+  <button id="xhr">XHR</button>
+  <button id="fetch">Fetch</button>
+  <button id="jquery">jQuery</button>
+  <button id="axios">Axios</button>
+</section>
+
+
+<p id="quote">Quote Goes Here...</p>
+</section>
+
+</div>
+<script src="/assets/js/axios.min.js"></script>
+
+<script src="/assets/js/jquery-slim.min.js" ></script>
+<script src="/assets/js/popper.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/ajax.js"></script>
+</body>
+</html>
+
+ 

@@ -1,0 +1,17 @@
+{
+  "test": {
+    "PORT": 4200,
+    "MONGODB_URI": "mongodb://isdccosmos:OZ146Rjm4EoYAQmiyyQb7s9KgV00Zg9gKPfKoFygf2R0JPmLnXYhGiGBY9qlLHTaDBHj2XBv74Spe2ugxuxcDA==@isdccosmos.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&maxIdleTimeMS=120000&appName=@isdccosmos@",
+    "JWT_SECRET": "poijasdf98435jpgfdpoij3"
+  },
+  "development": {
+    "PORT": 4200,
+    "MONGODB_URI": "mongodb://isdccosmos:OZ146Rjm4EoYAQmiyyQb7s9KgV00Zg9gKPfKoFygf2R0JPmLnXYhGiGBY9qlLHTaDBHj2XBv74Spe2ugxuxcDA==@isdccosmos.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&maxIdleTimeMS=120000&appName=@isdccosmos@",
+    "JWT_SECRET": "pojiaj234oi234oij234oij4"
+  },
+  "production": {
+    "PORT": 4200,
+    "MONGODB_URI": "mongodb://isdccosmos:OZ146Rjm4EoYAQmiyyQb7s9KgV00Zg9gKPfKoFygf2R0JPmLnXYhGiGBY9qlLHTaDBHj2XBv74Spe2ugxuxcDA==@isdccosmos.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&maxIdleTimeMS=120000&appName=@isdccosmos@",
+    "JWT_SECRET": "pojiaj234oi234oij234oij4"
+  }
+}

@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-10805370-17"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-10805370-17');
+</script>
+<!-- Global adsence code -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-6352873787606567",
+          enable_page_level_ads: true
+     });
+</script>
+<meta charset="utf-8" />
+<link rel="icon" href="favicon.png" />
+<title>Tutorial-JavaScript</title>
+<link rel="stylesheet" href="/assets/css/bootstrap.min.css"/>
+<link href="/assets/css/prism.css" rel="stylesheet" />   
+   
+</head> 
+<body>
+{{> menu}}
+<main role="main">
+<div class="jumbotron">
+<div class="container">
+    <h1>{{pageTitle}}</h1>
+    JavaScript is the language of the Web developing, that the browser understands. You can run JavaScript commands in your browsers console.
+    About <b>JavaScript</b> you can learn here: <a id ="testsid" href="https://www.w3schools.com/js/" target="_blank" rel="noopener noreferrer">https://www.w3schools.com/js/</a>
+    <br>
+    <a href="#basics">Basics</a> <br>
+    <a href="#dom">DOM</a> <br>
+    <a href="#jquery">JQuery</a> <br>
+    <a href="#array">Array</a> <br>
+    <a href="#callback">Callback function</a> <br>
+    <a href="#promise">Promise</a> <br>
+
+    
+    <div id="basics">
+        <h1>Basics</h1>
+        Some commands, that you can try in your Web browser console (F12): <br>
+        <ul>
+        <li>alert("something") : displays alert popup </li>
+        <li>clear() : clears the browser console</li>
+        <li>console.log("something") : output to the console</li>
+        <li>var a = prompt("something"): ask for an input and puts it into the variable</li>
+        <li>var a = 100; var b = 50; var c = a + b;</li>
+        </ul> <br>
+        Connect the <b>JavaScript</b> with <b>HTML</b> write this in the <b>html</b> file for example in the <b>head</b> part:
+        <pre><code class="lang-html">
+        &ltscript src="my.js"&gt &lt/script&gt
+        </code></pre>
+    
+        Simple <b>if</b> statement:
+        <pre><code class="lang-javascript">
+        if (temp > 30){
+            console.log("Hot summer!")
+        } else if(temp <= 30 && temp >= 15){
+                console.log('Nice weather!')
+        } else if(temp <= 15 && temp >= 0){
+                console.log("Its cooler outside!")
+        } else{
+                console.log("Its really cold!")
+        }
+        </code></pre>
+ 
+        Loops: <br>
+        <pre><code class="lang-javascript">
+        var x =0;
+        while(x < 5){
+            console.log("x is currently: "+ x);
+            x = x+1;
+        } 
+        
+        for (i = 0; i < 5; i++) {
+            console.log("Number is " + i );
+        }
+        </code></pre>
+
+        Function:
+        <pre><code class="lang-javascript">
+        // Multiplies input by 3
+        function times3(num) {
+            var result = num * 3
+            return result
+        }
+        
+        var a = times3(5)
+        console.log(a)
+        </code></pre>
+
+        Arrays:
+        <pre><code class="lang-javascript">
+        var arr = ['one','two','three'];
+        var matrix = [[1,2,3],[4,5,6],[7,8,9]];
+        
+        //going through on an array
+        for(var i = 0;i &lt arr.length;i++){
+            console.log(arr[i])
+        }
+        
+        var arr = ['A','B','C'];
+        
+        // going through on an array
+        for (letter of arr) {
+            console.log(letter);
+        }
+        
+        // add a new elemet to the array
+        arr.push("D");
+        
+        // remove an element from an array
+        var index = arr.indexOf("C");
+        arr.splice(index,1)
+        
+        // removes the last element
+        arr.pop();
+        
+        // removes the first element
+        arr.shift();  
+        
+        // Adds a new element in the beginning
+        arr.unshift("something");    
+        
+        // change element
+        arr[0] = "Z";   
+        
+        // add new elements
+        arr.splice(2, 0, "D", "E");
+        </code></pre>
+
+        JavaScript object is a key-value pair like in python the <b>dictionary</b>. Although the JavaScript object can have a function in it.
+        <pre><code class="lang-javascript">
+        var carInfo = { type: "Suzuki", year: 2000 , model: "Vitara" };
+        carInfo["model"];
+        
+        var multi = { a: "hello", b: ['x','y','z'] , c: {'inner': [ 4 ,5, ["abc",2]]}};
+        
+        // Grabbing the letter z:
+        multi['b'][2];
+        
+        // Grabbing "abc":
+        multi['c']['inner'][2][0];
+        
+        // change it
+        multi['c']['inner'][2][0]="de";
+        
+        // Iterate through object:
+        for (var key in multi) {
+            // Remember there is no order!
+            console.log(key)
+            console.log(multi[key])
+            console.log("\n")
+        }
+        
+        // Object method
+        // You'll need to use the "this" keyword
+        var carInfo = {
+            type: "Suzuki",
+            year: 2000 ,
+            model: "Vitara" ,
+            carAlert: function(){
+            alert('Your car info is, type: '+this.type+ " year: "+this.year+ " model:"+this.model)
+            }
+        };
+        
+        carInfo.carAlert();
+        </code></pre>
+
+        By now we have learnt about "vanilla" <b>JavaScript</b>, what means only plain JavaScript.
+    <h2>Closure function and this</h2>
+    It is important to understand <a href="https://www.w3schools.com/js/js_function_closures.asp" target="_blank" rel="noopener noreferrer">what is closure</a> and the 
+    <a href="https://www.w3schools.com/js/js_this.asp" target="_blank" rel="noopener noreferrer">this keyword</a>.
+    
+    
+    </div>
+    
+    <div id="dom">
+        <h1>DOM : Document Object Model</h1>
+        More here: <a href="https://www.w3schools.com/js/js_htmldom.asp" target="_blank" rel="noopener noreferrer">https://www.w3schools.com/js/js_htmldom.asp</a>
+        <br>
+        You can check the <b>document object</b> of your website on the console: <br>
+        <b>console.dir(document)</b> <br>
+        You can see, that the <b>document</b> is a <b>JavaSricpt</b> object! <br>
+        <p>Here are some important document attributes:</p>
+        <ul>
+        <li>document.URL    -- This is the actual URL of the website</li>
+        <li>document.body   -- This is everything inside of the body</li>
+        <li>document.head   -- This is everything in the head of the page</li>
+        <li>documnet.links  -- These are all the links on the page</li>
+        </ul>
+        <p>Then we also have methods we can use to grab HTML elements:</p>
+        <ul>
+        <li>document.getElementById() -- Returns the element with the id</li>
+        <li>document.getElementsByClassName() -- Returns list of all elements belonging to a class</li>
+        <li>document.getElementsByTagName() -- Returns list of all elements with the tag</li>
+        <li>document.querySelector() -- Returns the first object matching the CSS style selector</li>
+        <li>document.querySelectorAll() -- Returns all objects matching the CSS style selector</li>
+        </ul>
+    
+        For example grab a paragraph: <br>
+        <pre><code class="lang-javascript">
+        var x = document.querySelector("p");
+        x.textContent //  This returns just the text
+        x.innerHTML   // This returns the actual html
+        x.getAttribute("href")  // This returns the original attribute
+        x.setAttribute("href","https://www.amazon.com") // This allowed you to set an attribute
+        </code></pre>
+
+    
+        To handle events:
+        <pre><code class="lang-javascript">
+        var x = document.querySelector('h1')
+
+        // Hover (mouseover and mouseout)
+        x.addEventListener('mouseover',function(){
+            x.textContent = "Mouse currently Over";
+            x.style.color = 'red';
+        })
+        </code></pre>
+ 
+    
+        Here is a simple tic-tac-toe with <b>JavaScript</b> code:
+        It works here: 
+        <a  href="/basic/basicjavascript.html" >Basic JavaScript</a>  
+        <pre><code class="lang-html">
+        &lt!DOCTYPE html&gt
+        &lthtml&gt
+            &lthead&gt
+                &ltmeta charset="utf-8"&gt
+                &lttitle&gtTic Tac Toe&lt/title&gt
+                &ltlink rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"&gt
+                &ltlink rel="stylesheet" href="GameCSS.css"&gt
+            &lt/head&gt
+            
+            &ltbody&gt
+                &ltdiv class="container"&gt
+            
+            
+            &ltdiv class="jumbotron"&gt
+                &lth1&gtWelcome to Tic Tac Toe!&lt/h1&gt
+            
+            &ltp&gt&lta id='b' class="btn btn-primary btn-lg" href="#" role="button"&gtRestart!&lt/a&gt&lt/p&gt
+            &lt/div&gt
+                &lttable align='center'&gt
+                &lttr&gt
+                    &lttd&gt&lt/td&gt
+                    &lttd&gt&lt/td&gt
+                    &lttd&gt&lt/td&gt
+                &lt/tr&gt
+                &lttr&gt
+                    &lttd&gt&lt/td&gt
+                    &lttd&gt&lt/td&gt
+                    &lttd&gt&lt/td&gt
+                &lt/tr&gt
+                &lttr&gt
+                    &lttd&gt&lt/td&gt
+                    &lttd&gt&lt/td&gt
+                    &lttd&gt&lt/td&gt
+                &lt/tr&gt
+            
+                &lt/table&gt
+            
+            
+            &ltscript type="text/javascript" src='Game.js'&gt&lt/script&gt
+            &lt/div&gt
+            &lt/body&gt
+            
+        &lt/html&gt
+               
+        </code></pre>
+
+        <pre><code class="lang-javascript">
+        // Restart Game Button
+        var restart = document.querySelector('#b');
+        
+        // Grab all the squares
+        var squares = document.querySelectorAll("td");
+        
+        
+        // Clear Squares Function
+        function clearBoard() {
+          for (var i = 0; i < squares.length; i++) {
+              squares[i].textContent = '';
+          }
+        
+        }
+        restart.addEventListener('click',clearBoard)
+
+        // Create a function that will check the square marker
+        function changeMarker(){
+            if(this.textContent === ''){
+              this.textContent = 'X';
+              // console.log(marker)
+            }else if (this.textContent === 'X') {
+              this.textContent = 'O';
+            }else {
+              this.textContent = '';
+            }
+        };
+        
+        // Use a for loop to add Event listeners to all the squares
+        for (var i = 0; i < squares.length; i++) {
+            squares[i].addEventListener('click', changeMarker);
+        }
+        
+        
+
+        </code></pre>
+
+    </div>
+    
+    <div id="jquery">
+        <h1>jQuery</h1>
+        Read about jQuery here: <a href="https://www.w3schools.com/jquery/" target="_blank" rel="noopener noreferrer">https://www.w3schools.com/jquery/</a>
+        <br>
+        <b>jQuery</b>  is a JavaScript Library. jQuery greatly simplifies JavaScript programming. Angular does not need <b>jQuery</b>,
+        but <b>Bootstrap</b> uses it. Some examples:
+        <pre><code class="lang-javascript">
+        // Grab the h1 header:
+        $('h1');
+        
+        // Save it to variable:
+        var x = $('h1');
+        
+        // You can easily edit the css properties:
+        x.css("color",'red');
+        x.css("background","blue");
+        
+        // Multiple CSS properties at once:
+        var newCSS = {
+            "color":"white",
+            "background":"blue",
+            "border":"red"
+        }
+        
+        x.css(newCSS);
+        
+        // On Click
+        $('h1').click(function(){
+            console.log("There was a click!");
+        })
+        
+        // on()  works like addEventListener()
+        $('h1').on("dblclick",function() {
+            $('h1').addClass('turnBlue');
+        })
+        
+        $('li').on('mouseenter',function() {
+            $(this).toggleClass('turnRed');
+        })
+        
+        // keypress
+        $('input').eq(0).keypress(function() {
+            $('h3').toggleClass("turnRed");
+        })
+        </code></pre>
+
+    </div>
+
+    <div><a id="array"></a>
+        <h1>Array function</h1>
+        <ul>
+            <li><b>forEach</b>: iterates through the array, returns nothing</li>
+            <li><b>map</b>: iterates through the array, returns an array with the same size</li>
+            <li><b>filter</b>: iterates through the array, returns a new array with the elements that match the criterion</li>
+            <li><b>some</b>: iterates through the array, returns a boolean if some criterion matches</li>
+            <li><b>every</b>: iterates through the array, returns a boolean if all criterion matches</li>
+            <li><b>reduce</b>: iterates through the array,accumulates the values</li>
+        </ul>
+        <h2>Slice</h2>
+        The slice() method returns a shallow copy of a portion of an array into a new array object selected from begin to end (end not included). 
+        The original array will not be modified.
+        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice" target="_blank" rel="noopener noreferrer">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice</a>
+    
+
+    </div>
+    
+    <div><a id="callback"></a>
+        <h1>Callback function</h1>
+    A callback function is a function that is passed as a parameter into another function than invoked by that other function.
+    A higher older function is a function that accepts a callback as a parameter.
+    <pre><code class="lang-javascript">
+        function callback() {
+        console.log("Coming from callback");
+        }
+
+        function higherOrder(fn) {
+        console.log("About to call callback");
+        fn(); // Callback function is invoked
+        console.log("Callback has been invoked");
+        }
+
+        higherOrder(callback);
+    </code></pre>
+
+    </div>
+    
+    <div><a id="promise"></a>
+        <h1>Promise</h1>
+   A promise is an object that represents a task that will be completed in the future. Since ES2015.
+    <pre><code class="lang-javascript">
+        var counter = 0;
+        function incCounter() {
+        counter++;
+        console.log("Counter:", counter);
+        }
+
+        function runLater(callback, timeInMs) {
+        var p = new Promise(function(resolve, reject) {
+            setTimeout(function() {
+            var res = callback();
+            resolve(res);
+            }, timeInMs);
+        });
+        return p;
+        }
+
+        runLater(incCounter, 1000).then(function() {
+        return runLater(incCounter, 2000);
+        }).then(function() {
+        return runLater(incCounter, 3000);
+        }).then(function() {
+        // final .then not necessary
+        });
+    </code></pre>
+
+    </div>
+    <div><a id="async"></a>
+        <h1>Async - await</h1>
+    Since ES2017.
+    <pre><code class="lang-javascript">
+        async function getMovieData(){
+            try {
+                var movieData = await $.getJSON('https://omdbapi.com?t=columbo&apikey=thewdb');
+                console.log(response.name);
+            } catch(e){
+                console.log("User does not exist!");
+            }
+        }
+        getMovieData();
+
+   </code></pre>
+
+    </div>
+   
+</div>
+</div>
+</main>
+{{> footer}}
+    <script src="/assets/js/prism.js"></script>
+</body>
+</html>

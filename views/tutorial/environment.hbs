@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-10805370-17"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-10805370-17');
+</script>
+<!-- Global adsence code -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-6352873787606567",
+          enable_page_level_ads: true
+     });
+</script>
+<meta charset="utf-8" />
+<link rel="icon" href="favicon.png" />
+<title>Tutorial-Install on Client</title>
+<link rel="stylesheet" href="/assets/css/bootstrap.min.css"/>
+<link href="/assets/css/prism.css" rel="stylesheet" />   
+     
+</head>
+<body>
+{{> menu}}
+<main role="main">
+<div class="jumbotron">
+<div class="container">
+  <h1>{{pageTitle}}</h1>
+
+    <p>
+      For developing porpoise you can choose any editor, 
+      personally I like Visual Studio Code, which you can download from here: 
+          <a href="https://code.visualstudio.com/download" target="_blank">https://code.visualstudio.com/download</a>. <br> 
+          I use it for Angular and for Python too.
+    </p>
+    <a href="#nodejs">Install Node.js</a> <br>
+    <a href="#angular">Install Angular</a> <br>
+    <a href="#newproject">Create your first Angular application</a> <br>
+    <a href="#bootstrap">Install Bootstrap</a> <br>
+    <a href="#other">Install Other libraries</a> <br>
+    <a href="#python">Install Python, Django</a> <br>
+    <a href="#djangoapp">Create a Django Application</a> <br>
+    <a href="#git">Push a project to Github</a> <br>
+    <a href="#angtogit">Push Angular project to Github</a> <br>
+    <a href="#pytogit">Push Python project to Github</a> <br>  
+    <a href="#heroku">Deploy to Heroku</a> <br>
+    <a href="#angheroku">Deploy Angular to Heroku</a> <br>
+    <a href="#pyherokut">Deploy the Django project to Heroku</a> <br>
+    <a href="#mongodb">Mongodb</a> <br>
+    
+    
+    <div  id="nodejs">
+      <h1>Install Node.js</h1>
+        First you have to download and install <b>Node.js and npm </b> from here: <a href="https://nodejs.org/en/" target="_blank">https://nodejs.org/en/</a>.
+        You can read more about Node.js here: <a href="https://www.npmjs.com/get-npm" target="_blank">https://www.npmjs.com/get-npm</a>.
+     
+    <br>
+      After installing Node.js, please start a Windows command line (cmd) and you can upgrade Node.js with the next command: <br>
+      <b>npm i -g npm-upgrade</b>  <br>
+      You can check the version number with this: <br>
+      <b>npm –version</b><br>
+      My version is currently: 5.6.0.<br>
+      <b>node –version</b><br>
+      My version is currently: 8.11.3.<br>
+    </div>
+    <div  id="angular">
+      <h1>
+        Install Angular
+      </h1>
+      Install Angular with this command:
+      <b>npm install -g @angular/cli</b> and check the version number <b>ng –version</b>. You can get a similar answer: <br>
+      <img src="/images/ngversion.jpg" alt="">
+    </div>
+    
+    
+    <div  id="newproject">
+      <h1>Create your first Angular application</h1>
+      Angular is a platform that makes it easy to build applications with the web. It is based on TypeScript, which is a typed superset of Javascript.
+      So your Angular source code will be compiled to Javasript. More about Angular here : <a href="https://angular.io/docs" target="_blank">https://angular.io/docs</a><br>
+      <p>
+      To create your first Angular application, please create a folder for your project and navigate into it, for example: <b>cd myproject</b>. 
+      Here create your first app:
+      <b>ng new isdcproject</b>
+      </p>
+      In your main folder you can see your newly created isdcproject folder and the files in it, something like this: <br>
+      <img src="/images/angularfiles.jpg" alt=""> <br>
+      Short explanations: <b>node_modules:</b> In this folder are located the Angular system modules and those which you will install later, for example Bootstrap. 
+      In the <b>src</b> folder is your source code, in <b>src/app</b> will be your apps, in the <b>src/assets</b> goes your image files. The <b>packages.json</b> and
+      <b>angular.json</b> files contains your settings.
+      <p>
+      Now navigate into your project folder i.e. <b>cd isdcproject</b> and start your local server: <br>
+      <b>ng serve</b>
+      <p>
+        Now your server is running, launch your browser an you can se your app running here: 
+        <a href="http://localhost:4200/">http://localhost:4200/</a>
+      <b> Nice job!</b></p>
+      <p>
+      Some comments: If you do not make your app from scratch, but you download it for Git or from other source, 
+      then likely in the package you won't find the <b>node modules</b> folder. 
+      Then you have to install it. In that case you have to navigate in your project folder (where the <b>package.json</b> file is located) and then: <br>
+      <b>npm install</b>
+      This command will create the <b>node_modules</b> folder based on the <b>package.json</b> file. After that run:
+      <b>npm run start</b>
+      Why not <b>ng serve</b>? Look at in the <b>package.json</b> file the <b>scripts</b> block! It is something like this: <br> <b> "start": "ng serve",</b>
+      <br>
+      So, basically the two commands do the same, but in a project <b>npm run start</b> can run other command too, so better use that! 
+      </p>
+    </div>
+    <div  id="bootstrap">
+      <h1>Install Bootstrap</h1>
+      As you know, for a web application you need HTML, CSS and Javascripct. 
+      So far we have talked about JacaScript, now we add Bootstrap to our Angular application to easy dealing with CSS. You can read more here:
+      <a href="https://getbootstrap.com/" target="_blank">https://getbootstrap.com/</a>. <br>
+      To install Bootstrap navigate to the project folder and install it: <br>
+      <b>npm install bootstrap jquery@^3.0.0  popper.js@^1.14.3</b> <br>
+      After the installation open the <b>styles.css</b> file and insert in it the next line: <br>
+      <pre><code class="language-css">
+        @import "~bootstrap/dist/css/bootstrap.css"; 
+      </code></pre>
+    
+      Or in the <b>Angular.json</b> file reference to the Bootstrap CSS. <br>
+      <pre><code class="language-json">
+        "styles": [
+        "node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "src/styles.css"
+        ],
+      </code></pre>
+
+      Next run your server with <b>ng serve</b> and you can see that the styles of the fonts have changed. <br><br>
+      Now we are ready with the basic installations! <br><br>
+    </div>
+    
+    <div id="other">
+        <h1>Install Other libraries</h1>
+        <ul>
+          <li><strong>npm i --save @ngx-prism/core</strong> : For nice looking code snipets in HTML </li>
+          <li><strong>npm i --save @types/prismjs@1.9.0 prismjs@1.9.0</strong> : dependencies to <b>ngx-prism</b> </li>
+          <li><strong>npm i lodash-es </strong> : dependency to <b>prism</b>. After installing them, import the <strong>PrismModule</strong> in the <strong>app.module.ts</strong>.</li>
+          <li><b>npm install rxjs-compat --save</b>: Back compatibility to lower than <b>rxjs6</b>. <br>
+          We are using Angular 6, but if you would like to know what is new in <b>Angular 6</b> or simple you
+        want to understand codes written in earlier version of <b>Angular</b> look this page: <br>
+            <a href="https://www.academind.com/learn/angular/snippets/angular-6-whats-new-angular-upgrade/" target="_blank" rel="noopener noreferrer">https://www.academind.com/learn/angular/snippets/angular-6-whats-new-angular-upgrade/</a>
+          </li>
+          <li><b>npm install ngx-bootstrap --save</b>: Angular for Bootstrap</li>
+          <li><b>npm install @tensorflow/tfjs</b>: Tensorflow for machine learning</li>
+          <li><b>npm install --save @ng-select/ng-select</b></li>
+    
+        </ul>
+        
+    </div>
+    <div id="python">
+        <h1>Install Python, Django</h1>
+        You can download it from here:
+        <a href="https://www.python.org/downloads/" target="_blank" rel="noopener noreferrer">https://www.python.org/downloads/</a>. 
+        
+        During the installation click "Add to path" checkbox. Next follow these steps: <br>
+        <ul>
+          <li><b>python -m pip install --upgrade pip</b> : upgrade pip<br></li>
+          <li><b>pip install virtualenvwrapper-win</b> : in Python we are going to use a virtual environment</li>
+          <li> <b>mkvirtualenv isdcp</b> : create a virtual environment</li>
+          <li><b>workon isdcp </b> : activate the virtual environment ( this step you always have to do when you will work with it</li>
+          <li><b>pip install django</b> : python framework</li>
+          <li><b>pip install djangorestframework</b> : Django framework for REST API</li>
+          <li><b>pip install djangorestframework-jwt</b> : for JWT tokens </li>
+          <li><b>pip install markdown</b></li>
+          <li><b>pip install django-filter</b></li>
+          <li><b>pip install gunicorn</b>  : for deploy to Heroku</li>
+          <li><b>pip install django-heroku</b> : for deploy to Heroku</li>
+          <li><b>pip install django-cors-headers</b> : for security reason</li>
+          <li><b>pip install django-bootstrap4</b></li>
+          <li><b>pip freeze > requirements.txt.</b> : you will need it to deploy to Heroku</li>
+          <li><b>pip install pillow </b>: for upload images</li> 
+          <li>pip install django-debug-toolbar: 
+            <a href="https://django-debug-toolbar.readthedocs.io/en/latest/installation.html" target="_blank" rel="noopener noreferrer">https://django-debug-toolbar.readthedocs.io/en/latest/installation.html</a>
+          </li>
+        </ul>
+    
+    
+    
+        About CORS  (Cross-Origin Resource Sharing) read more: <a href="https://www.html5rocks.com/en/tutorials/cors/">https://www.html5rocks.com/en/tutorials/cors/</a>
+       
+        <div  id="djangoapp">
+          <h1>Create your first Django Application</h1>
+          <ul>
+            <li>Start Command Prompt, then activate your environment(<b>workon isdcp</b>)</li>
+            <li>Create a new folder for your Python project and go into it, e.g.: <b>D:\isdcbackend</b> </li>
+            <li>Create the Django project: <b>django-admin startproject isdcbackend .</b> - Note the trailing '.' character </li>
+            <li>Create your first app: <b>python manage.py startapp webpages</b></li>
+            <li>Sync your database for the first time: <b>python manage.py migrate</b></li>
+            <li>Create your admin user: <b>python manage.py createsuperuser --email example@gmail.com --username admin</b> 
+              It will ask you for password.</li>
+            <li>Run the server: <b>python manage.py runserver</b></li>
+            <li>Open your browser: http://localhost:8000</li>
+          </ul>
+        
+          Next open  VScode. It is great for Python too. <br>
+        
+          You are going to see this: <br>
+          <img src="/images/spyder.jpg"> <br>
+        
+        
+          Django needs a database. By default it is an <b>sqLite</b> database, because it is preinstalled in the
+          <b>settings.py</b> at <b>DATABASE</b> property. See in your project folder the <b>db.sqlite3</b> file.
+          Next set your cors headers : <br>
+          In the <b>settings.py</b> insert these lines: <br>
+          <pre><code class="language-python">
+            INSTALLED_APPS = (
+                ...
+                'corsheaders'
+            
+                )MIDDLEWARE_CLASSES = (
+                'corsheaders.middleware.CorsMiddleware',
+            
+                CORS_ORIGIN_ALLOW_ALL = False
+            
+                CORS_ORIGIN_WHITELIST = (
+                  'localhost:4200', // Django will accept requests ONLY from this domain
+                )
+          </code></pre>
+      
+    </div>
+    <div  id="git">
+        <h1>Push a project to Github</h1>
+        First create an account on Github.com, then create a project under your account, for example "isdcproject". 
+        Actually we will create several projects, one for Angular and one for Python, but the basic steps are the same. <br>
+        After signing up in Github, go to your desktop device, in your command prompt console navigate to your project folder and type this: <br>
+        <ul>
+          <li><b> echo "# something" >> README.md</b> _: create a Readme file</li>
+          <li><b>git init</b> : If you do not have a <b>.git</b> file yet</li>
+          <li><b>git remote add origin https://github.com/isdckft/isdcproject.git</b> <br></li>
+        </ul> <br>
+        Github will ask for your username and password. Read more about how to use Git here: <br>
+        <a href="https://git-scm.com/" target="_blank" rel="noopener noreferrer">https://git-scm.com/</a> <br>
+        These steps were necessary only at the first time. After now, when you have to push the changes to the Github, do this: <br>
+        <ul>
+          <li><b>git rm -r --cached .</b>: if you have chaged <b>.gitigore</b></li>
+          <li>
+              <b>git add .</b>
+          </li>
+          <li><b>git commit -m "initial commit"</b></li>  
+          <li><b>git push -u origin master</b></li>
+        </ul>
+    
+    </div>
+    
+    <div  id="angtogit">
+      <h1>Push Angular  project to Github</h1>
+      First create an account on Github.com, then create a project under your account, for example "isdcproject". 
+      Next on your desktop device, in your command prompt console navigate to your project folder and type this: <br>
+      <b>git remote add origin https://github.com/isdckft/isdcproject.git</b> <br>
+      <b>git add .</b> <br>
+      <b>git commit -m "initial commit"</b> <br>
+      <b>git push -u origin master</b> <br>
+    
+    </div>
+    <div id="pytogit">
+        <h1>Deploy your Django project to Github</h1>
+        It is similar like pushing an Angular project to Github. First create your project in Github ( without readme file), 
+        then in your Python project folder create a <b>.gitignore</b> file and insert these lines: <br>
+        <pre><code class="language-ini">
+            *.pyc
+            db.sqlite3
+            __pycache__
+            local_settings.py
+        </code></pre>
+
+        Next in your project folder: <br>
+        <ul>
+          <li><b> echo "# isdcbackend" >> README.md</b></li>
+          <li><b>git init</b></li>
+          <li><b>git add .</b></li>
+          <li><b>git commit -m "initial commit"</b></li>
+          <li><b>git remote add origin https://github.com/isdckft/yourproject.git</b></li>
+          <li><b>git push -u origin master</b></li>
+        </ul>
+       
+      </div>
+    <div  id="heroku">
+        <h1>Deploy to Heroku</h1>
+        We are going to deploy both our Angular and our Python project to Heroku. Basic steps: <br>
+        <ul>
+          <li>
+              Sign up here: <a href="https://www.heroku.com/home" target="_blank" rel="noopener noreferrer">Heroku</a>.
+          </li>
+          <li> on <a href="https://dashboard.heroku.com/apps" target="_blank" rel="noopener noreferrer">Heroku dashboard</a> create a new app.</li>
+          <li>click on your app, you will see several menu items, like Overview, Resources, Deploy, Settings, etc.</li>
+          <li>In the <b>Overview</b> menu you can change your <b>dyno</b></li>
+          <li>In the <b>Resources</b> menu you can add an add-on, e.g. a database</li>
+          <li>In the <b>Deploy</b> menu you can set whether you want to deploy from Github or Heroku CLI. 
+            If you select Github, then you can connect your Github repository here. 
+            Bellow that you can choose whether you want to deploy manually or in automatic way.</li>
+          <li>In the <b>Settings</b>menu you can add your own domain if you want.</li>
+        </ul>
+        These steps above are the same both for Angular and Python applications. 
+        But in both you have to make special setting in your project settings. You will see it later.
+        
+      </div>
+      <div  id="angheroku">
+      <h1>Deploy Angular project to Heroku</h1>
+      
+      Step 1: Modify the <b>package.json</b> file: <br>
+      Insert these lines in the <b>"scripts"</b>  block: <br>
+      <b>
+          "start": "node server.js", <br>
+          "postinstall": "ng build --aot --prod" <br>
+      </b>
+      Insert this at the end : <br>
+      <b>
+        "engines": &#123; <br>
+          "node": "8.11.3", <br>
+          "npm": "5.6.0" <br>
+          &#125;
+      </b> <br>
+    
+      From the <b>"devDependencies"</b> block copy these lines to the <b>"dependencies"</b> block. <br>
+      <b>
+          "@angular-devkit/build-angular": "~0.8.0", <br>
+          "@angular/animations": "^6.1.0", <br>
+          "@angular/cli": "~6.2.4", <br>
+        "typescript": "~2.9.2", <br>
+        </b> <br>
+    
+      Step 2: Install express server : <br>
+      <b>
+      npm install express path –save
+      </b> <br>
+    
+      Step 3: Create an <b>"server.js</b> file in the project folder with the next content: <br>
+      <pre><code class="language-javascript">
+        const express = require('express'); 
+        const path = require('path'); 
+        const app = express();
+        app.use(express.static(__dirname + '/dist/isdcproject'));
+        app.get('/*', function(req,res) {
+            res.sendFile(path.join(__dirname+'/dist/isdcproject/index.html'));
+        }); 
+        app.listen(process.env.PORT || 8080);
+        </code></pre>
+
+    
+      Note: <b>"/dist/isdcproject"</b> is the same path which is in the <b>Angular.json</b> file at  
+      <b> "outputPath": "dist/isdcproject",</b>.
+      <b>Angular Universal</b> <br>
+      If you are working with <a href="/mystory/angularadvanced#universal">Angular Universal</a>, you have to adjust it to <b>Heroku</b>: <br>
+    
+    <ul>
+        <li>
+            Copy the compiled <b>server.js</b> file from the <b>dist</b> folder to the main folder.
+        </li>
+        <li>
+            In the <b>package.json</b> file add to the <b>postinstall</b> part: <br>
+            <pre><code class="language-typescript">
+                "postinstall": "ng build --aot --prod && ng run isdcproject:server",
+            </code></pre>
+
+    
+        </li>
+    </ul>
+    </div>
+    
+    
+    
+    
+    <div id="pyherokut">
+      <h1>Deploy the Django project to Heroku</h1>
+      Remember, our Angular project and Python project is two different things, 
+      basically they have got nothing in common. First create on Heroku a new app. 
+      Next in the <b>Deploy</b> menu set, that you will deploy it from Github.
+      After that in the <b>Resources</b> menu add an <b>add-on</b> to the app: <b>Heroku Postgre::Database</b>. 
+      Next click on the app and find the <b>Database Credentials</b> menu at dat database settings. 
+      Later you will need these data to the correct configuration. <br>
+      Now back to your Django application. We have to do some changes in order to deploy to Heroku.
+      <ul>
+        <li> In the project folder create a file with the name: <b>Procfile</b> and insert this line in it:
+         <b>web: gunicorn myproject.wsgi</b></li>
+         <li>Create a <b>runtime.txt</b> file and insert in it the version of Python, e.g. : <b>python-3.7.0</b></li>
+      </ul> <br>
+      Next go to the folder, where the <b>settings.py</b> is located and create a file named <b>local_settings.py</b> <br>
+      Copy these lines from the <b>settings.py</b> in it: <br>
+      Heroku sets the STATIC_ROOT variable to <b>staticfiles</b> and it will create this in your project folder.
+      <pre><code class="language-python">
+        import os
+        BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.sqlite3',
+                'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+              }
+            }
+        DEBUG = True
+        CORS_ORIGIN_WHITELIST = (
+            'localhost:4200',
+        )
+        </code></pre>
+
+     
+    
+      What does it mean? Locally you will use sqlit3.db, not PostgreSQL, 
+      you can see debug information and you can access the REST API-s from your local Angular application. <br> 
+      Next open the <b>settings.py</b> and make these changes. <br>
+      <pre><code class="language-python">
+        # At the top of the file put this: 
+        import django_heroku
+        import dj_database_url
+      
+        # SECURITY WARNING: don't run with debug turned on in production!
+        DEBUG = False
+      
+        # Set the correct cors whitelist.
+        CORS_ORIGIN_ALLOW_ALL=False
+        CORS_ORIGIN_WHITELIST = (
+            'isdcproject.herokuapp.com',
+            'www.isdcproject.com'
+        )
+      
+        # Application definition, insert CORS headers
+      
+        INSTALLED_APPS = [
+          ...
+            'corsheaders',
+          ...
+        ]
+      
+        # Database, set the credentials for the Heroku database (What you have found on the Heroku page. See above!): 
+      
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql_psycopg2',
+                'NAME': 'name-of-the-database',
+                'USER': 'username',
+                'PASSWORD': 'password',
+                'HOST': 'host',
+                'PORT': '5432',
+            }
+        }
+      
+        # Activate Django-Heroku at the bottom of the file
+      
+        django_heroku.settings(locals())
+        # include lcal settings for developer mode
+        try:
+            from .local_settings import *
+        except ImportError:
+            pass
+        </code></pre>
+      
+    However, if we would like to put some data in our database manually or just create a superuser on Heroku, then we have
+    to install the <b>Heroku CLI</b>. After installing navigate to the project folder and you can create a superuser so: <br>
+    <ul>
+      <li>Heroku login</li>
+      <li>heroku run python manage.py createsuperuser</li>
+      <li>heroku run python manage.py makemigrations webpages</li>
+      <li>heroku run python manage.py migrate </li>
+      <li>heroku config:set DISABLE_COLLECTSTATIC=1</li>
+      <li>heroku run  python manage.py collectstatic</li>
+      <li>heroku config:set DEBUG_COLLECTSTATIC=1</li>
+    
+    </ul>
+    Now you can login with your <b>Django Admin</b> on Heroku too.
+    </div>
+    
+    <div  id="mongodb">
+      Mongodb is a NoSQL database. You can read about it here: 
+      <a href="https://www.mongodb.com/" target="_blank" rel="noopener noreferrer">https://www.mongodb.com/</a>. You can download it from here: 
+      <a href="http://" target="_blank" rel="noopener noreferrer"></a>  <br>
+      You can download it from there. After installation : <br>
+      <ul>
+        <li>create somewhere a folder, where you will keep the mongo data, for example: <b>D:\mongodata</b></li>
+      <li>Then start the command prompt and go to the <b>Mongodb</b> <b>bin</b> forlder. For example: <b>C:\Program Files\MongoDB\Server\4.0\bin</b>. </li>
+      <li>start the db server: <b>mongod.exe --dbpath D:\mongodata</b>. Now the server is listening on the port: 27017</li>
+      <li>start a new command line, navigate to the same folder and make a connection to the db server: <b>mongo.exe</b></li>
+      <li>let's create a collection :
+      <pre><code class="lang-javascript">
+          db.inventory.insertMany([
+            // MongoDB adds the _id field with an ObjectId if _id is not present
+            { item: "journal", qty: 25, status: "A",
+                size: { h: 14, w: 21, uom: "cm" }, tags: [ "blank", "red" ] },
+            { item: "notebook", qty: 50, status: "A",
+                size: { h: 8.5, w: 11, uom: "in" }, tags: [ "red", "blank" ] },
+            { item: "paper", qty: 100, status: "D",
+                size: { h: 8.5, w: 11, uom: "in" }, tags: [ "red", "blank", "plain" ] },
+            { item: "planner", qty: 75, status: "D",
+                size: { h: 22.85, w: 30, uom: "cm" }, tags: [ "blank", "red" ] },
+            { item: "postcard", qty: 45, status: "A",
+                size: { h: 10, w: 15.25, uom: "cm" }, tags: [ "blue" ] }
+          ]);
+      </code></pre>
+      </li>
+      <li>Next find them:
+      <pre><code class="lang-javascript">
+          db.inventory.find( {} )
+      </code></pre>
+
+      </li>
+      <li>Install <b>Robo 3T</b>(formerly Robomongo, a GUI for <b>mongodb</b> or <b>Studio 3T</b> an IDE
+      from here: <a href="https://robomongo.org/" target="_blank" rel="noopener noreferrer">https://robomongo.org/</a></li>
+      </ul>
+
+    </div>
+           
+</div>
+</div>
+</main>
+{{> footer}}
+    <script src="/assets/js/prism.js"></script>
+</body>
+</html>

@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-10805370-17"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-10805370-17');
+</script>
+<!-- Global adsence code -->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-6352873787606567",
+          enable_page_level_ads: true
+     });
+</script>
+ 
+<meta charset="utf-8" />
+<link rel="icon" href="favicon.png" />
+<title>Tutorial - CSS</title>
+<link rel="stylesheet" href="/assets/css/bootstrap.min.css"/>
+<link href="/assets/css/prism.css" rel="stylesheet" />  
+</head>
+<body>
+{{> menu}}
+<main role="main">
+<div class="jumbotron">
+<div class="container">
+<h1>{{pageTitle}}</h1>
+<a href="#basics">CSS Basics</a> <br>
+<a href="#animation">Animation</a> <br>
+<a href="#fonts">Fonts</a> <br>
+<a href="#icons">Icons</a> <br>
+<a href="#bootstrap">Bootstrap</a> <br>
+<a href="#flexbox">Flexbox</a> <br>
+<a href="#scss">SCSS</a> <br>
+
+
+
+<div id = "basics">
+    <h1>CSS Basics</h1>
+    You can learn more about CSS here : <a href="https://www.w3schools.com/css/" 
+    target="_blank" rel="noopener noreferrer">https://www.w3schools.com/css/</a>
+    I have built a very simple HTML page with CSS. Check the different elements and the form.
+    Here is our primitive example: <a href="/basic/basiccss.html">Basic CSS</a>
+ 
+    <pre>
+    <code class="lang-html">
+    &lth1&gtThis a HTML page with CSS example&lt/h1&gt
+
+    &ltdiv class=""&gt
+        &ltp&gtThanks so much for visiting this site!&lt/p&gt
+    &lt/div&gt
+    
+    &lth2&gtWhat is this site for?&lt/h2&gt
+    &ltp&gtThis site can do three things:&lt/p&gt
+    &ltol&gt
+        &ltli id='itemone'&gtTake in text input&lt/li&gt
+        &ltli&gtTake in Log In Information&lt/li&gt
+        &ltli&gt&lta href="http://www.google.com" target="_blank" &gtTake you to Google&lt/a&gt&lt/li&gt
+    &lt/ol&gt
+    
+    &ltdiv class="blogtext"&gt
+        &lttextarea name="name" id="textblock"&gt&lt/textarea&gt
+    &lt/div&gt       
+    &lth2&gtPlease log in to save your blog post&lt/h2&gt       
+    &ltform class="loginForm" method="get"&gt
+        &ltlabel for="mail"&gtEmail: &lt/label&gt
+        &ltinput type="email" id="mail" value=""&gt       
+        &ltlabel for="pass"&gtPassword: &lt/label&gt
+        &ltinput type="password" id="pass" value=""&gt        
+        &ltinput type="submit" name="" value="Log In"&gt                
+    &lt/form&gt
+    
+    &ltdiv class="exit"&gt     
+        &ltp&gtQuestions or Comments? Send us feedback here:&lt/p&gt
+        &lttextarea name="name" rows="8" cols="80"&gt&lt/textarea&gt 
+    &lt/div&gt    
+    </code>
+    </pre>
+    <pre><code class="lang-css">
+    /*h1 have a 1px solid black border*/
+    h1{
+        border: 1px solid black;
+    }
+    
+    /* h2 elements has purple color, font-family: sans-serif*/
+    h2{
+        font-family: sans-serif;
+        color: purple;
+    }
+    
+    /*Input boxes have a 2px solid dark red border*/
+    input{
+        border: 2px solid rgb(144, 0, 0);
+    }
+    
+    /*paragraphs ha yellow backgroud color*/
+    div p{
+        background:#fffca5;
+    }
+    
+    /*Set Text box set a width,a height and border*/
+    
+    #textblock{
+        border: 4px solid gray;
+        width: 600px;
+        height: 300px;
+    }
+    
+    /*There is a link to Google on the page. This link is red.*/
+    a{
+        color: red;
+    }
+    
+    /*The id="itemone" have an overline text-decoration and the color is purple.*/
+    #itemone{
+        text-decoration: overline;
+        color: purple;
+    }
+    
+    /*The "exit" class have a background of blue and a 4px dashed yellow border.*/
+    .exit{
+        background-color: blue;
+        border: 4px dashed yellow;
+    }
+    
+    /* There is a link to Google on the page in the list. I have changed the color if it is clicked */
+    a:visited{
+        color:blue
+    }
+                 
+    </code></pre>
+
+    The CSS box model: <br>
+    <img src="/images/cssboxmodel.jpg"> <br>
+</div>
+<div id = "animation">
+    <h1>Animation</h1>
+
+    <ul>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes" target="_blank" rel="noopener noreferrer">Pseudo classes</a>
+        <pre><code class="lang-css">
+            button:hover {
+                color:teal;
+            }
+
+            button:focus {
+                background-color:teal;
+            }
+
+            button:active {
+                background-color: yellow;
+            }
+        </code></pre>    
+    </li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transform?v=control" target="_blank" rel="noopener noreferrer">Transform:</a> 
+    <pre><code  class="lang-css">
+        .butn:active {
+            box-shadow: 0 0 #efa424;
+            top: 6px;
+            transform: scale(2);
+            transform-origin: top-left;
+        }
+
+        .butn:focus {
+        transform: rotate(45deg);
+        }
+    </code></pre>
+
+    </li>
+
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Transitions/Using_CSS_transitions" target="_blank" rel="noopener noreferrer">Transition:</a> 
+    <pre><code  class="lang-css">
+
+        .box {
+            background: #9b59b6;
+            height: 50px;
+            width: 50px;
+            line-height:50px;
+            text-align: center;
+            color: white;
+            font-size: 17px;
+            border-radius: 20px;
+        }
+        
+        .animated {
+            /* transition-property: background, border-radius; */
+            /* transition-property: transform; */
+            /* transition-duration: 5s, 1s; */
+            /* transition-delay: 2s; */
+            transition-duration: 4s;
+            /* transition-timing-function: cubic-bezier(0.050, 0.005, 0.000, 0.870);  */
+            transition-timing-function: ease-in-out; 
+        }
+        
+        .box:hover {
+            background: #e74c3c;
+            transform-origin: top left;
+            transform:scale(2) rotate(-45deg);
+            border-radius: 50px;
+        }
+    </code></pre>
+
+    </li>
+    <li> <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes" target="_blank" rel="noopener noreferrer">Keyframe animation</a> 
+    <pre><code  class="lang-css">
+        p {
+
+            animation-name: rainbowtext;
+            animation-duration: 5s;
+            animation-timing-function: linear;
+            animation-delay: 0s;
+            animation-iteration-count: infinite;
+        }
+        
+        @keyframes rainbowtext {
+            0%{
+            color:red;
+            font-size: 20px;
+            }
+            25%{
+            color:orange;
+            }
+            50% {
+            color:yellow;
+            font-size: 40px;
+            transform: translateX(200px);
+            }
+            75%{
+            color: green;
+            }
+            
+            85%{
+            color: blue
+            }
+            100% {
+            color: purple;
+            font-size:20px;
+            }
+        }
+    </code></pre>
+    </li>
+    </ul>
+
+</div>
+
+<div id = "fonts">
+    <h1>Fonts</h1>  
+    In <b>CSS</b> you can use different fonts with the <b>font-family</b> attribute:
+    <pre><code class="lang-css">
+    h1{
+        font-family: cursive;
+    }
+        
+    p{   
+        font-family: monospace;
+    }
+    </code></pre>
+
+    If you use own font files, you have to set a <b>font-face</b>
+    <pre><code class="lang-css">
+    @font-face{
+        font-family: your_font_name;
+        src: url(path/to/woff_file.woff);
+    }
+    </code></pre> 
+    You can download fonts from the internet or you can use them from a remote CDN with a link reference in the 
+    head section in the HTML file.
+    <pre><code class="lang-html">
+    &ltlink href="https://fonts.googleapis.com/css?family=Bree+Serif" rel="stylesheet"&gt   
+    </code></pre> 
+</div>
+
+
+<div id ="icons">
+<h1>Icons</h1>
+    We can use icons in our application. Icons are fonts.
+    We have chosen two different font types. The first is 
+    <a href="https://fontawesome.com/how-to-use/on-the-web/setup/getting-started?using=web-fonts-with-css" target="_blank" rel="noopener noreferrer">Font Awesome</a> 
+    for this purpose. As mentioned on that website, you can use them from their CDN. We have decided to download them. <br>
+    The other one is <a href="https://icomoon.io/" target="_blank" rel="noopener noreferrer">IcoMoon</a>. <br>
+    First we have put the font files in our <b>assets/fonts</b> folder and the <b>css</b> files in the <b>assets/styles</b> folder. <br>
+    <img src="/images/fonts.jpg"> <br>
+    It is important to set the right folders in the <b>CSS</b> files of the font files. So, in the <b>solid.css</b> and <b>icomoon.css</b> 
+    you have to set the <b>assets/folder</b>. I have renamed the <b>styles.css</b> of the <b>icomoon</b> fonts to <b>icomoon.css</b>. 
+    <pre><code class="lang-css">
+    /* Icomoon.css */
+    @font-face {
+        font-family: 'icomoon';
+        src:  url('../fonts/icomoon.eot?k56r01');
+        src:  url('../fonts/icomoon.eot?k56r01#iefix') format('embedded-opentype'),
+        url('../fonts/icomoon.ttf?k56r01') format('truetype'),
+        url('../fonts/icomoon.woff?k56r01') format('woff'),
+        url('../fonts/icomoon.svg?k56r01#icomoon') format('svg');
+        font-weight: normal;
+        font-style: normal;
+    }
+    
+    /* solid.css */
+    @font-face {
+        font-family: 'Font Awesome 5 Free';
+        font-style: normal;
+        font-weight: 900;
+        src: url("../fonts/fa-solid-900.eot");
+        src: url("../fonts/fa-solid-900.eot?#iefix") format("embedded-opentype"), 
+        url("../fonts/fa-solid-900.woff2") format("woff2"), 
+        url("../fonts/fa-solid-900.woff") format("woff"), 
+        url("../fonts/fa-solid-900.ttf") format("truetype"), 
+        url("../fonts/fa-solid-900.svg#fontawesome") format("svg"); }
+    </code></pre>
+
+    Next import the <b>css</b> files into the <b>styles.css</b>
+    <pre><code class="lang-css">
+    @import 'assets/styles/icomoon.css';
+    @import 'assets/styles/solid.css';
+    @import 'assets/styles/brands.css';
+    @import 'assets/styles/fontawesome.min.css';
+    </code></pre>
+
+    And here is an example how to use them:
+    <pre><code class="lang-css">
+    &lth1&gt &ltspan class="fab fa-angular"&gtWebPage&lt/span&gt&lt/h1&gt
+    &ltlabel for="name"&gt&ltspan class="fas fa-smile"&gt&lt/span&gt Id: &lt/label&gt &#123;&#123;webPage.id&#125;&#125; &ltbr&gt
+    &ltlabel for="name"&gt&ltspan class="fas fa-registered"&gt&lt/span&gt Name: &lt/label&gt &#123;&#123;webPage.name&#125;&#125;&ltbr&gt
+    &ltlabel for="name"&gt&ltspan class="fas fa-quote-left"&gt&lt/span&gt About: &lt/label&gt &#123;&#123;webPage.about&#125;&#125;&ltbr&gt
+    &ltlabel for="name"&gt&ltspan class="fas fa-pen"&gt&lt/span&gt Page Type: &lt/label&gt &#123;&#123;webPage.pagetype | pageTypePipe | async&#125;&#125;&ltbr&gt
+    &ltlabel for="name"&gt&ltspan class="icon-home"&gt&lt/span&gt URL: &lt/label&gt &#123;&#123;webPage.url&#125;&#125;&ltbr&gt
+    &ltlabel for="name"&gt&ltspan class="icon-pacman"&gt&lt/span&gt Official: &lt/label&gt &#123;&#123;webPage.official&#125;&#125;&ltbr&gt
+    &ltlabel for="name"&gt&ltspan class="fas fa-calendar-alt"&gt&lt/span&gt Date: &lt/label&gt &#123;&#123;webPage.date&#125;&#125;&ltbr&gt
+    &lthr&gt
+    &ltbutton type="submit" class="btn btn-success"  (click)="back(webPage.id)"&gtBack&lt/button&gt
+    &ltbutton type="submit" class="btn btn-success"  (click)="next(webPage.id)"&gtNext&lt/button&gt
+    </code></pre>
+
+    Note: There is other way to use <b>Font Awesome</b> in Angular. You can install then in the Angular environment. 
+    We have chosen this more general way, because we can use other font files too in a similar way.
+</div>
+<div id = "bootstrap">
+    <h1>Bootstrap</h1>
+    We cover a few things about <b>Bootstrap</b> in our Angular section too, 
+    although here we are going to go into in it more deeply. More about <b>Bootstrap</b> here: 
+    <a href="https://getbootstrap.com/" target="_blank" rel="noopener noreferrer">https://getbootstrap.com/</a>. <br>
+    We are using <b>Bootstrap 4 </b>. Some differences between 3 and 4 are here:
+    <a href="https://getbootstrap.com/docs/4.0/migration/" target="_blank" rel="noopener noreferrer">
+        https://getbootstrap.com/docs/4.0/migration/</a>
+    <h2>Bootstrap Layout examples</h2>
+    Here you can find examples to start: <br>
+    <a href="https://getbootstrap.com/docs/4.1/examples/" target="_blank" rel="noopener noreferrer">https://getbootstrap.com/docs/4.1/examples/</a>
+    <h2>Buttons</h2>
+    Bootstrap has several <b>button</b> classes what we can use. About buttons you can read here:
+    <a href="https://getbootstrap.com/docs/4.1/components/buttons/" target="_blank" rel="noopener noreferrer">https://getbootstrap.com/docs/4.1/components/buttons/</a>
+    You can add the <b>btn</b> <b>Bootstrap</b> class to several <b>HTML</b> elements:
+    <pre><code class="lang-html">
+    &lta class="btn btn-primary" href="#" role="button"&gtLink&lt/a&gt
+    &ltbutton class="btn btn-primary" type="submit"&gtButton&lt/button&gt
+    &ltinput class="btn btn-primary" type="button" value="Input"&gt
+    &ltinput class="btn btn-primary" type="submit" value="Submit"&gt
+    &ltinput class="btn btn-primary" type="reset" value="Reset"&gt
+    </code></pre>
+
+    I have modified one of my html to <b>Jumbotron</b>, which also uses buttons and put the whole in a container class.
+    The last is centering the content.
+    <pre><code class="lang-html">
+    &ltdiv class="container"&gt
+        &ltdiv class="jumbotron"&gt
+            &lth1 class="display-4"&gt&ltspan class="fab fa-angular"&gtWebPage&lt/span&gt&lt/h1&gt
+            &ltp class="lead"&gtThis is a simple webpage unit, a simple jumbotron-style component for calling extra attention to featured content or information.&lt/p&gt
+            &lthr class="my-4"&gt
+            &ltp&gtIt uses utility classes for typography and spacing to space content out within the larger container.&lt/p&gt
+            &ltlabel for="name"&gt&ltspan class="fas fa-smile"&gt&lt/span&gt Id: &lt/label&gt &#123;&#123;webPage.id&#125;&#125; &ltbr&gt
+            &ltlabel for="name"&gt&ltspan class="fas fa-registered"&gt&lt/span&gt Name: &lt/label&gt &#123;&#123;webPage.name&#125;&#125;&ltbr&gt
+            &ltlabel for="name"&gt&ltspan class="fas fa-quote-left"&gt&lt/span&gt About: &lt/label&gt &#123;&#123;webPage.about&#125;&#125;&ltbr&gt
+            &ltlabel for="name"&gt&ltspan class="fas fa-pen"&gt&lt/span&gt Page Type: &lt/label&gt &#123;&#123;webPage.pagetype | pageTypePipe | async&#125;&#125;&ltbr&gt
+            &ltlabel for="name"&gt&ltspan class="icon-home"&gt&lt/span&gt URL: &lt/label&gt &#123;&#123;webPage.url&#125;&#125;&ltbr&gt
+            &ltlabel for="name"&gt&ltspan class="icon-pacman"&gt&lt/span&gt Official: &lt/label&gt &#123;&#123;webPage.official&#125;&#125;&ltbr&gt
+            &ltlabel for="name"&gt&ltspan class="fas fa-calendar-alt"&gt&lt/span&gt Date: &lt/label&gt &#123;&#123;webPage.date&#125;&#125;&ltbr&gt
+            
+            
+            &lta class="btn btn-primary btn-lg" type="submit" role="button" (click)="back(webPage.id)"&gtBack&lt/a&gt
+            &lta class="btn btn-primary btn-lg" type="submit" role="button" (click)="next(webPage.id)"&gtNext&lt/a&gt
+        &lt/div&gt
+    &lt/div&gt
+    </code></pre>
+
+    <h2>Forms</h2>
+    Here are more about forms: <a href="https://getbootstrap.com/docs/4.1/components/forms/" target="_blank" rel="noopener noreferrer">https://getbootstrap.com/docs/4.1/components/forms/</a>.
+    Here we see the <b>form-group</b>, that put some spaces between the elements and <b>form-control</b>,
+    that changes the style of an input element. Some other examples here:
+    <pre><code class="lang-html">
+    &ltdiv class="container"&gt
+    &lt!--
+            The &ltfieldset&gt tag is used to group related elements in a form.
+    
+            The &ltfieldset&gt tag draws a box around the related elements.
+        --&gt
+    &ltform&gt
+        &lt!-- EMAIL SUBMISSION --&gt
+        &ltdiv class="form-group"&gt
+        &ltlabel for="exampleInputEmail1"&gtEmail address&lt/label&gt
+        &ltinput type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"&gt
+        &ltsmall id="emailHelp" class="form-text text-muted"&gtWe'll never share your email with anyone else.&lt/small&gt
+        &lt/div&gt
+    
+        &lt!-- PASSWORD --&gt
+        &ltdiv class="form-group"&gt
+        &ltlabel for="exampleInputPassword1"&gtPassword&lt/label&gt
+        &ltinput type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"&gt
+        &lt/div&gt
+    
+        &lt!-- DROPDOWN SELECT --&gt
+        &ltdiv class="form-group"&gt
+        &ltlabel for="exampleSelect1"&gtExample select&lt/label&gt
+        &ltselect class="form-control" id="exampleSelect1"&gt
+            &ltoption&gt1&lt/option&gt
+            &ltoption&gt2&lt/option&gt
+            &ltoption&gt3&lt/option&gt
+            &ltoption&gt4&lt/option&gt
+            &ltoption&gt5&lt/option&gt
+        &lt/select&gt
+        &lt/div&gt
+    
+    
+        &lt!-- MULTIPLE SELECT OPTIONS --&gt
+        &ltdiv class="form-group"&gt
+        &ltlabel for="exampleSelect2"&gtExample multiple select&lt/label&gt
+        &ltselect multiple class="form-control" id="exampleSelect2"&gt
+            &ltoption&gt1&lt/option&gt
+            &ltoption&gt2&lt/option&gt
+            &ltoption&gt3&lt/option&gt
+            &ltoption&gt4&lt/option&gt
+            &ltoption&gt5&lt/option&gt
+        &lt/select&gt
+        &lt/div&gt
+    
+    
+        &lt!-- TEXT AREA --&gt
+        &ltdiv class="form-group"&gt
+        &ltlabel for="exampleTextarea"&gtExample textarea&lt/label&gt
+        &lttextarea class="form-control" id="exampleTextarea" rows="3"&gt&lt/textarea&gt
+        &lt/div&gt
+    
+    
+        &lt!-- FILE UPLOAD INPUT --&gt
+        &ltdiv class="form-group"&gt
+        &ltlabel for="exampleInputFile"&gtFile input&lt/label&gt
+        &ltinput type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp"&gt
+        &ltsmall id="fileHelp" class="form-text text-muted"&gtThis is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.&lt/small&gt
+        &lt/div&gt
+    
+        &lt!-- RADIO BUTTONS --&gt
+        &ltfieldset class="form-group"&gt
+        &ltlegend&gtRadio buttons&lt/legend&gt
+        &ltdiv class="form-check"&gt
+            &ltlabel class="form-check-label"&gt
+            &ltinput type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" checked&gt
+            Option one is this and that&mdash;be sure to include why it's great
+            &lt/label&gt
+        &lt/div&gt
+    
+    
+        &ltdiv class="form-check"&gt
+        &ltlabel class="form-check-label"&gt
+            &ltinput type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2"&gt
+            Option two can be something else and selecting it will deselect option one
+            &lt/label&gt
+        &lt/div&gt
+    
+        &ltdiv class="form-check disabled"&gt
+        &ltlabel class="form-check-label"&gt
+            &ltinput type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios3" value="option3" disabled&gt
+            Option three is disabled
+            &lt/label&gt
+        &lt/div&gt
+        &lt/fieldset&gt
+    
+        &lt!-- CHECK BUTTON --&gt
+        &ltdiv class="form-check"&gt
+        &ltlabel class="form-check-label"&gt
+            &ltinput type="checkbox" class="form-check-input"&gt
+            Check me out
+        &lt/label&gt
+        &lt/div&gt
+        &ltbutton type="submit" class="btn btn-primary"&gtSubmit&lt/button&gt
+    &lt/form&gt
+    
+    &lt/div&gt
+    </code></pre>
+
+    You can see several examples in our forms in this Angular application.
+    <h2>Navigation bar</h2>
+    About navigation bar here: <a href="https://getbootstrap.com/docs/4.1/components/navbar/" target="_blank" rel="noopener noreferrer">https://getbootstrap.com/docs/4.1/components/navbar/</a>
+    In the navigation bar we use dropdown list and hamburger menu. To work with them we have to copy these JavaScript links in 
+    our <b>index.html</b>
+    <pre><code class="lang-html">
+    &ltscript src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"&gt&lt/script&gt
+    &ltscript src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"&gt&lt/script&gt
+    &ltscript src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"&gt&lt/script&gt
+    
+    </code></pre>
+
+
+    Or in our case in the <b>Angular.json</b> file:
+    <pre><code class="lang-json">
+    "styles": [
+        "node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "src/styles.css"
+    ],
+    "scripts": [
+        "node_modules/jquery/dist/jquery.min.js",
+        "node_modules/popper.js/dist/umd/popper.min.js",
+        "node_modules/bootstrap/dist/js/bootstrap.min.js",
+    ]
+    </code></pre>
+
+    Now let's see our navigation bar source code. The drop down menu is done, the hamburger menu is working if we resize our
+    browser (make it small) and the navigation bar is fixed to the top.
+    <pre><code class="lang-html">
+    &ltnav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top"&gt
+    &ltdiv class="container-fluid"&gt
+        &lta class="navbar-brand" routerLink="/"&gtISDCProject&lt/a&gt
+        &ltbutton class="navbar-toggler" type="button" data-toggle="collapse" 
+                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
+                aria-expanded="false" aria-label="Toggle navigation"&gt
+        &ltspan class="navbar-toggler-icon"&gt&lt/span&gt
+        &lt/button&gt
+        &ltdiv class="collapse navbar-collapse" id="navbarSupportedContent"&gt
+        &ltul class="nav navbar-nav mr-auto"&gt
+    
+            &ltli class="nav-item"&gt
+                &lta class="nav-link" routerLink="/mystory" routerLinkActive="active"&gtHow to develop this?&lt/a&gt
+            &lt/li&gt
+    
+            &ltli class="nav-item dropdown"&gt
+                &lta class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"&gt
+                HTML basics
+                &lt/a&gt
+                &ltdiv class="dropdown-menu" aria-labelledby="navbarDropdown"&gt
+                &lta class="dropdown-item" routerLink="/basic/html"&gtPure HTML&lt/a&gt
+                &lta class="dropdown-item" routerLink="/basic/css"&gtCSS&lt/a&gt
+                &lta class="dropdown-item" routerLink="/basic/js"&gtJavaScript&lt/a&gt
+                &lt/div&gt
+            &lt/li&gt
+    
+            &ltli class="nav-item dropdown"&gt
+                &lta class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"&gt
+                Angular basics
+                &lt/a&gt
+                &ltdiv class="dropdown-menu" aria-labelledby="navbarDropdown2"&gt
+                &lta class="dropdown-item" routerLink="/webpages" routerLinkActive="active"&gtFavorite web pages&lt/a&gt
+                &lta class="dropdown-item" routerLink="/webpagereactive" routerLinkActive="active"&gtNew webpage(reactive)&lt/a&gt
+                &lt/div&gt
+            &lt/li&gt
+    
+            &ltli class="nav-item dropdown"&gt
+                &lta class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"&gt
+                Machine Learning
+                &lt/a&gt
+                &ltdiv class="dropdown-menu" aria-labelledby="navbarDropdown3"&gt
+                &lta class="dropdown-item" routerLink="/ml/tensorflow"&gtTensorflow JS&lt/a&gt
+                &lta class="dropdown-item" routerLink="/ml/tensordemo"&gtTensorflow pretrained&lt/a&gt
+                &lta class="dropdown-item" routerLink="/ml/iris"&gtPython Iris&lt/a&gt
+                &lt/div&gt
+            &lt/li&gt
+    
+        &lt/ul&gt
+        &ltul class="nav navbar-nav navbar-right"&gt
+    
+            &ltng-template [ngIf]="!isAuthenticated()"&gt
+            &ltli class="nav-item"&gt
+                &lta class="nav-link" routerLink="/login"&gtLogin&lt/a&gt
+            &lt/li&gt
+            &lt/ng-template&gt
+            &ltng-template [ngIf]="isAuthenticated()"&gt
+            &ltli class="nav-item"&gt
+                &lta class="nav-link" style="cursor:pointer;" (click)="onLogout()"&gtLogout&lt/a&gt
+            &lt/li&gt
+            &lt/ng-template&gt
+            &ltng-template [ngIf]="isAuthenticated()"&gt
+                &ltli class="nav-item dropdown"&gt
+                    &lta class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"&gt
+                    Admin
+                    &lt/a&gt
+                    &ltdiv class="dropdown-menu" aria-labelledby="navbarDropdown4"&gt
+                    &lta class="dropdown-item" routerLink="/"&gtManage PageType&lt/a&gt
+                    &lta class="dropdown-item" routerLink="/"&gtDo something else&lt/a&gt
+                    &lt/div&gt
+                &lt/li&gt
+            &lt/ng-template&gt
+            &lt/ul&gt
+        &lt/div&gt
+    &lt/div&gt
+    &lt/nav&gt
+    </code></pre>
+
+    <h3>Bootstrap Grid</h3>
+    About the grid system here: <a href="https://getbootstrap.com/docs/4.0/layout/grid/" target="_blank" rel="noopener noreferrer">https://getbootstrap.com/docs/4.0/layout/grid/</a>
+    Example:
+    <pre><code class="lang-html">
+    &ltdiv class="container"&gt
+        &ltdiv class="row"&gt
+            &ltdiv class="col-md-2" &gt&lta routerLink="/mystory/html"&gtHTML&lt/a&gt&lt/div&gt
+            &ltdiv class="col-md-2" &gt&lta routerLink="/mystory/css"&gtCss, Bootstrap&lt/a&gt&lt/div&gt
+            &ltdiv class="col-md-2" &gt&lta #js (click)="onClick('js')" style="cursor:pointer;"&gtJavaSript&lt/a&gt&lt/div&gt
+            &ltdiv class="col-md-2" &gt&lta routerLink="/mystory/tsbasic"&gtTypeScript Fundamentals&lt/a&gt&lt/div&gt
+            &ltdiv class="col-md-2" &gt&lta routerLink="/mystory/angularbasic"&gtAngular basic&lt/a&gt&lt/div&gt
+            &ltdiv class="col-md-2" &gt&lta routerLink="/mystory/angularadvanced"&gtAngular advanced&lt/a&gt&lt/div&gt
+        &lt/div&gt
+        &ltdiv class="row"&gt
+            &ltdiv class="col-md-4" &gt&lta routerLink="/mystory/pythonbasic"&gtPython&lt/a&gt&lt/div&gt
+            &ltdiv class="col-md-4" &gt&lta routerLink="/mystory/ml"&gtMachine learning&lt/a&gt&lt/div&gt
+            &ltdiv class="col-md-4" &gt&lta routerLink="/mystory/environment"&gtInstall environment, deploy applications&lt/a&gt&lt/div&gt
+        &lt/div&gt
+    &lt/div&gt
+    </code></pre>
+
+
+</div>
+<div id = "flexbox">
+<h1>Flexbox</h1>
+Flexbox is a layout method in CSS3. <br>
+About Flexbox: <a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/" target="_blank" rel="noopener noreferrer">https://css-tricks.com/snippets/css/a-guide-to-flexbox/</a>
+Also Bootstrap4 uses Flexbox : <a href="https://getbootstrap.com/docs/4.0/layout/utilities-for-layout/#flexbox-options" target="_blank" rel="noopener noreferrer">Bootstrap with Flexbox</a>
+<pre><code class="lang-css">
+    @import url('https://fonts.googleapis.com/css?family=Raleway:200');
+
+    .sidebar {
+    float: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    height: 100vh;
+    width: 15vw;
+    border-right: 1px solid #D7DBDD;
+    font-family: raleway;
+    background: #34495e
+    }
+
+    .item {
+        padding: 10px 20px;
+        color: white;
+        font-size: 20px;
+    }
+
+    .section {
+    padding: 10px;
+    }
+</code></pre>
+</div>
+<div id = "scss">
+    <h1>SCSS</h1>
+    SCSS is an CSS extension language, a preprocessor. With the help of it,  it is easier to write CSS code. 
+    The browsers does not understand SCSS, so you have to complie it to CSS. For example with <b>node-saas</b> compiler. To install it: <br>
+    <b>npm install -g node-sass</b> <br>
+    Or make it on the fly with this npm module. Follow these steps: <br>
+    <ul>
+        <li>In the project folder : <b>npm install --save compile-sass</b></li>
+        <li>In the <b>server.js</b> file: <br>
+        <pre><code class="lang-javascript">
+            const compileSass = require('compile-sass');
+            const path = require('path');
+
+            app.use('/css/:cssName', compileSass({
+            sassFilePath: path.join(__dirname, '/scss/'),
+            sassFileExt: 'scss',
+            embedSrcMapInProd: true
+            }));
+
+        </code></pre>
+        </li>
+        <li> In the html file include it as it were the css file:
+        <pre><code class="lang-html">
+            <link rel="stylesheet" href="/css/common.css">
+        </code></pre>
+
+        </li>
+    </ul>
+
+</div>
+
+
+</div>
+</div>
+</main>
+{{> footer}}
+    <script src="/assets/js/prism.js"></script>
+    
+</body>
+</html>
