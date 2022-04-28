@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: isdcmain 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: isdcmain
+  template:
+    metadata:
+      labels:
+        app: isdcmain 
+    spec:
+      containers:
+        - name: isdcmain 
+          image: isdckft.azurecr.io/isdcmain
+          ports:
+          - containerPort: 4200
