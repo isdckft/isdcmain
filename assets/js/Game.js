@@ -15,7 +15,7 @@ function clearBoard() {
 restart.addEventListener('click',clearBoard)
 
 
-
+ 
 
 // Create a function that will check the square marker
 function changeMarker(){

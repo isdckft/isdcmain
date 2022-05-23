@@ -38,7 +38,7 @@ axiosbtn.addEventListener("click",function(){
   .catch(function(){
     alert("ERROR!");
   })
-});
+}); 
 
 $('#jquery').click(function(){
     $.getJSON(url)
