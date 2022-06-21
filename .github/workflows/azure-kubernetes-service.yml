@@ -34,7 +34,7 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_CONTAINER_REGISTRY: "isdckft.azurecr.io"
+  AZURE_CONTAINER_REGISTRY: "isdckft"
   CONTAINER_NAME: "isdcmain"
   RESOURCE_GROUP: "isdckftcom_rg"
   CLUSTER_NAME: "isdckft-aks"
