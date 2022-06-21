@@ -1,5 +1,12 @@
 # Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+Demo poject. Azure-ben fut. Dockerizált legyen.
+Komponensek:
+isdcmain - Ez a project, Nyitóoldal, Java script, HTML. Dockerizált. Azure DEVOPS -> Azure K8S
+isdcproject - Angular. Két része van. Van egy config mappa. Dockerizált, Azure DEVOPS- Helm Chartokkal, Azure KS
+isdcbackend - Python, Django, Postgres SQL kell alá, még Dockerizálni kellene és átírni SQLLite-ra, mert drága a postrger
+
+Első feladat a DEVOPS-ról áttérni githubra, mert drága a DEVOPS, pl. ,ost
+
 
 # Getting Started
 TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
