@@ -42,7 +42,7 @@ env:
   RESOURCE_GROUP: "isdckftcom_rg"
   CLUSTER_NAME: "isdckft-aks"
   IMAGE_PULL_SECRET_NAME: "isdckft1650371a-auth"
-  DEPLOYMENT_MANIFEST_PATH: 'manifests'
+  DEPLOYMENT_MANIFEST_PATH: "manifests"
 
 jobs:
   buildImage:
@@ -66,9 +66,7 @@ jobs:
     - name: Build and push image to ACR
       run: |
 #        az acr build --image ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }} --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.RESOURCE_GROUP }} .
-# inkább én adom a verziószámot, így külön is le lehet húzni, amikor csak akarom : 50
         az acr build --image ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:"50" --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.RESOURCE_GROUP }} .
-
 
   # createSecret:
   #   permissions:
